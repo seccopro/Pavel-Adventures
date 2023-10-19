@@ -6,6 +6,7 @@ const CLIMBING_SPEED = 100.0
 const DASH_SPEED = 1000
 const DASH_DURATION = 30
 var remaining_dashing = 0
+var double_jumped = false
 
 #flags
 var is_climbing = false 
@@ -37,10 +38,12 @@ func movement():
 	else:	#slowing down after releasing
 		velocity.x = move_toward(velocity.x, 0, 50)
 	
-# Handle Jump.
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
-	
+#Handle Jump and Double Jump.
+	if Input.is_action_just_pressed("jump"):
+		jump();
+	if double_jumped and (is_on_floor() or is_climbing):
+		double_jumped = false
+
 	if Input.is_action_just_pressed("dash") and not is_dashing and not is_climbing: #maybe to add dash cooldown 
 		dash()
 	elif is_dashing:
@@ -52,6 +55,13 @@ func movement():
 	if is_climbing:
 		climb()
 		
+func jump():
+	if is_on_floor():
+		velocity.y = JUMP_VELOCITY
+	elif not double_jumped:
+		velocity.y = JUMP_VELOCITY		#could change the second jump velocity
+		double_jumped = true;
+
 func climb():	
 #climb up and down			
 	var climb_direction = Input.get_axis("up", "down")		
