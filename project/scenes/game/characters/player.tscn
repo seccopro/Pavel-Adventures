@@ -1,20 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://c4kab872n5p2y"]
+[gd_scene load_steps=4 format=3 uid="uid://bekqv7eev7lmv"]
 
-[ext_resource type="Script" path="res://scenes/game/characters/player.gd" id="1_7icc7"]
+[ext_resource type="Script" path="res://scenes/game/characters/player.gd" id="1_gl315"]
+[ext_resource type="PackedScene" uid="uid://cysadsryrryup" path="res://scenes/HUD/control.tscn" id="2_4fi7t"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_atxw1"]
-size = Vector2(21, 22)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vqk56"]
+size = Vector2(23, 22)
 
-[node name="Node2D" type="Node2D"]
+[node name="player" type="CharacterBody2D"]
+script = ExtResource("1_gl315")
 
-[node name="player" type="CharacterBody2D" parent="."]
-script = ExtResource("1_7icc7")
+[node name="playerCollisionShape" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_vqk56")
 
-[node name="playerCollisionShape" type="CollisionShape2D" parent="player"]
-position = Vector2(-0.5, 0)
-shape = SubResource("RectangleShape2D_atxw1")
-
-[node name="ColorRect" type="ColorRect" parent="player/playerCollisionShape"]
+[node name="ColorRect" type="ColorRect" parent="playerCollisionShape"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -27,5 +25,13 @@ offset_bottom = 11.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 1, 0.784314, 1)
+metadata/_edit_use_anchors_ = true
 
-[node name="Camera2D" type="Camera2D" parent="player"]
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Control" parent="." instance=ExtResource("2_4fi7t")]
+offset_left = -61.0
+offset_top = -581.0
+offset_right = -61.0
+offset_bottom = -581.0
+metadata/_edit_use_anchors_ = true

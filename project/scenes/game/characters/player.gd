@@ -3,11 +3,14 @@ extends CharacterBody2D
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 const CLIMBING_SPEED = 100.0
-const DASH_SPEED = 1000
+const DASH_SPEED = 5
 const DASH_DURATION = 30
 var remaining_dashing = 0
 var double_jumped = false
+var prev_pos = 0
 
+
+var lifes = 3		#now handeld in movement-
 #flags
 var is_climbing = false 
 var is_dashing = false
@@ -23,12 +26,16 @@ func _physics_process(delta):
 		velocity.y += gravity * delta
 
 	if Input.is_action_just_pressed("reset_position"):		#reset respawn mech add button
-		position.x = 0
-		position.y = 0
+		reset_position()
 	
 	move_and_slide()
 	movement()
 
+		
+func reset_position():
+		position.x = 550
+		position.y = 400
+		
 
 func movement():
 	#basic left and right
@@ -68,33 +75,44 @@ func climb():
 	if climb_direction:
 		velocity.y = climb_direction * CLIMBING_SPEED
 	else:	#slowing down after releasing
-		velocity.y = move_toward(velocity.y, 0, CLIMBING_SPEED) 	#makes player detach on the end of a wall
-		
+		velocity.y = 0
+#
 # Handle climb-jump
 	if Input.is_action_just_pressed("jump"):	#should jump to the direction opposite of the wall
 		velocity.y = JUMP_VELOCITY
 		is_climbing = false
 		
 #stop climbing, any moment that you aren't touching the wall	
-	if not is_on_wall():
+	if not is_on_wall():		#kinda fucks when on top
+		print("too far from wall")
 		is_climbing=false
 
-func dash():
-	#dash while moving right (checking input, not momentum, nor character facing direction)
-		if(Input.is_action_pressed("right")): 
-			is_dashing = true;
-			velocity.x += DASH_SPEED
-			remaining_dashing = DASH_DURATION
-	#dash while moving left (checking input, not momentum, nor character facing direction)
-		elif (Input.is_action_pressed("left")): 
-			is_dashing = true;
-			velocity.x -= DASH_SPEED
-			remaining_dashing = DASH_DURATION
-			
+func dash():	#to add to facing direction
+		#dash while moving right (checking input, not momentum, nor character facing direction)
+		velocity.x *= DASH_SPEED
+		is_dashing = true
+		remaining_dashing = DASH_DURATION
+		
+#		if(Input.is_action_pressed("right")): 
+#			is_dashing = true
+#			velocity.x += DASH_SPEED
+#			remaining_dashing = DASH_DURATION
+#	#dash while moving left (checking input, not momentum, nor character facing direction)
+#		elif (Input.is_action_pressed("left")): 
+#			is_dashing = true
+#			velocity.x -= DASH_SPEED
+#			remaining_dashing = DASH_DURATION
+			#var prev pos
 func dash_reset():
-	#waiting for dash to finish			SHOULD CHECK HORIZONTAL MOMENTUM TO RESET
+	if(prev_pos == position.x): #check if dash has been interrupted
+		remaining_dashing=0;
+		is_dashing=false
+		print("dash reset")	
+	else:
+		prev_pos = position.x; #spomni kje je bilposizione v frame 1	(10)
+	#waiting for dash to finish	
 		if remaining_dashing>0:
-			remaining_dashing-=1 #waits for  ${DASH_DURATION} cicles to let you move again (reset your speed)
+			remaining_dashing-=1 #waits for  ${DASH_DURATION} (30) cicles to let you move again (reset your speed)
 		else:
 			is_dashing=false
-			print("dash reset")	
+			print("dash reset")		
