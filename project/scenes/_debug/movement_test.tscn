@@ -34,14 +34,14 @@ offset_right = 170.0
 offset_bottom = 11.0
 metadata/_edit_use_anchors_ = true
 
-[node name="wall2" type="StaticBody2D" parent="platforms"]
+[node name="wall 2" type="StaticBody2D" parent="platforms"]
 position = Vector2(-254, -122)
 rotation = 1.5708
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="platforms/wall2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="platforms/wall 2"]
 shape = SubResource("RectangleShape2D_mh7pj")
 
-[node name="ColorRect" type="ColorRect" parent="platforms/wall2/CollisionShape2D"]
+[node name="ColorRect" type="ColorRect" parent="platforms/wall 2/CollisionShape2D"]
 offset_left = -166.0
 offset_top = -11.0
 offset_right = 170.0

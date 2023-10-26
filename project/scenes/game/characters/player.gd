@@ -37,7 +37,7 @@ func logic():
 	var hearts = ""
 	for i in lifes:
 		hearts += "♥"
-	$"HP-bar".text = str(hearts)
+	$"HP_bar".text = str(hearts)
 	if(lifes <= 0):
 		game_over()
 		

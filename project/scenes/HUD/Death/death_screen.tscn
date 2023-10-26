@@ -1,17 +1,17 @@
 [gd_scene load_steps=2 format=3 uid="uid://61w51ai88ja0"]
 
-[ext_resource type="Script" path="res://scenes/HUD/Death/Death-screen.gd" id="1_da64d"]
+[ext_resource type="Script" path="res://scenes/HUD/Death/death_screen.gd" id="1_8sd6f"]
 
-[node name="Death-screen" type="Control"]
+[node name="death_screen" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_da64d")
+script = ExtResource("1_8sd6f")
 
-[node name="death-text" type="TextEdit" parent="."]
+[node name="death_text" type="TextEdit" parent="."]
 layout_mode = 0
 offset_left = 216.0
 offset_top = 17.0
@@ -30,6 +30,7 @@ offset_bottom = 346.0
 text = "replay"
 
 [node name="main-menu" type="Button" parent="."]
+layout_mode = 0
 offset_left = 242.0
 offset_top = 376.0
 offset_right = 562.0
