@@ -9,8 +9,8 @@ var remaining_dashing = 0
 var double_jumped = false
 var prev_pos = 0
 
+var lifes = 3
 
-var lifes = 3		#now handeld in movement-
 #flags
 var is_climbing = false 
 var is_dashing = false
@@ -28,10 +28,24 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("reset_position"):		#reset respawn mech add button
 		reset_position()
 	
-	move_and_slide()
-	movement()
+	if(is_alive):
+		logic()
+		move_and_slide()
+		movement()
 
+func logic():
+	var hearts = ""
+	for i in lifes:
+		hearts += "♥"
+	$"HP-bar".text = str(hearts)
+	if(lifes <= 0):
+		game_over()
 		
+func game_over():
+	$"Death-screen".show()
+	is_alive = false
+	print("gay over")
+	
 func reset_position():
 		position.x = 550
 		position.y = 400
@@ -116,3 +130,6 @@ func dash_reset():
 		else:
 			is_dashing=false
 			print("dash reset")		
+
+func _on_node_2d_damaged():
+	lifes -= 1 

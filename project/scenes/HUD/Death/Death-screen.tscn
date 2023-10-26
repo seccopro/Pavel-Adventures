@@ -1,0 +1,40 @@
+[gd_scene load_steps=2 format=3 uid="uid://61w51ai88ja0"]
+
+[ext_resource type="Script" path="res://scenes/HUD/Death/Death-screen.gd" id="1_da64d"]
+
+[node name="Death-screen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_da64d")
+
+[node name="death-text" type="TextEdit" parent="."]
+layout_mode = 0
+offset_left = 216.0
+offset_top = 17.0
+offset_right = 558.0
+offset_bottom = 78.0
+text = "                               YOU DIED"
+wrap_mode = 1
+autowrap_mode = 1
+
+[node name="Replay" type="Button" parent="."]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 317.0
+offset_right = 560.0
+offset_bottom = 346.0
+text = "replay"
+
+[node name="main-menu" type="Button" parent="."]
+offset_left = 242.0
+offset_top = 376.0
+offset_right = 562.0
+offset_bottom = 407.0
+text = "give up"
+
+[connection signal="pressed" from="Replay" to="." method="_on_replay_pressed"]
+[connection signal="pressed" from="main-menu" to="." method="_on_mainmenu_pressed"]

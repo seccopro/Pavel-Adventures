@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bekqv7eev7lmv"]
 
 [ext_resource type="Script" path="res://scenes/game/characters/player.gd" id="1_gl315"]
-[ext_resource type="PackedScene" uid="uid://cysadsryrryup" path="res://scenes/HUD/control.tscn" id="2_4fi7t"]
+[ext_resource type="PackedScene" uid="uid://61w51ai88ja0" path="res://scenes/HUD/Death/Death-screen.tscn" id="2_w6crr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vqk56"]
 size = Vector2(23, 22)
@@ -29,9 +29,15 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="Control" parent="." instance=ExtResource("2_4fi7t")]
-offset_left = -61.0
-offset_top = -581.0
-offset_right = -61.0
-offset_bottom = -581.0
-metadata/_edit_use_anchors_ = true
+[node name="HP-bar" type="Label" parent="."]
+offset_left = -20.0
+offset_top = -35.0
+offset_right = 20.0
+offset_bottom = -12.0
+
+[node name="Death-screen" parent="." instance=ExtResource("2_w6crr")]
+visible = false
+offset_left = -405.0
+offset_top = -245.0
+offset_right = -405.0
+offset_bottom = -245.0

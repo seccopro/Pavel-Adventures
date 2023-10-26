@@ -56,6 +56,7 @@ offset_bottom = 412.0
 text = "quit"
 
 [node name="Version" type="Label" parent="."]
+layout_mode = 0
 offset_left = 967.0
 offset_top = 597.0
 offset_right = 1145.0
