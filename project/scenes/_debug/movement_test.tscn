@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://bccnka0x1hcbt"]
+[gd_scene load_steps=10 format=3 uid="uid://bccnka0x1hcbt"]
 
 [ext_resource type="Script" path="res://scenes/_debug/movement_test.gd" id="1_pcuud"]
 [ext_resource type="PackedScene" uid="uid://bekqv7eev7lmv" path="res://scenes/game/characters/player.tscn" id="2_36yml"]
+[ext_resource type="PackedScene" uid="uid://c8wvmaehkj300" path="res://scenes/game/enemies/ronda/ronda.tscn" id="3_28jar"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mh7pj"]
 size = Vector2(333, 29.5)
@@ -14,6 +15,12 @@ size = Vector2(333, 29.5)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fqnr7"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k5cre"]
+size = Vector2(333, 29.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gw3nv"]
+size = Vector2(312, 24)
+
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_pcuud")
 
@@ -21,7 +28,7 @@ script = ExtResource("1_pcuud")
 position = Vector2(875, 327)
 
 [node name="wall" type="StaticBody2D" parent="platforms"]
-position = Vector2(-405, -60)
+position = Vector2(-403, -63)
 rotation = 1.5708
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="platforms/wall"]
@@ -132,4 +139,29 @@ metadata/_edit_use_anchors_ = true
 [node name="player" parent="." instance=ExtResource("2_36yml")]
 position = Vector2(560, 384)
 
+[node name="ronda" parent="." instance=ExtResource("3_28jar")]
+position = Vector2(1736, 136)
+
+[node name="win_platform" type="StaticBody2D" parent="."]
+position = Vector2(3048, 112)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="win_platform"]
+shape = SubResource("RectangleShape2D_k5cre")
+
+[node name="ColorRect" type="ColorRect" parent="win_platform/CollisionShape2D"]
+offset_left = -166.0
+offset_top = -11.0
+offset_right = 170.0
+offset_bottom = 11.0
+metadata/_edit_use_anchors_ = true
+
+[node name="win_check" type="Area2D" parent="win_platform"]
+
+[node name="win_check_shape" type="CollisionShape2D" parent="win_platform/win_check"]
+position = Vector2(4, -8)
+shape = SubResource("RectangleShape2D_gw3nv")
+
 [connection signal="damaged" from="." to="player" method="_on_node_2d_damaged"]
+[connection signal="win" from="." to="player" method="_on_node_2d_win"]
+[connection signal="touched" from="ronda" to="player" method="_on_ronda_touched"]
+[connection signal="body_entered" from="win_platform/win_check" to="." method="_on_win_check_body_entered"]

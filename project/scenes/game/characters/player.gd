@@ -15,6 +15,7 @@ var lifes = 3
 var is_climbing = false 
 var is_dashing = false
 var is_alive = true
+var is_playing = true
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -28,7 +29,7 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("reset_position"):		#reset respawn mech add button
 		reset_position()
 	
-	if(is_alive):
+	if(is_alive and is_playing):
 		logic()
 		move_and_slide()
 		movement()
@@ -42,9 +43,14 @@ func logic():
 		game_over()
 		
 func game_over():
-	$"Death-screen".show()
+	$"death_screen".show()
 	is_alive = false
+	is_playing = false
 	print("gay over")
+
+func win():
+	is_playing = false
+	$"victory_screen".show()
 	
 func reset_position():
 		position.x = 550
@@ -133,3 +139,10 @@ func dash_reset():
 
 func _on_node_2d_damaged():
 	lifes -= 1 
+
+func _on_ronda_touched(value):
+	lifes -= value
+
+
+func _on_node_2d_win(score):
+	win()

@@ -2,6 +2,7 @@ extends Node2D
 
 var lethal_depth= 600
 signal damaged()
+signal win(score)
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	
@@ -19,8 +20,14 @@ func game_logic():		#move in level
 		reset_position()
 	if($player.position.x>= 2900 or $player.position.y <= -50):
 		print("you won!!!")
+		emit_signal("win",0)
 
 func reset_position():
 		$player.position.x = 550
 		$player.position.y = 400
 
+
+
+func _on_win_check_body_entered(body):
+	if(body.name =="player"):
+		emit_signal("win",0)
