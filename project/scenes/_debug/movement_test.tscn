@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://bccnka0x1hcbt"]
 
 [ext_resource type="Script" path="res://scenes/_debug/movement_test.gd" id="1_pcuud"]
-[ext_resource type="PackedScene" uid="uid://3ioybr417mxs" path="res://scenes/game/characters/player.tscn" id="2_36yml"]
+[ext_resource type="PackedScene" uid="uid://bekqv7eev7lmv" path="res://scenes/game/characters/player.tscn" id="2_36yml"]
 [ext_resource type="PackedScene" uid="uid://c8wvmaehkj300" path="res://scenes/game/enemies/ronda/ronda.tscn" id="3_28jar"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mh7pj"]

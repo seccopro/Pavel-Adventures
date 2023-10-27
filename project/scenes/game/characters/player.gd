@@ -1,16 +1,21 @@
 extends CharacterBody2D
 
+#variables _______________________________________________________________________________________________
+#on ready
 @onready var anim = $AnimationPlayer
 
+#constants
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 const CLIMBING_SPEED = 100.0
 const DASH_SPEED = 5
 const DASH_DURATION = 30
+
+#variables for game logic
+var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") # Get the gravity from the project settings to be synced with RigidBody nodes.
 var remaining_dashing = 0
 var double_jumped = false
 var prev_pos = 0
-
 var lifes = 3
 
 #flags
@@ -19,22 +24,20 @@ var is_dashing = false
 var is_alive = true
 var is_playing = true
 
-# Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-
-
-func _physics_process(delta):
+#functions ___________________________________________________________________________________________________________________________
+func _physics_process(delta):		#"MAIN" runs every delta time - CALLS ALL OTHER FUNCTIONS
 	# Add the gravity.
 	if not is_on_floor() and not is_climbing:	#gravity / falling
 		velocity.y += gravity * delta
-
-	if Input.is_action_just_pressed("reset_position"):		#reset respawn mech add button
-		reset_position()
+	
+	camera()
 	
 	if(is_alive and is_playing):
-		logic()
 		move_and_slide()
+		logic()	
 		movement()
+
+#game logic _______________________________________________________________________________________________
 
 func logic():
 	var hearts = ""
@@ -43,7 +46,8 @@ func logic():
 	$"HP_bar".text = str(hearts)
 	if(lifes <= 0):
 		game_over()
-		
+
+#SUB-FUNCTIONS for game logic
 func game_over():
 	$"death_screen".show()
 	is_alive = false
@@ -53,33 +57,60 @@ func game_over():
 func win():
 	is_playing = false
 	$"victory_screen".show()
-	
-func reset_position():
-		position.x = 550
-		position.y = 400
-		
 
-func movement():
-	walk()      #basic left and right
+func camera():
+	if(Input.is_action_just_pressed("camera_zoom_in")):
+		print("zoom in")
+		$"Camera2D".zoom.x += 0.5
+		$"Camera2D".zoom.y += 0.5
+	if(Input.is_action_just_pressed("camera_zoom_out")):
+		print("zoom out")
+		$"Camera2D".zoom.x -= 0.5
+		$"Camera2D".zoom.y -= 0.5	
+
+
+#character movement _______________________________________________________________________________________________
+
+func movement(): 	# handles all movement functions by waiting for inputs (declared below) [walk, jump, dash, climb]	
+#if staying still, play idle animation
+	if(velocity.x == 0 and velocity.y == 0 ):	
+		idle()	
+#walking with left and right
+	walk()
 	
 #Handle Jump and Double Jump.
 	if Input.is_action_just_pressed("jump"):
-		jump();
+		if is_on_floor() or is_climbing	:
+			jump()
+		elif not double_jumped:             #allows for one double jump
+			jump()
+			double_jumped = true
+	#resets double jump
 	if double_jumped and (is_on_floor() or is_climbing):
 		double_jumped = false
-
+	
+#Handle Dashing
 	if Input.is_action_just_pressed("dash") and not is_dashing and not is_climbing: #maybe to add dash cooldown 
 		dash()
+	#resets movement after dash
 	elif is_dashing:
 		dash_reset()	#to reset movement after dash
-			
-	#start climbing / attach to the wall
+	
+#start climbing / attach to the wall
 	if Input.is_action_pressed("climb") and is_on_wall():
 		is_climbing = true
+#Handles climbing
 	if is_climbing:
 		climb()
-		
-func walk():
+#RESET PLAYER POSITION, JUST IN CASE
+	if Input.is_action_just_pressed("reset_position"):		#reset respawn mech add button
+		reset_position()
+
+#SUB-FUNCTIONS for movement
+func idle(): 	   #idle animation                        
+	anim.play("idle")
+	
+func walk():	#handles Walking and IDLE
 	var direction = Input.get_axis("left", "right")
 	if direction == -1:
 		$Sprite2D.flip_h = true
@@ -94,21 +125,14 @@ func walk():
 				anim.queue("run")
 	else:	#slowing down after releasing
 		velocity.x = move_toward(velocity.x, 0, 50)         #need to implement RUN_STOP 
-		if velocity.y == 0:                                 #idle animation 
-			anim.play("idle")
-			#need to implement RUN_STOP 
-		
-func jump():
-	if is_on_floor() or is_climbing	:
-		velocity.y = JUMP_VELOCITY
-		anim.play("jump_start")                             #plays one animation then loops the second                    
-		anim.queue("fall_loop")
-	elif not double_jumped:             #allows for one double jump
-		velocity.y = JUMP_VELOCITY		#could change the second jump velocity
-		double_jumped = true;
-		anim.play("jump_start")                             #plays one animation then loops the second                    
-		anim.queue("fall_loop")
 
+			#need to implement RUN_STOP 
+
+func jump():
+	velocity.y = JUMP_VELOCITY		
+	anim.play("jump_start")         #plays one animation then loops the second                    
+	anim.queue("fall_loop")
+	
 func climb():	
 #climb up and down			
 	anim.play("RESET")
@@ -144,6 +168,7 @@ func dash():	#to add to facing direction
 #			velocity.x -= DASH_SPEED
 #			remaining_dashing = DASH_DURATION
 			#var prev pos
+
 func dash_reset():
 	if(prev_pos == position.x): #check if dash has been interrupted
 		remaining_dashing=0;
@@ -158,12 +183,16 @@ func dash_reset():
 			is_dashing=false
 			print("dash reset")		
 
+func reset_position():
+		position.x = 550
+		position.y = 400
+
+#world interaction and life management _______________________________________________________________________________________________
 func _on_node_2d_damaged():
 	lifes -= 1 
 
 func _on_ronda_touched(value):
 	lifes -= value
-
 
 func _on_node_2d_win(score):
 	win()
