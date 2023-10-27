@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+@onready var anim = $AnimationPlayer
+
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 const CLIMBING_SPEED = 100.0
@@ -58,12 +60,7 @@ func reset_position():
 		
 
 func movement():
-	#basic left and right
-	var direction = Input.get_axis("left", "right")
-	if direction and not is_climbing and not is_dashing:	#locked during climb and dash
-		velocity.x = direction * SPEED
-	else:	#slowing down after releasing
-		velocity.x = move_toward(velocity.x, 0, 50)
+	walk()      #basic left and right
 	
 #Handle Jump and Double Jump.
 	if Input.is_action_just_pressed("jump"):
@@ -82,15 +79,39 @@ func movement():
 	if is_climbing:
 		climb()
 		
+func walk():
+	var direction = Input.get_axis("left", "right")
+	if direction == -1:
+		$Sprite2D.flip_h = true
+	elif direction == 1:
+		$Sprite2D.flip_h = false
+		
+	if direction and not is_climbing and not is_dashing:	#locked during climb and dash
+		velocity.x = direction * SPEED
+		if velocity.y == 0:
+			if anim.current_animation != ("run"):           #duplo approved
+				anim.play("run_start")  
+				anim.queue("run")
+	else:	#slowing down after releasing
+		velocity.x = move_toward(velocity.x, 0, 50)         #need to implement RUN_STOP 
+		if velocity.y == 0:                                 #idle animation 
+			anim.play("idle")
+			#need to implement RUN_STOP 
+		
 func jump():
-	if is_on_floor():
+	if is_on_floor() or is_climbing	:
 		velocity.y = JUMP_VELOCITY
-	elif not double_jumped:
+		anim.play("jump_start")                             #plays one animation then loops the second                    
+		anim.queue("fall_loop")
+	elif not double_jumped:             #allows for one double jump
 		velocity.y = JUMP_VELOCITY		#could change the second jump velocity
 		double_jumped = true;
+		anim.play("jump_start")                             #plays one animation then loops the second                    
+		anim.queue("fall_loop")
 
 func climb():	
 #climb up and down			
+	anim.play("RESET")
 	var climb_direction = Input.get_axis("up", "down")		
 	if climb_direction:
 		velocity.y = climb_direction * CLIMBING_SPEED
@@ -99,7 +120,7 @@ func climb():
 #
 # Handle climb-jump
 	if Input.is_action_just_pressed("jump"):	#should jump to the direction opposite of the wall
-		velocity.y = JUMP_VELOCITY
+		jump()
 		is_climbing = false
 		
 #stop climbing, any moment that you aren't touching the wall	

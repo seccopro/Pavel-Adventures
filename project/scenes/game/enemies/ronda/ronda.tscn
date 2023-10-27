@@ -5,8 +5,8 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r8svd"]
 size = Vector2(20, 43)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0luk3"]
-size = Vector2(396, 116)
+[sub_resource type="CircleShape2D" id="CircleShape2D_ok2ic"]
+radius = 113.018
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vg1ld"]
 size = Vector2(25, 48)
@@ -28,8 +28,8 @@ color = Color(0, 0, 0, 1)
 [node name="event_detector" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="event_detector"]
-position = Vector2(0, -3)
-shape = SubResource("RectangleShape2D_0luk3")
+position = Vector2(0, 7)
+shape = SubResource("CircleShape2D_ok2ic")
 
 [node name="damage_area" type="Area2D" parent="."]
 
