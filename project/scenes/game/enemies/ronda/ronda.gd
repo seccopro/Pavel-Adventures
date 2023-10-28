@@ -49,12 +49,20 @@ func range_walking():
 
 
 func _on_event_detector_body_entered(body):
-	print("ronda has detected a " + str(body))
 	if(body.name == "player"):
 		velocity.y += JUMP_VELOCITY
-
 
 func _on_damage_area_body_entered(body):
 	if(body.name == "player"):
 		print("ronda has damaged you")
 		emit_signal("touched", 1)
+
+
+func _on_damage_area_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
+	print("hit by a " + area.name)
+	if( area.name == "magic_orb"):
+		print("ronda dead")
+		queue_free()	#lose 1 health
+	if( area.name == "dark blast" ):
+		queue_free() 	#lose 5 health
+		

@@ -1,28 +1,39 @@
 extends CharacterBody2D
 
 #variables _______________________________________________________________________________________________
-#on ready
+#on ready ANIMATIONS and STATE MACHINE
 @onready var anim = $AnimationPlayer
+@onready var state_machine : CharacterStateMachine = $"CharacterStateMachine"
 
 #constants
-const SPEED = 300.0
-const JUMP_VELOCITY = -400.0
-const CLIMBING_SPEED = 100.0
-const DASH_SPEED = 5
-const DASH_DURATION = 30
+@export_category("movement")
+@export var SPEED = 300.0
+@export var JUMP_VELOCITY = -400.0
+@export var CLIMBING_SPEED = 100.0
+@export var DASH_SPEED = 5
+@export var DASH_DURATION = 30
+
+@export_category("health")
+@export var lifes: float = 3
 
 #variables for game logic
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") # Get the gravity from the project settings to be synced with RigidBody nodes.
 var remaining_dashing = 0
 var double_jumped = false
-var prev_pos = 0
-var lifes = 3
+var prev_pos = 0	#if staying still mid dash
+
+
 
 #flags
 var is_climbing = false 
 var is_dashing = false
 var is_alive = true
 var is_playing = true
+var is_casting = false
+
+#attacks
+var magic_orb = load("res://scenes/game/characters/player/magic_orb/magic_orb.tscn")
+
 
 #functions ___________________________________________________________________________________________________________________________
 func _physics_process(delta):		#"MAIN" runs every delta time - CALLS ALL OTHER FUNCTIONS
@@ -36,6 +47,7 @@ func _physics_process(delta):		#"MAIN" runs every delta time - CALLS ALL OTHER F
 		move_and_slide()
 		logic()	
 		movement()
+		combat()
 
 #game logic _______________________________________________________________________________________________
 
@@ -186,6 +198,12 @@ func dash_reset():
 func reset_position():
 		position.x = 550
 		position.y = 400
+
+#COMBAT SYSTEM _______________________________________________________________________________________________
+func combat():
+	if(Input.is_action_just_pressed("attack")):
+		print("shoot")
+		add_child(magic_orb.instantiate())
 
 #world interaction and life management _______________________________________________________________________________________________
 func _on_node_2d_damaged():

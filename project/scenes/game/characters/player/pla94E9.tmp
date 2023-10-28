@@ -1,12 +1,24 @@
-[gd_scene load_steps=21 format=3 uid="uid://c27okguknaco3"]
+[gd_scene load_steps=25 format=3 uid="uid://cbb5qfdj1r0sb"]
 
-[ext_resource type="Script" path="res://scenes/game/characters/alex test/player.gd" id="1_2onwh"]
-[ext_resource type="Texture2D" uid="uid://dgx67f1crxu83" path="res://scenes/game/characters/player/sprite_sheet/chara_run_sheet.png" id="2_avn5p"]
-[ext_resource type="Texture2D" uid="uid://cunedphba4b6s" path="res://scenes/game/characters/player/sprite_sheet/chara_run_sheet_n.png" id="3_yorvv"]
+[ext_resource type="Script" path="res://scenes/game/characters/player/player.gd" id="1_hkbnf"]
+[ext_resource type="PackedScene" uid="uid://61w51ai88ja0" path="res://scenes/HUD/death_screen/death_screen.tscn" id="2_ee4nu"]
+[ext_resource type="PackedScene" uid="uid://36kt0ngexo1t" path="res://scenes/HUD/victory_screen/victory_screen.tscn" id="3_0kecm"]
+[ext_resource type="Texture2D" uid="uid://dgx67f1crxu83" path="res://scenes/game/characters/player/sprite_sheet/chara_run_sheet.png" id="4_8o6kq"]
+[ext_resource type="Texture2D" uid="uid://cunedphba4b6s" path="res://scenes/game/characters/player/sprite_sheet/chara_run_sheet_n.png" id="5_atgh3"]
+[ext_resource type="Script" path="res://scenes/game/characters/player/States/CharacterStateMachine.gd" id="6_wfvl0"]
+[ext_resource type="Script" path="res://scenes/game/characters/player/States/IdleState.gd" id="7_xcc5y"]
+[ext_resource type="Script" path="res://scenes/game/characters/player/States/JumpingState.gd" id="8_vfwhu"]
+[ext_resource type="Script" path="res://scenes/game/characters/player/States/ClimbingState.gd" id="9_0x0ia"]
+[ext_resource type="Script" path="res://scenes/game/characters/player/States/CastingState.gd" id="10_v8iwg"]
+[ext_resource type="Script" path="res://scenes/game/characters/player/DashingState.gd" id="11_6cnyw"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u8p3a"]
-radius = 50.0
-height = 366.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_epkqn"]
+radius = 8.0
+height = 56.0
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_vlif7"]
+diffuse_texture = ExtResource("4_8o6kq")
+normal_texture = ExtResource("5_atgh3")
 
 [sub_resource type="Animation" id="Animation_7o5yl"]
 length = 0.001
@@ -190,53 +202,63 @@ _data = {
 "run_stop": SubResource("Animation_rq06s")
 }
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_u002o"]
-animation = &"run"
-
-[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_0q53f"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_n2wn5"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_8bdpt"]
-states/run/node = SubResource("AnimationNodeAnimation_u002o")
-states/run/position = Vector2(547, 76)
-states/run_start/node = SubResource("AnimationNodeBlendSpace2D_0q53f")
-states/run_start/position = Vector2(379, 76)
-transitions = ["run_start", "run", SubResource("AnimationNodeStateMachineTransition_n2wn5")]
-
-[sub_resource type="CanvasTexture" id="CanvasTexture_8e0w8"]
-diffuse_texture = ExtResource("2_avn5p")
-normal_texture = ExtResource("3_yorvv")
-
 [node name="player" type="CharacterBody2D"]
-floor_constant_speed = true
-script = ExtResource("1_2onwh")
+script = ExtResource("1_hkbnf")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, 54)
-shape = SubResource("CapsuleShape2D_u8p3a")
+[node name="playerCollisionShape" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+shape = SubResource("CapsuleShape2D_epkqn")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-scale = Vector2(4.65234, 0.685429)
 zoom = Vector2(1.5, 1.5)
-limit_left = 0
-limit_top = 0
-limit_bottom = 640
+
+[node name="HP_bar" type="Label" parent="."]
+offset_left = -32.0
+offset_top = -49.0
+offset_right = 8.0
+offset_bottom = -26.0
+
+[node name="death_screen" parent="." instance=ExtResource("2_ee4nu")]
+visible = false
+offset_left = -394.0
+offset_top = -235.0
+offset_right = -394.0
+offset_bottom = -235.0
+
+[node name="victory_screen" parent="." instance=ExtResource("3_0kecm")]
+visible = false
+offset_left = -400.0
+offset_top = -191.0
+offset_right = -400.0
+offset_bottom = -191.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.152542, 0.154661)
+texture = SubResource("CanvasTexture_vlif7")
+hframes = 13
+vframes = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_twtli")
 }
 
-[node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource("AnimationNodeStateMachine_8bdpt")
-anim_player = NodePath("../AnimationPlayer")
-active = true
-parameters/run_start/blend_position = Vector2(0, 0)
+[node name="CharacterStateMachine" type="Node" parent="." node_paths=PackedStringArray("player", "current_state")]
+script = ExtResource("6_wfvl0")
+player = NodePath("..")
+current_state = NodePath("Idle")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, 62)
-texture = SubResource("CanvasTexture_8e0w8")
-hframes = 13
-vframes = 3
+[node name="Idle" type="Node" parent="CharacterStateMachine"]
+script = ExtResource("7_xcc5y")
+
+[node name="Jumping" type="Node" parent="CharacterStateMachine"]
+script = ExtResource("8_vfwhu")
+
+[node name="Climbing" type="Node" parent="CharacterStateMachine"]
+script = ExtResource("9_0x0ia")
+
+[node name="Casting" type="Node" parent="CharacterStateMachine"]
+script = ExtResource("10_v8iwg")
+
+[node name="Dashing" type="Node" parent="CharacterStateMachine"]
+script = ExtResource("11_6cnyw")

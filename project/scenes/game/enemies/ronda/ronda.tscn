@@ -45,4 +45,5 @@ offset_right = 22.0
 offset_bottom = -95.0
 
 [connection signal="body_entered" from="event_detector" to="." method="_on_event_detector_body_entered"]
+[connection signal="area_shape_entered" from="damage_area" to="." method="_on_damage_area_area_shape_entered"]
 [connection signal="body_entered" from="damage_area" to="." method="_on_damage_area_body_entered"]
