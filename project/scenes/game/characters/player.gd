@@ -3,6 +3,8 @@ extends CharacterBody2D
 #variables _______________________________________________________________________________________________
 #on ready
 @onready var anim = $AnimationPlayer
+@onready var anim_state_machine = $AnimationTree.get("parameters/playback")
+@onready var anim_tree : AnimationTree = $AnimationTree
 
 #constants
 const SPEED = 300.0
@@ -43,7 +45,7 @@ func logic():
 	var hearts = ""
 	for i in lifes:
 		hearts += "♥"
-	$"HP_bar".text = str(hearts)
+	$HUD/HP_bar.text = str(hearts)
 	if(lifes <= 0):
 		game_over()
 
@@ -81,8 +83,10 @@ func movement(): 	# handles all movement functions by waiting for inputs (declar
 #Handle Jump and Double Jump.
 	if Input.is_action_just_pressed("jump"):
 		if is_on_floor() or is_climbing	:
+			anim_state_machine.travel("jump_start")
 			jump()
 		elif not double_jumped:             #allows for one double jump
+			anim_state_machine.travel("jump_start 2")
 			jump()
 			double_jumped = true
 	#resets double jump
@@ -107,8 +111,8 @@ func movement(): 	# handles all movement functions by waiting for inputs (declar
 		reset_position()
 
 #SUB-FUNCTIONS for movement
-func idle(): 	   #idle animation                        
-	anim.play("idle")
+func idle(): 	   #idle animation
+	anim_state_machine.travel("idle")
 	
 func walk():	#handles Walking and IDLE
 	var direction = Input.get_axis("left", "right")
@@ -119,19 +123,15 @@ func walk():	#handles Walking and IDLE
 		
 	if direction and not is_climbing and not is_dashing:	#locked during climb and dash
 		velocity.x = direction * SPEED
-		if velocity.y == 0:
-			if anim.current_animation != ("run"):           #duplo approved
-				anim.play("run_start")  
-				anim.queue("run")
+		if is_on_floor():
+			anim_state_machine.travel("run")
 	else:	#slowing down after releasing
-		velocity.x = move_toward(velocity.x, 0, 50)         #need to implement RUN_STOP 
-
-			#need to implement RUN_STOP 
+		velocity.x = move_toward(velocity.x, 0, 50)     
+		if abs(velocity.x) > 0 and is_on_floor():
+			anim_state_machine.travel("run_stop")
 
 func jump():
-	velocity.y = JUMP_VELOCITY		
-	anim.play("jump_start")         #plays one animation then loops the second                    
-	anim.queue("fall_loop")
+	velocity.y = JUMP_VELOCITY
 	
 func climb():	
 #climb up and down			

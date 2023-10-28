@@ -5,13 +5,13 @@
 [ext_resource type="PackedScene" uid="uid://c8wvmaehkj300" path="res://scenes/game/enemies/ronda/ronda.tscn" id="3_28jar"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mh7pj"]
-size = Vector2(333, 29.5)
+size = Vector2(333, 22)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5clwn"]
 size = Vector2(55, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ijsxk"]
-size = Vector2(333, 29.5)
+size = Vector2(333, 22)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fqnr7"]
 
@@ -172,7 +172,7 @@ shape = SubResource("RectangleShape2D_gw3nv")
 [node name="Lights" type="Node2D" parent="."]
 
 [node name="PointLight2D" type="PointLight2D" parent="Lights"]
-position = Vector2(703, 298)
+position = Vector2(777, 288)
 scale = Vector2(6.202, 6.202)
 energy = 1.5
 texture = SubResource("GradientTexture2D_k7hfu")
