@@ -4,7 +4,7 @@ class_name State
 
 @export var idle_state : State
 @export var walking_state : State
-@export var jumping_state : State
+@export var air_state : State
 @export var dashing_state : State
 @export var climbing_state : State
 @export var casting_state : State

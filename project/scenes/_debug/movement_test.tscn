@@ -1,11 +1,11 @@
 [gd_scene load_steps=12 format=3 uid="uid://bccnka0x1hcbt"]
 
 [ext_resource type="Script" path="res://scenes/_debug/movement_test.gd" id="1_pcuud"]
-[ext_resource type="PackedScene" uid="uid://xrb8n5a1sqvy" path="res://scenes/game/characters/player/player.tscn" id="2_36yml"]
+[ext_resource type="PackedScene" uid="uid://cbb5qfdj1r0sb" path="res://scenes/game/characters/player/player.tscn" id="2_36yml"]
 [ext_resource type="PackedScene" uid="uid://c8wvmaehkj300" path="res://scenes/game/enemies/ronda/ronda.tscn" id="3_28jar"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mh7pj"]
-size = Vector2(333, 29.5)
+size = Vector2(340.5, 29.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5clwn"]
 size = Vector2(55, 20)
@@ -80,6 +80,7 @@ metadata/_edit_use_anchors_ = true
 position = Vector2(-251, 129)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="platforms/ground"]
+position = Vector2(3.75, 0)
 shape = SubResource("RectangleShape2D_mh7pj")
 
 [node name="ColorRect" type="ColorRect" parent="platforms/ground/CollisionShape2D"]

@@ -230,57 +230,55 @@ script = ExtResource("6_wfvl0")
 character = NodePath("..")
 current_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("idle_state", "walking_state", "air_state", "dashing_state", "climbing_state", "casting_state")]
+[node name="Idle" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("idle_state", "walking_state", "dashing_state", "climbing_state", "casting_state")]
 script = ExtResource("7_xcc5y")
 idle_state = NodePath(".")
 walking_state = NodePath("../Walking")
-air_state = NodePath("../Air")
 dashing_state = NodePath("../Dashing")
 climbing_state = NodePath("../Climbing")
 casting_state = NodePath("../Casting")
 
-[node name="Air" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("idle_state", "walking_state", "air_state", "dashing_state", "climbing_state", "casting_state")]
+[node name="Air" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("idle_state", "walking_state", "jumping_state", "dashing_state", "climbing_state", "casting_state")]
 script = ExtResource("6_wvrpb")
 idle_state = NodePath("../Idle")
 walking_state = NodePath("../Walking")
-air_state = NodePath(".")
+jumping_state = NodePath(".")
 dashing_state = NodePath("../Dashing")
 climbing_state = NodePath("../Climbing")
 casting_state = NodePath("../Casting")
 can_jump = false
 
-[node name="Climbing" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("idle_state", "walking_state", "air_state", "dashing_state", "climbing_state", "casting_state")]
+[node name="Climbing" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("idle_state", "walking_state", "jumping_state", "dashing_state", "climbing_state", "casting_state")]
 script = ExtResource("9_0x0ia")
 idle_state = NodePath("../Idle")
 walking_state = NodePath("../Walking")
-air_state = NodePath("../Air")
+jumping_state = NodePath("../Air")
 dashing_state = NodePath("../Dashing")
 climbing_state = NodePath(".")
 casting_state = NodePath("../Casting")
 
-[node name="Casting" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("idle_state", "walking_state", "air_state", "dashing_state", "climbing_state", "casting_state")]
+[node name="Casting" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("idle_state", "walking_state", "jumping_state", "dashing_state", "climbing_state", "casting_state")]
 script = ExtResource("10_v8iwg")
 idle_state = NodePath("../Idle")
 walking_state = NodePath("../Walking")
-air_state = NodePath("../Air")
+jumping_state = NodePath("../Air")
 dashing_state = NodePath("../Dashing")
 climbing_state = NodePath("../Climbing")
 casting_state = NodePath(".")
 
-[node name="Dashing" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("idle_state", "walking_state", "air_state", "dashing_state", "climbing_state", "casting_state")]
+[node name="Dashing" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("idle_state", "walking_state", "jumping_state", "dashing_state", "climbing_state", "casting_state")]
 script = ExtResource("11_bxnc5")
 idle_state = NodePath("../Idle")
 walking_state = NodePath("../Walking")
-air_state = NodePath("../Air")
+jumping_state = NodePath("../Air")
 dashing_state = NodePath(".")
 climbing_state = NodePath("../Climbing")
 casting_state = NodePath("../Casting")
 
-[node name="Walking" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("idle_state", "walking_state", "air_state", "dashing_state", "climbing_state", "casting_state")]
+[node name="Walking" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("idle_state", "walking_state", "dashing_state", "climbing_state", "casting_state")]
 script = ExtResource("12_eyoi0")
 idle_state = NodePath("../Idle")
 walking_state = NodePath(".")
-air_state = NodePath("../Air")
 dashing_state = NodePath("../Dashing")
 climbing_state = NodePath("../Climbing")
 casting_state = NodePath("../Casting")

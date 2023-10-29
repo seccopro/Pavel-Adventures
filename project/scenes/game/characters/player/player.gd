@@ -12,7 +12,6 @@ func _physics_process(delta):		#"MAIN" runs every delta time - CALLS ALL OTHER F
 	move_and_slide()
 	#camera controlling, zoom
 	camera()
-	CharacterStateMachine
 
 func camera():
 	if(Input.is_action_just_pressed("camera_zoom_in")):
