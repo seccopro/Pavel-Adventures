@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://cbb5qfdj1r0sb"]
+[gd_scene load_steps=27 format=3 uid="uid://cbb5qfdj1r0sb"]
 
 [ext_resource type="Script" path="res://scenes/game/characters/player/player.gd" id="1_hkbnf"]
 [ext_resource type="PackedScene" uid="uid://61w51ai88ja0" path="res://scenes/HUD/death_screen/death_screen.tscn" id="2_ee4nu"]
@@ -13,7 +13,6 @@
 [ext_resource type="Script" path="res://scenes/HUD/HP_bar_label.gd" id="11_7sifh"]
 [ext_resource type="Script" path="res://scenes/game/characters/player/States/DashingState.gd" id="11_bxnc5"]
 [ext_resource type="Script" path="res://scenes/game/characters/player/States/WalkingState.gd" id="12_eyoi0"]
-[ext_resource type="Script" path="res://scenes/game/characters/player/magic/magic_handler.gd" id="15_eafol"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_epkqn"]
 radius = 8.0
@@ -259,32 +258,14 @@ dashing_state = NodePath("../Dashing")
 climbing_state = NodePath(".")
 casting_state = NodePath("../Casting")
 
-[node name="climb_detach" type="Timer" parent="CharacterStateMachine/Climbing"]
-wait_time = 0.5
-
-[node name="just_detached" type="Timer" parent="CharacterStateMachine/Climbing"]
-wait_time = 0.5
-
-[node name="Casting" type="Node" parent="CharacterStateMachine"]
+[node name="Casting" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("idle_state", "walking_state", "air_state", "dashing_state", "climbing_state", "casting_state")]
 script = ExtResource("10_v8iwg")
-can_move = false
-can_fall = false
-can_dash = false
-can_jump = false
-can_cast = false
-
-[node name="magic_handler" type="Node" parent="CharacterStateMachine/Casting" node_paths=PackedStringArray("previous_state")]
-script = ExtResource("15_eafol")
-previous_state = NodePath("../../Idle")
-
-[node name="magic_orb_cooldown" type="Timer" parent="CharacterStateMachine/Casting/magic_handler"]
-process_mode = 3
-one_shot = true
-
-[node name="dark_sphere_cooldown" type="Timer" parent="CharacterStateMachine/Casting/magic_handler"]
-process_mode = 3
-wait_time = 5.0
-one_shot = true
+idle_state = NodePath("../Idle")
+walking_state = NodePath("../Walking")
+air_state = NodePath("../Air")
+dashing_state = NodePath("../Dashing")
+climbing_state = NodePath("../Climbing")
+casting_state = NodePath(".")
 
 [node name="Dashing" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("idle_state", "walking_state", "air_state", "dashing_state", "climbing_state", "casting_state")]
 script = ExtResource("11_bxnc5")
@@ -300,6 +281,9 @@ can_dash = false
 can_jump = false
 can_cast = false
 
+[node name="dash_duration" type="Timer" parent="CharacterStateMachine/Dashing"]
+wait_time = 0.5
+
 [node name="Walking" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("idle_state", "walking_state", "air_state", "dashing_state", "climbing_state", "casting_state")]
 script = ExtResource("12_eyoi0")
 idle_state = NodePath("../Idle")
@@ -308,6 +292,8 @@ air_state = NodePath("../Air")
 dashing_state = NodePath("../Dashing")
 climbing_state = NodePath("../Climbing")
 casting_state = NodePath("../Casting")
+can_fall = false
+can_dash = false
 
 [node name="HUD" type="Control" parent="."]
 layout_mode = 3
@@ -347,7 +333,4 @@ offset_bottom = -57.0
 script = ExtResource("11_7sifh")
 state_machine = NodePath("../../CharacterStateMachine")
 
-[connection signal="timeout" from="CharacterStateMachine/Climbing/climb_detach" to="CharacterStateMachine/Climbing" method="_on_climb_detach_timeout"]
-[connection signal="timeout" from="CharacterStateMachine/Climbing/just_detached" to="CharacterStateMachine" method="_on_just_detached_timeout"]
-[connection signal="timeout" from="CharacterStateMachine/Casting/magic_handler/magic_orb_cooldown" to="CharacterStateMachine/Casting/magic_handler" method="_on_magic_orb_cooldown_timeout"]
-[connection signal="timeout" from="CharacterStateMachine/Casting/magic_handler/dark_sphere_cooldown" to="CharacterStateMachine/Casting/magic_handler" method="_on_dark_sphere_cooldown_timeout"]
+[connection signal="timeout" from="CharacterStateMachine/Dashing/dash_duration" to="CharacterStateMachine/Dashing" method="_on_dash_duration_timeout"]

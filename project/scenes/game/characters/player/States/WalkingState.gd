@@ -3,10 +3,6 @@ extends State
 class_name WalkingState
 
 
-@export var WALKING_SPEED : float = 300
-@export var JUMP_VELOCITY : float = -400
-@export var  DASH_VELOCITY: float = 5
-
 func on_enter():
 	pass
 
@@ -20,12 +16,12 @@ func state_input(event: InputEvent):
 	if(Input.is_action_just_pressed("climb") and character.is_on_wall()):	#TO CLIMBING STATE
 		next_state = climbing_state
 	
-	if(Input.is_action_just_pressed("cast") and character.is_on_wall()):	#TO CASTING STATE (NO WORK YET)
+	if( Input.is_action_just_pressed("magic_orb") and not $"../Casting/magic_handler".magic_orb_is_on_cooldown ):
+		$"../Casting/magic_handler".cast("magic_orb", $".")
 		next_state = casting_state
-
-
-
-
+	if( Input.is_action_just_pressed("dark_sphere") and not $"../Casting/magic_handler".dark_sphere_is_on_cooldown ):
+		$"../Casting/magic_handler".cast("dark_sphere", $".")
+		next_state = casting_state
 
 func state_process(delta):
 	walk()
@@ -43,16 +39,19 @@ func on_exit():
 func walk():
 	var direction = Input.get_axis("left", "right")
 	if direction:
-		character.velocity.x = direction* WALKING_SPEED	
+		character.velocity.x = direction* get_parent().MOVING_SPEED	
 	else:
 		character.velocity.x = move_toward(character.velocity.x, 0, 50)		
 
 func jump():
-	character.velocity.y = JUMP_VELOCITY		
+	character.velocity.y = get_parent().JUMP_VELOCITY		
 #	anim.play("jump_start")         #plays one animation then loops the second                    
 #	anim.queue("fall_loop")
 	next_state = air_state
 
 func dash():
-	character.velocity.x *= DASH_VELOCITY
+	if(character.velocity.x < 0): 	#moving left WILL CHANGE WITH ANIM FANCING
+		character.velocity.x = -get_parent().DASH_VELOCITY	#add dir
+	else:
+		character.velocity.x = +get_parent().DASH_VELOCITY
 	next_state = dashing_state

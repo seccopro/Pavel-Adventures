@@ -201,7 +201,7 @@ func reset_position():
 
 #COMBAT SYSTEM _______________________________________________________________________________________________
 func combat():
-	if(Input.is_action_just_pressed("attack")):
+	if(Input.is_action_just_pressed("dark_sphere")):
 		print("shoot")
 		add_child(magic_orb.instantiate())
 
