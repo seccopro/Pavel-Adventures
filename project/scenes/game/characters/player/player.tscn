@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://cbb5qfdj1r0sb"]
+[gd_scene load_steps=30 format=3 uid="uid://cbb5qfdj1r0sb"]
 
 [ext_resource type="Script" path="res://scenes/game/characters/player/player.gd" id="1_hkbnf"]
 [ext_resource type="PackedScene" uid="uid://61w51ai88ja0" path="res://scenes/HUD/death_screen/death_screen.tscn" id="2_ee4nu"]
@@ -13,6 +13,8 @@
 [ext_resource type="Script" path="res://scenes/HUD/HP_bar_label.gd" id="11_7sifh"]
 [ext_resource type="Script" path="res://scenes/game/characters/player/States/DashingState.gd" id="11_bxnc5"]
 [ext_resource type="Script" path="res://scenes/game/characters/player/States/WalkingState.gd" id="12_eyoi0"]
+[ext_resource type="Script" path="res://scenes/game/characters/player/States/input_check.gd" id="12_oovai"]
+[ext_resource type="Script" path="res://scenes/game/characters/player/States/DeadState.gd" id="13_1kak5"]
 [ext_resource type="Script" path="res://scenes/game/characters/player/magic/magic_handler.gd" id="15_eafol"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_epkqn"]
@@ -231,7 +233,7 @@ script = ExtResource("6_wfvl0")
 character = NodePath("..")
 current_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("idle_state", "walking_state", "air_state", "dashing_state", "climbing_state", "casting_state")]
+[node name="Idle" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("idle_state", "walking_state", "air_state", "dashing_state", "climbing_state", "casting_state", "dead_state")]
 script = ExtResource("7_xcc5y")
 idle_state = NodePath(".")
 walking_state = NodePath("../Walking")
@@ -239,8 +241,9 @@ air_state = NodePath("../Air")
 dashing_state = NodePath("../Dashing")
 climbing_state = NodePath("../Climbing")
 casting_state = NodePath("../Casting")
+dead_state = NodePath("../Dead")
 
-[node name="Air" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("idle_state", "walking_state", "air_state", "dashing_state", "climbing_state", "casting_state")]
+[node name="Air" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("idle_state", "walking_state", "air_state", "dashing_state", "climbing_state", "casting_state", "dead_state")]
 script = ExtResource("6_wvrpb")
 idle_state = NodePath("../Idle")
 walking_state = NodePath("../Walking")
@@ -248,9 +251,10 @@ air_state = NodePath(".")
 dashing_state = NodePath("../Dashing")
 climbing_state = NodePath("../Climbing")
 casting_state = NodePath("../Casting")
+dead_state = NodePath("../Dead")
 can_jump = false
 
-[node name="Climbing" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("idle_state", "walking_state", "air_state", "dashing_state", "climbing_state", "casting_state")]
+[node name="Climbing" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("idle_state", "walking_state", "air_state", "dashing_state", "climbing_state", "casting_state", "dead_state")]
 script = ExtResource("9_0x0ia")
 idle_state = NodePath("../Idle")
 walking_state = NodePath("../Walking")
@@ -258,6 +262,11 @@ air_state = NodePath("../Air")
 dashing_state = NodePath("../Dashing")
 climbing_state = NodePath(".")
 casting_state = NodePath("../Casting")
+dead_state = NodePath("../Dead")
+can_move = false
+can_fall = false
+can_dash = false
+can_climb = false
 
 [node name="climb_detach" type="Timer" parent="CharacterStateMachine/Climbing"]
 wait_time = 0.5
@@ -265,12 +274,20 @@ wait_time = 0.5
 [node name="just_detached" type="Timer" parent="CharacterStateMachine/Climbing"]
 wait_time = 0.5
 
-[node name="Casting" type="Node" parent="CharacterStateMachine"]
+[node name="Casting" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("idle_state", "walking_state", "air_state", "dashing_state", "climbing_state", "casting_state", "dead_state")]
 script = ExtResource("10_v8iwg")
+idle_state = NodePath("../Idle")
+walking_state = NodePath("../Walking")
+air_state = NodePath("../Air")
+dashing_state = NodePath("../Dashing")
+climbing_state = NodePath("../Climbing")
+casting_state = NodePath(".")
+dead_state = NodePath("../Dead")
 can_move = false
 can_fall = false
 can_dash = false
 can_jump = false
+can_climb = false
 can_cast = false
 
 [node name="magic_handler" type="Node" parent="CharacterStateMachine/Casting" node_paths=PackedStringArray("previous_state")]
@@ -286,7 +303,22 @@ process_mode = 3
 wait_time = 5.0
 one_shot = true
 
-[node name="Dashing" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("idle_state", "walking_state", "air_state", "dashing_state", "climbing_state", "casting_state")]
+[node name="Dead" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("idle_state", "walking_state", "air_state", "dashing_state", "climbing_state", "casting_state", "dead_state")]
+script = ExtResource("13_1kak5")
+idle_state = NodePath("../Idle")
+walking_state = NodePath("../Walking")
+air_state = NodePath("../Air")
+dashing_state = NodePath("../Dashing")
+climbing_state = NodePath("../Climbing")
+casting_state = NodePath("../Casting")
+dead_state = NodePath(".")
+can_move = false
+can_dash = false
+can_jump = false
+can_climb = false
+can_cast = false
+
+[node name="Dashing" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("idle_state", "walking_state", "air_state", "dashing_state", "climbing_state", "casting_state", "dead_state")]
 script = ExtResource("11_bxnc5")
 idle_state = NodePath("../Idle")
 walking_state = NodePath("../Walking")
@@ -294,13 +326,14 @@ air_state = NodePath("../Air")
 dashing_state = NodePath(".")
 climbing_state = NodePath("../Climbing")
 casting_state = NodePath("../Casting")
+dead_state = NodePath("../Dead")
 can_move = false
 can_fall = false
 can_dash = false
 can_jump = false
-can_cast = false
+can_climb = false
 
-[node name="Walking" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("idle_state", "walking_state", "air_state", "dashing_state", "climbing_state", "casting_state")]
+[node name="Walking" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("idle_state", "walking_state", "air_state", "dashing_state", "climbing_state", "casting_state", "dead_state")]
 script = ExtResource("12_eyoi0")
 idle_state = NodePath("../Idle")
 walking_state = NodePath(".")
@@ -308,6 +341,10 @@ air_state = NodePath("../Air")
 dashing_state = NodePath("../Dashing")
 climbing_state = NodePath("../Climbing")
 casting_state = NodePath("../Casting")
+dead_state = NodePath("../Dead")
+
+[node name="input_check" type="Node" parent="CharacterStateMachine"]
+script = ExtResource("12_oovai")
 
 [node name="HUD" type="Control" parent="."]
 layout_mode = 3
@@ -348,6 +385,6 @@ script = ExtResource("11_7sifh")
 state_machine = NodePath("../../CharacterStateMachine")
 
 [connection signal="timeout" from="CharacterStateMachine/Climbing/climb_detach" to="CharacterStateMachine/Climbing" method="_on_climb_detach_timeout"]
-[connection signal="timeout" from="CharacterStateMachine/Climbing/just_detached" to="CharacterStateMachine" method="_on_just_detached_timeout"]
+[connection signal="timeout" from="CharacterStateMachine/Climbing/just_detached" to="CharacterStateMachine/Climbing" method="_on_just_detached_timeout"]
 [connection signal="timeout" from="CharacterStateMachine/Casting/magic_handler/magic_orb_cooldown" to="CharacterStateMachine/Casting/magic_handler" method="_on_magic_orb_cooldown_timeout"]
 [connection signal="timeout" from="CharacterStateMachine/Casting/magic_handler/dark_sphere_cooldown" to="CharacterStateMachine/Casting/magic_handler" method="_on_dark_sphere_cooldown_timeout"]

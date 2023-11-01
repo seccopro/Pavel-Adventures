@@ -8,12 +8,14 @@ class_name State
 @export var dashing_state : State
 @export var climbing_state : State
 @export var casting_state : State
+@export var dead_state : State
 
 
 @export var can_move : bool = true
 @export var can_fall : bool = true
 @export var can_dash : bool = true
 @export var can_jump : bool = true
+@export var can_climb : bool = true
 @export var can_cast : bool = true
 
 var character : CharacterBody2D

@@ -2,15 +2,15 @@ extends State
 
 class_name CastingState
 
-
-
 var time_elapsed : float = 0.0
-
-
 
 func on_enter():
 	character.velocity.y=0
 	character.velocity.x =0
+
+func state_input(event : InputEvent):
+	$"../input_check".permission_checker($".", event)
+
 
 func state_process(delta):
 	time_elapsed += delta

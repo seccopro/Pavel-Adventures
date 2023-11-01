@@ -8,28 +8,19 @@ func on_enter():
 	can_fall = false
 
 func state_process(delta):
-	if(not character.is_on_wall()):	#to idle / air state by falling
+	if(not character.is_on_wall() and not character.is_on_floor()):	#to idle / air state by falling
+		print("fell from wall")				#♂temporary solution, while on floor is not on wall
 		next_state = air_state
 	vertical_movement()
 	
 
 func state_input(event : InputEvent):
-	if(Input.is_action_just_pressed("climb")):	#TO IDLE STATE (OR AIR)
+	if(Input.is_action_just_pressed("climb")):	#starts detaching
 		$"climb_detach".start()
-	if(Input.is_action_just_released("climb")):
+	if(Input.is_action_just_released("climb")):	
 		$"climb_detach".stop()		
 	
-	if (Input.is_action_just_pressed("jump")):				#TO AIR STATE (by jumping)
-		character.velocity.y = get_parent().JUMP_VELOCITY
-		next_state = air_state
-	
-	if( Input.is_action_just_pressed("magic_orb") and not $"../Casting/magic_handler".magic_orb_is_on_cooldown ):
-		$"../Casting/magic_handler".magic_orb("magic_orb", $".")
-		next_state = casting_state
-	if( Input.is_action_just_pressed("dark_sphere") and not $"../Casting/magic_handler".dark_sphere_is_on_cooldown ):
-		$"../Casting/magic_handler".magic_orb("dark_sphere", $".")
-		next_state = casting_state
-
+	$"../input_check".permission_checker($".", event)
 
 func vertical_movement():
 	var direction = Input.get_axis("up", "down")
@@ -43,7 +34,10 @@ func on_exit():
 	get_parent().get_parent().can_fall = true
 
 
-func _on_climb_detach_timeout():
+func _on_climb_detach_timeout():	#TO IDLE STATE (OR AIR)
 	get_parent().just_detached = true
-	$"just_detached".start()
+	$"just_detached".start()		#climbing cooldown
 	next_state = idle_state	
+
+func _on_just_detached_timeout():	#can re-attach
+	get_parent().just_detached = false

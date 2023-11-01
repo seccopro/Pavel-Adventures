@@ -40,6 +40,7 @@ position = Vector2(-403, -63)
 rotation = 1.5708
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="platforms/wall"]
+position = Vector2(11, -2.00006)
 shape = SubResource("RectangleShape2D_mh7pj")
 
 [node name="ColorRect" type="ColorRect" parent="platforms/wall/CollisionShape2D"]
