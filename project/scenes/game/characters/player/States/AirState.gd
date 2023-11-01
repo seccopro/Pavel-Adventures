@@ -37,7 +37,6 @@ func state_process(delta):
 	else:
 		if(character.velocity.y >= -10 and character.velocity.y <= 5):	#uselsess alex says
 			anim.play("jump_top")
-			print("top of the world")
 		
 	if(Input.is_action_pressed("climb") and character.is_on_wall() and not get_parent().just_detached):	#TO CLIMBING STATE
 		next_state = climbing_state

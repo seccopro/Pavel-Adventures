@@ -5,6 +5,7 @@ class_name ClimbingState
 @export var VERTICAL_SPEED :float = 300
 
 func on_enter():
+	anim.play("idle")
 	can_fall = false
 
 func state_process(delta):
