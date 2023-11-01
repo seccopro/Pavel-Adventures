@@ -1,5 +1,7 @@
 extends Node
 
+var anim : AnimationPlayer
+
 func permission_checker(state: State, event):	
 	if(state.can_move):		
 		if(!state == $"../Air"):		#movement is handled differently in air
@@ -30,6 +32,7 @@ func walk(state: State, event: InputEvent):
 func jump(state: State, event: InputEvent):
 	if (Input.is_action_just_pressed("jump")):
 		get_parent().character.velocity.y = get_parent().JUMP_VELOCITY
+		#anim.play("jump_start")	#on enter in air state
 		state.next_state = state.air_state
 
 func dash(state: State, event: InputEvent):

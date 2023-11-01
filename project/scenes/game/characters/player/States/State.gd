@@ -19,6 +19,7 @@ class_name State
 @export var can_cast : bool = true
 
 var character : CharacterBody2D
+var anim : AnimationPlayer
 var next_state : State
 
 func on_enter():

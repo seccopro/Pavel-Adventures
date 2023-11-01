@@ -4,7 +4,7 @@ class_name IdleState
 
 
 func on_enter():
-	pass
+	anim.queue("idle")
 
 func state_process(delta):	
 	character.velocity.x = move_toward(character.velocity.x, 0, 50)	#make sure we are stopped (like after dash and jump)

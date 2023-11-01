@@ -3,6 +3,7 @@ extends Node
 class_name CharacterStateMachine 
 
 @export var character : CharacterBody2D
+@export var anim : AnimationPlayer
 @export var current_state : State
 
 @export var WALKING_SPEED:float = 300
@@ -20,12 +21,14 @@ func _ready():
 		if ( !(child is State) ):
 			if(child == $input_check):
 				print("started input_check")
+				child.anim = anim
 			else:
 				print( "child isn't a state: " + str(child) )
 			return
 		
 		states.append(child)
 		child.character = character
+		child.anim = anim
 		print("appended state: " + str(child))
 
 func _physics_process(delta):	
