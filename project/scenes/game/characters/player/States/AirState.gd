@@ -25,9 +25,7 @@ func state_input(event: InputEvent):
 func state_process(delta):
 	if(can_move):
 		movement()		#instead of walking state
-	
 
-	
 	#change state
 	if(character.is_on_floor()):
 		if(character.velocity.x == 0):
@@ -35,10 +33,10 @@ func state_process(delta):
 		else:
 			next_state = walking_state		#TO WALKING STATE
 	else:
-		if(character.velocity.y >= -10 and character.velocity.y <= 5):	#uselsess alex says
+		if( character.velocity.y >= -10 and character.velocity.y <= 5 ):	#uselsess alex says
 			anim.play("jump_top")
 		
-	if(Input.is_action_pressed("climb") and character.is_on_wall() and not get_parent().just_detached):	#TO CLIMBING STATE
+	if( Input.is_action_pressed("climb") and character.is_on_wall() and not get_parent().just_detached ):	#TO CLIMBING STATE
 		next_state = climbing_state
 
 

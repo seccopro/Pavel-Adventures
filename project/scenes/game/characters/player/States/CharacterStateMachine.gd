@@ -14,7 +14,6 @@ class_name CharacterStateMachine
 
 var just_detached: bool = false
 
-var states : Array[State]
 
 func _ready():
 	for child in get_children():
@@ -26,7 +25,6 @@ func _ready():
 				print( "child isn't a state: " + str(child) )
 			return
 		
-		states.append(child)
 		child.character = character
 		child.anim = anim
 		print("appended state: " + str(child))

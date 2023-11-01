@@ -27,11 +27,9 @@ func _physics_process(delta):		#"MAIN" runs every delta time - CALLS ALL OTHER F
 
 func camera():
 	if(Input.is_action_just_pressed("camera_zoom_in")):
-		print("zoom in")
 		$"Camera2D".zoom.x += 0.5
 		$"Camera2D".zoom.y += 0.5
 	if(Input.is_action_just_pressed("camera_zoom_out")):
-		print("zoom out")
 		$"Camera2D".zoom.x -= 0.5
 		$"Camera2D".zoom.y -= 0.5	
 
