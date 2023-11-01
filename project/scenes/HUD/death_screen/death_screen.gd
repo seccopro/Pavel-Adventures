@@ -11,16 +11,9 @@ func _process(delta):
 	pass
 
 
-func _on_start_pressed():
-	print("start")
+func _on_replay_pressed():
+	get_tree().change_scene_to_file("res://scenes/_debug/movement_test.tscn") # Replace with function body.
 
 
-func _on_quit_pressed():
-	print("quit")
-	get_tree().quit()
-	
-
-
-func _on_training_pressed():
-	print("training")
-	get_tree().change_scene_to_file("res://scenes/_debug/movement_test.tscn")
+func _on_mainmenu_pressed():
+	get_tree().change_scene_to_file("res://scenes/main.tscn")

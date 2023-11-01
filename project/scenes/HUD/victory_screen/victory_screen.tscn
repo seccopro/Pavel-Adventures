@@ -1,0 +1,41 @@
+[gd_scene load_steps=2 format=3 uid="uid://36kt0ngexo1t"]
+
+[ext_resource type="Script" path="res://scenes/HUD/victory_screen/victory_screen.gd" id="1_kjaeb"]
+
+[node name="victory_screen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_kjaeb")
+
+[node name="win_text" type="TextEdit" parent="."]
+layout_mode = 0
+offset_left = 216.0
+offset_top = 17.0
+offset_right = 558.0
+offset_bottom = 78.0
+text = "                               YOU WIN"
+wrap_mode = 1
+autowrap_mode = 1
+
+[node name="replay" type="Button" parent="."]
+layout_mode = 0
+offset_left = 232.0
+offset_top = 247.0
+offset_right = 560.0
+offset_bottom = 290.0
+text = "REPLAY"
+
+[node name="quit" type="Button" parent="."]
+layout_mode = 0
+offset_left = 227.0
+offset_top = 328.0
+offset_right = 555.0
+offset_bottom = 371.0
+text = "QUIT"
+
+[connection signal="pressed" from="replay" to="." method="_on_replay_pressed"]
+[connection signal="pressed" from="quit" to="." method="_on_quit_pressed"]
