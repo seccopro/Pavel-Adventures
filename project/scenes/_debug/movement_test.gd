@@ -18,9 +18,9 @@ func game_logic():		#move in level
 	if($player.position.y >= lethal_depth):		#falled
 		emit_signal("damaged")
 		reset_position()
-	if($player.position.x>= 2900 or $player.position.y <= -50):
+	if( $player.position.y <= -50 ):
 		print("you won!!!")
-		emit_signal("win",0)
+		emit_signal("win", 0)
 
 func reset_position():
 		$player.position.x = 550
@@ -30,4 +30,4 @@ func reset_position():
 
 func _on_win_check_body_entered(body):
 	if(body.name =="player"):
-		emit_signal("win",0)
+		emit_signal("win", 0)

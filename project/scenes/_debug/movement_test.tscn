@@ -1,25 +1,25 @@
 [gd_scene load_steps=12 format=3 uid="uid://bccnka0x1hcbt"]
 
 [ext_resource type="Script" path="res://scenes/_debug/movement_test.gd" id="1_pcuud"]
-[ext_resource type="PackedScene" uid="uid://bekqv7eev7lmv" path="res://scenes/game/characters/player.tscn" id="2_36yml"]
+[ext_resource type="PackedScene" uid="uid://cbb5qfdj1r0sb" path="res://scenes/game/characters/player/player.tscn" id="2_36yml"]
 [ext_resource type="PackedScene" uid="uid://c8wvmaehkj300" path="res://scenes/game/enemies/ronda/ronda.tscn" id="3_28jar"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mh7pj"]
-size = Vector2(333, 22)
+size = Vector2(340.5, 29.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5clwn"]
 size = Vector2(55, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ijsxk"]
-size = Vector2(333, 22)
+size = Vector2(338.1, 29.5)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fqnr7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k5cre"]
-size = Vector2(333, 29.5)
+size = Vector2(333, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gw3nv"]
-size = Vector2(312, 24)
+size = Vector2(328, 20)
 
 [sub_resource type="Gradient" id="Gradient_sgrge"]
 colors = PackedColorArray(0.902174, 0.902174, 0.902174, 1, 0, 0, 0, 1)
@@ -80,6 +80,7 @@ metadata/_edit_use_anchors_ = true
 position = Vector2(-251, 129)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="platforms/ground"]
+position = Vector2(3.75, 0)
 shape = SubResource("RectangleShape2D_mh7pj")
 
 [node name="ColorRect" type="ColorRect" parent="platforms/ground/CollisionShape2D"]
@@ -94,6 +95,7 @@ position = Vector2(1019, -77)
 scale = Vector2(5, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="platforms/ground 2"]
+position = Vector2(2.54999, 0)
 shape = SubResource("RectangleShape2D_ijsxk")
 
 [node name="ColorRect" type="ColorRect" parent="platforms/ground 2/CollisionShape2D"]
@@ -157,22 +159,23 @@ position = Vector2(3048, 112)
 shape = SubResource("RectangleShape2D_k5cre")
 
 [node name="ColorRect" type="ColorRect" parent="win_platform/CollisionShape2D"]
-offset_left = -166.0
-offset_top = -11.0
-offset_right = 170.0
-offset_bottom = 11.0
+offset_left = -168.0
+offset_top = -16.0
+offset_right = 168.0
+offset_bottom = 6.0
 metadata/_edit_use_anchors_ = true
 
 [node name="win_check" type="Area2D" parent="win_platform"]
+position = Vector2(0, -4)
 
 [node name="win_check_shape" type="CollisionShape2D" parent="win_platform/win_check"]
-position = Vector2(4, -8)
+position = Vector2(0, -2)
 shape = SubResource("RectangleShape2D_gw3nv")
 
 [node name="Lights" type="Node2D" parent="."]
 
 [node name="PointLight2D" type="PointLight2D" parent="Lights"]
-position = Vector2(777, 288)
+position = Vector2(552, 328)
 scale = Vector2(6.202, 6.202)
 energy = 1.5
 texture = SubResource("GradientTexture2D_k7hfu")
@@ -184,7 +187,7 @@ energy = 1.5
 texture = SubResource("GradientTexture2D_k7hfu")
 
 [node name="PointLight2D3" type="PointLight2D" parent="Lights"]
-position = Vector2(2895, 254)
+position = Vector2(2896, 256)
 scale = Vector2(8.92199, 8.92199)
 energy = 3.0
 texture = SubResource("GradientTexture2D_k7hfu")
