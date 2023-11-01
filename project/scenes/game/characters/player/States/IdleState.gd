@@ -1,22 +1,18 @@
-extends State
+class_name IdleState extends State
 
-class_name IdleState
-
-
-func on_enter():
+func on_enter() -> void:
 	pass
 
-func state_process(delta):	
+func state_process(delta: float) -> void:	
 	character.velocity.x = move_toward(character.velocity.x, 0, 50)	#make sure we are stopped (like after dash and jump)
-	if(not character.is_on_floor()):			#TO AIR STATE (by falling)
+	if !character.is_on_floor():			#TO AIR STATE (by falling)
 		next_state = air_state
-	
 
-func state_input(event: InputEvent):
+func state_input(event: InputEvent) -> void:
 	$"../input_check".permission_checker($".", event)
 
-func on_exit():
+func on_exit() -> void:
 	pass
 
-func die():
+func die() -> void:
 	next_state = dead_state
