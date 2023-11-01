@@ -56,3 +56,6 @@ func death():
 	$CharacterStateMachine.current_state.next_state = $CharacterStateMachine.current_state.dead_state
 	is_playing = false
 	$HUD/death_screen.show()
+
+func _unhandled_input(event):
+	pass

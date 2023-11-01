@@ -22,9 +22,9 @@ func permission_checker(state: State, event):
 		#TO CASTING STATE (magic orb and dark sphere)
 		cast(state, event)
 
-
 func walk(state: State, event: InputEvent):
-	if (Input.is_action_just_pressed("right") or Input.is_action_just_pressed("left")): #TO WALKING STATE
+	var move : float = Input.get_axis("left", "right")
+	if (not is_zero_approx(move)): #TO WALKING STATE
 		state.next_state = state.walking_state
 
 func jump(state: State, event: InputEvent):

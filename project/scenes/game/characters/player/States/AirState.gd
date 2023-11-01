@@ -5,11 +5,11 @@ class_name AirState
 var has_double_jumped : bool = false
 
 func on_enter():
+	$"../../AnimationTree".set("parameters/ground_air/transition_request", "air_state")
 	pass
 
 
-
-func state_input(event: InputEvent): 
+func state_input(event: InputEvent):
 	
 	if(Input.is_action_just_pressed("jump")):	#double jump
 		if(not has_double_jumped):
@@ -42,9 +42,11 @@ func movement():
 
 func double_jump():
 	character.velocity.y = get_parent().DOUBLE_JUMP_VELOCITY
+	$"../../AnimationTree".set("parameters/jump_state/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 	has_double_jumped = true
 
 	
 func on_exit():
 	if(next_state == idle_state or next_state == walking_state):	#reset double jump
 		has_double_jumped = false
+		$"../../AnimationTree".set("parameters/jump_state/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
