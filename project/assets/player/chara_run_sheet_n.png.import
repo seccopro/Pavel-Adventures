@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dgx67f1crxu83"
-path="res://.godot/imported/chara_run_sheet.png-ab9b317c024f75bc8d464bfe8fa9a657.ctex"
+uid="uid://ta1vkelfnkwj"
+path="res://.godot/imported/chara_run_sheet_n.png-babc70cb7f938c677ead7c73a776c2c7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/game/characters/player/sprite_sheet/chara_run_sheet.png"
-dest_files=["res://.godot/imported/chara_run_sheet.png-ab9b317c024f75bc8d464bfe8fa9a657.ctex"]
+source_file="res://assets/player/chara_run_sheet_n.png"
+dest_files=["res://.godot/imported/chara_run_sheet_n.png-babc70cb7f938c677ead7c73a776c2c7.ctex"]
 
 [params]
 

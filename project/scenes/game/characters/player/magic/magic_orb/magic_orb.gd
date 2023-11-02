@@ -1,15 +1,15 @@
 extends Area2D
 
-var starting_position 
-var height 
-var travel_distance = 300    
-var final_position
-var shoot_speed = 5
+var starting_position: float
+var height: float
+var travel_distance: float = 300.0	
+var final_position: float
+var shoot_speed: float = 5
 var facing_right
 
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	height = global_position.y 
 	starting_position = global_position.x
 	
@@ -19,11 +19,9 @@ func _ready():
 	else:
 		final_position = starting_position - travel_distance
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	global_position.y = height        #holds y position
-	#IS CHASING PLAYER MOVEMENT, maybe shouldn't be a player's child,but a level child?
+func _process(delta: float) -> void:
+	global_position.y = height		#holds y position
 	if(facing_right):                                                    #shoots right
 		if ( global_position.x < final_position ):
 			global_position.x +=  shoot_speed        #projectile speed
@@ -35,7 +33,6 @@ func _process(delta):
 		else:
 			queue_free()
 
-
-func _on_body_entered(body):
-	if(body.name != "player"):
+func _on_body_entered(body: PhysicsBody2D) -> void:
+	if body.name != "player":
 		queue_free()
