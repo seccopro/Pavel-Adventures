@@ -17,8 +17,6 @@ func state_process(delta: float) -> void:
 		next_state = air_state
 	elif character.velocity.x == 0:	#stopped walking #TO IDLE STATE
 		$"../../AnimationTree".set("parameters/run_state/transition_request", "run_idle")
-		next_state = air_state
-	elif character.velocity.x == 0:	#stopped walking #TO IDLE STATE
 		next_state = idle_state
 
 func on_exit() -> void:
@@ -29,9 +27,9 @@ func walk() -> void:
 	if direction:
 		character.velocity.x = direction * get_parent().MOVING_SPEED	
 		if direction > 0:
-			$"../..".facing_right = true
+			$"../..".is_facing_right = true
 		else:
-			$"../..".facing_right = false
+			$"../..".is_facing_right = false
 		$"../../AnimationTree".set("parameters/run_state/transition_request", "run")
 	else:
 		character.velocity.x = move_toward(character.velocity.x, 0, 50)

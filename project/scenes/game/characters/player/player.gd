@@ -7,7 +7,7 @@ extends CharacterBody2D
 var can_fall: bool = true
 var is_playing: bool = true
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity") # Get the gravity from the project settings to be synced with RigidBody nodes.
-var facing_right : bool = true
+var is_facing_right : bool = true
 
 func _physics_process(delta: float) -> void:		#"MAIN" runs every delta time - CALLS ALL OTHER FUNCTIONS
 	# Add the gravity.
@@ -35,7 +35,7 @@ func camera() -> void:
 		$"Camera2D".zoom.y -= 0.5	
 
 func animations():
-	if facing_right: 
+	if is_facing_right: 
 		$Sprite2D.flip_h = false
 	else:
 		$Sprite2D.flip_h = true

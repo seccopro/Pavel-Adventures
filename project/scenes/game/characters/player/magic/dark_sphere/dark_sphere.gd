@@ -16,15 +16,6 @@ func _ready() -> void:
 	if is_facing_right:
 		final_position = starting_position + travel_distance
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	global_position.y = height		#holds y position
-	if global_position.x < final_position:
-		global_position.x +=  + shoot_speed		#projectile speed
-	else:
-		final_position = starting_position - travel_distance
-		
-#Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	global_position.y = height        #holds y position
 

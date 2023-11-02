@@ -33,9 +33,9 @@ func movement() -> void:
 	if direction:
 		character.velocity.x = direction * get_parent().MOVING_SPEED	
 		if direction > 0:
-			$"../..".facing_right = true
+			$"../..".is_facing_right = true
 		else:
-			$"../..".facing_right = false
+			$"../..".is_facing_right = false
 	else:
 		character.velocity.x = move_toward(character.velocity.x, 0, 50)	
 
