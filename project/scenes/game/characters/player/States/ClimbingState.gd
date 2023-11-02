@@ -10,7 +10,6 @@ func state_process(delta: float) -> void:
 		print("fell from wall")				#♂temporary solution, while on floor is not on wall
 		next_state = air_state
 	vertical_movement()
-	
 
 func state_input(event : InputEvent) -> void:
 	if Input.is_action_just_pressed("climb"):	#starts detaching
@@ -30,7 +29,6 @@ func vertical_movement() -> void:
 func on_exit() -> void:
 	$"climb_detach".stop()
 	get_parent().get_parent().can_fall = true
-
 
 func _on_climb_detach_timeout() -> void:	#TO IDLE STATE (OR AIR)
 	get_parent().just_detached = true

@@ -23,12 +23,14 @@ func permission_checker(state: State, event) -> void:
 		cast(state, event)
 
 func walk(state: State, event: InputEvent) -> void:
-	if Input.is_action_just_pressed("right") || Input.is_action_just_pressed("left"): #TO WALKING STATE
+	var move : float = Input.get_axis("left", "right")
+	if !is_zero_approx(move): #TO WALKING STATE
 		state.next_state = state.walking_state
 
 func jump(state: State, event: InputEvent) -> void:
 	if Input.is_action_just_pressed("jump"):
 		get_parent().character.velocity.y = get_parent().JUMP_VELOCITY
+		$"../../AnimationTree".set("parameters/air_state/transition_request", "jump_state")
 		state.next_state = state.air_state
 
 func dash(state: State, event: InputEvent) -> void:
@@ -55,5 +57,3 @@ func cast(state: State, event: InputEvent) -> void:
 	if Input.is_action_just_pressed("dark_sphere") && !$"../Casting/magic_handler".dark_sphere_is_on_cooldown:
 		$"../Casting/magic_handler".cast("dark_sphere", state)
 		state.next_state = state.casting_state
-
-

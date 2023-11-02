@@ -1,6 +1,8 @@
 class_name IdleState extends State
 
 func on_enter() -> void:
+	$"../../AnimationTree".set("parameters/ground_air/transition_request", "movement")
+	$"../../AnimationTree".set("parameters/movement/transition_request", "idle")
 	pass
 
 func state_process(delta: float) -> void:	

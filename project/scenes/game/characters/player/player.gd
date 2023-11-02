@@ -7,6 +7,7 @@ extends CharacterBody2D
 var can_fall: bool = true
 var is_playing: bool = true
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity") # Get the gravity from the project settings to be synced with RigidBody nodes.
+var facing_right : bool = true
 
 func _physics_process(delta: float) -> void:		#"MAIN" runs every delta time - CALLS ALL OTHER FUNCTIONS
 	# Add the gravity.
@@ -19,6 +20,8 @@ func _physics_process(delta: float) -> void:		#"MAIN" runs every delta time - CA
 	#camera controlling, zoom
 	camera()
 	
+	animations()
+	
 	game_logic()
 
 func camera() -> void:
@@ -30,6 +33,12 @@ func camera() -> void:
 		print("zoom out")
 		$"Camera2D".zoom.x -= 0.5
 		$"Camera2D".zoom.y -= 0.5	
+
+func animations():
+	if facing_right: 
+		$Sprite2D.flip_h = false
+	else:
+		$Sprite2D.flip_h = true
 
 func _on_node_2d_damaged() -> void:
 	lifes -= 1 
@@ -56,3 +65,6 @@ func death() -> void:
 	$CharacterStateMachine.current_state.next_state = $CharacterStateMachine.current_state.dead_state
 	is_playing = false
 	$HUD/death_screen.show()
+
+func _unhandled_input(event):
+	pass

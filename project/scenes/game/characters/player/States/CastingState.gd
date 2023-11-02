@@ -11,9 +11,8 @@ func state_input(event: InputEvent) -> void:
 
 func state_process(delta: float) -> void:
 	time_elapsed += delta
-	if(time_elapsed >= $magic_handler.cast_duration):
+	if time_elapsed >= $magic_handler.cast_duration:
 		next_state = $magic_handler.previous_state
-
 
 func on_exit() -> void:
 	time_elapsed = 0
