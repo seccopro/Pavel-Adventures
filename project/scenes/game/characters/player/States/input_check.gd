@@ -24,7 +24,7 @@ func permission_checker(state: State, event) -> void:
 
 func walk(state: State, event: InputEvent) -> void:
 	var move : float = Input.get_axis("left", "right")
-	if (not is_zero_approx(move)): #TO WALKING STATE
+	if !is_zero_approx(move): #TO WALKING STATE
 		state.next_state = state.walking_state
 
 func jump(state: State, event: InputEvent) -> void:

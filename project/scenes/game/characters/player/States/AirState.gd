@@ -2,7 +2,7 @@ class_name AirState extends State
 
 var has_double_jumped: bool = false
 
-func on_enter():
+func on_enter() -> void:
 	$"../../AnimationTree".set("parameters/ground_air/transition_request", "air_state")
 	pass
 
@@ -44,6 +44,7 @@ func double_jump() -> void:
 	$"../../AnimationTree".set("parameters/air_state/transition_request", "jump_state")
 	$"../../AnimationTree".set("parameters/jump_state/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 	has_double_jumped = true
+
 func on_exit() -> void:
 	if next_state == idle_state || next_state == walking_state:	#reset double jump
 		has_double_jumped = false

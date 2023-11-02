@@ -17,6 +17,8 @@ func state_process(delta: float) -> void:
 		next_state = air_state
 	elif character.velocity.x == 0:	#stopped walking #TO IDLE STATE
 		$"../../AnimationTree".set("parameters/run_state/transition_request", "run_idle")
+		next_state = air_state
+	elif character.velocity.x == 0:	#stopped walking #TO IDLE STATE
 		next_state = idle_state
 
 func on_exit() -> void:
