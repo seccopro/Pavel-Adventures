@@ -6,7 +6,9 @@ extends CharacterBody2D
 
 var can_fall = true
 var is_playing = true
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") # Get the gravity from the project settings to be synced with RigidBody nodes.
+var facing_right : bool = true
+var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") # Get the gravity from the project 
+																		#settings to be synced with RigidBody nodes.
 
 func _physics_process(delta):		#"MAIN" runs every delta time - CALLS ALL OTHER FUNCTIONS
 	# Add the gravity.
@@ -19,6 +21,8 @@ func _physics_process(delta):		#"MAIN" runs every delta time - CALLS ALL OTHER F
 	#camera controlling, zoom
 	camera()
 	
+	animations()
+	
 	game_logic()
 
 func camera():
@@ -30,6 +34,12 @@ func camera():
 		print("zoom out")
 		$"Camera2D".zoom.x -= 0.5
 		$"Camera2D".zoom.y -= 0.5	
+
+func animations():
+	if facing_right: 
+		$Sprite2D.flip_h = false
+	else:
+		$Sprite2D.flip_h = true
 
 func _on_node_2d_damaged():
 	lifes -= 1 

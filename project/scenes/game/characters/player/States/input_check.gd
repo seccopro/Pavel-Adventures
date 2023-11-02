@@ -30,6 +30,7 @@ func walk(state: State, event: InputEvent):
 func jump(state: State, event: InputEvent):
 	if (Input.is_action_just_pressed("jump")):
 		get_parent().character.velocity.y = get_parent().JUMP_VELOCITY
+		$"../../AnimationTree".set("parameters/air_state/transition_request", "jump_state")
 		state.next_state = state.air_state
 
 func dash(state: State, event: InputEvent):

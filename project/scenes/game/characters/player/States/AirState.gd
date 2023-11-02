@@ -32,21 +32,25 @@ func state_process(delta):
 	if(Input.is_action_pressed("climb") and character.is_on_wall() and not get_parent().just_detached):	#TO CLIMBING STATE
 		next_state = climbing_state
 
-
 func movement():
 	var direction = Input.get_axis("left", "right")
 	if direction:
 		character.velocity.x = direction* get_parent().MOVING_SPEED	
+		if direction > 0:
+			$"../..".facing_right = true
+		else:
+			$"../..".facing_right = false
 	else:
 		character.velocity.x = move_toward(character.velocity.x, 0, 50)	
 
 func double_jump():
 	character.velocity.y = get_parent().DOUBLE_JUMP_VELOCITY
+	$"../../AnimationTree".set("parameters/air_state/transition_request", "jump_state")
 	$"../../AnimationTree".set("parameters/jump_state/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 	has_double_jumped = true
 
-	
 func on_exit():
 	if(next_state == idle_state or next_state == walking_state):	#reset double jump
 		has_double_jumped = false
 		$"../../AnimationTree".set("parameters/jump_state/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
+		$"../../AnimationTree".set("parameters/landing/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
