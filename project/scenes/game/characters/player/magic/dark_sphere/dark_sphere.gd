@@ -15,7 +15,9 @@ func _ready() -> void:
 	is_facing_right = get_parent().is_facing_right
 	if is_facing_right:
 		final_position = starting_position + travel_distance
-
+	else:
+		final_position = starting_position - travel_distance
+		
 func _process(delta: float) -> void:
 	global_position.y = height        #holds y position
 

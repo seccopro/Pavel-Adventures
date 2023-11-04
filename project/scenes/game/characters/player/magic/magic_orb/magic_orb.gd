@@ -17,7 +17,6 @@ func _ready() -> void:
 		final_position = starting_position + travel_distance
 	else:
 		final_position = starting_position - travel_distance
-	final_position = starting_position + travel_distance
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

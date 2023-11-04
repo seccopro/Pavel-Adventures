@@ -23,7 +23,7 @@ func on_exit() -> void:
 	pass
 
 func walk() -> void:
-	var direction = Input.get_axis("left", "right")
+	var direction = Input.get_axis(controls.move_left, controls.move_right)
 	if direction:
 		character.velocity.x = direction * get_parent().MOVING_SPEED	
 		if direction > 0:

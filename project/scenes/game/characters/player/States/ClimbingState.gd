@@ -12,15 +12,15 @@ func state_process(delta: float) -> void:
 	vertical_movement()
 
 func state_input(event : InputEvent) -> void:
-	if Input.is_action_just_pressed("climb"):	#starts detaching
+	if Input.is_action_just_pressed(controls.climb):	#starts detaching
 		$"climb_detach".start()
-	if Input.is_action_just_released("climb"):	
+	if Input.is_action_just_released(controls.climb):	
 		$"climb_detach".stop()		
 	
 	$"../input_check".permission_checker($".", event)
 
 func vertical_movement() -> void:
-	var direction: float = Input.get_axis("up", "down")
+	var direction: float = Input.get_axis(controls.move_up, controls.move_down)
 	if direction:
 		character.velocity.y = direction * VERTICAL_SPEED	
 	else:

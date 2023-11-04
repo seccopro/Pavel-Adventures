@@ -3,8 +3,10 @@ class_name CharacterStateMachine extends Node
 @export var character : CharacterBody2D
 @export var current_state : State
 
+@onready var controls : Dictionary  = $"../controls".controls
+
 @export_group("Character Movement")
-@export var WALKING_SPEED:float = 300
+@export var WALKING_SPEED: float = 300
 @export var MOVING_SPEED : float = 300
 @export var JUMP_VELOCITY : float = -400
 @export var DOUBLE_JUMP_VELOCITY : float = -400
@@ -14,6 +16,7 @@ var just_detached: bool = false
 
 func _ready() -> void:
 	for child in get_children():
+		child.controls = controls
 		if !(child is State):
 			if child == $input_check:
 				print("started input_check")
@@ -21,7 +24,7 @@ func _ready() -> void:
 				print("child isn't a state: " + str(child))
 			return
 		
-		child.character = character
+		child.character = character		
 		print("appended state: " + str(child))
 
 func _physics_process(delta: float) -> void:	

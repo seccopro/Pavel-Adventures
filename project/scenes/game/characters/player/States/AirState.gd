@@ -25,11 +25,11 @@ func state_process(delta: float) -> void:
 		else:
 			next_state = walking_state		#TO WALKING STATE
 	
-	if Input.is_action_pressed("climb") && character.is_on_wall() && !get_parent().just_detached:	#TO CLIMBING STATE
+	if Input.is_action_pressed(controls.climb) && character.is_on_wall() && !get_parent().just_detached:	#TO CLIMBING STATE
 		next_state = climbing_state
 
 func movement() -> void:
-	var direction = Input.get_axis("left", "right")
+	var direction = Input.get_axis(controls.move_left, controls.move_right)
 	if direction:
 		character.velocity.x = direction * get_parent().MOVING_SPEED	
 		if direction > 0:

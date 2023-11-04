@@ -9,7 +9,6 @@ radius = 33.0151
 script = ExtResource("1_arjm0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(23, 0)
 shape = SubResource("CircleShape2D_7kus8")
 
 [node name="ColorRect" type="ColorRect" parent="CollisionShape2D"]

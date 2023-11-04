@@ -6,7 +6,9 @@ extends CharacterBody2D
 
 var can_fall: bool = true
 var is_playing: bool = true
-var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity") # Get the gravity from the project settings to be synced with RigidBody nodes.
+# Get the gravity from the project settings to be synced with RigidBody nodes.
+var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
+
 var is_facing_right : bool = true
 
 func _physics_process(delta: float) -> void:		#"MAIN" runs every delta time - CALLS ALL OTHER FUNCTIONS

@@ -19,6 +19,7 @@ class_name State extends Node
 
 var character: CharacterBody2D
 var next_state: State
+var controls: Dictionary
 
 func on_enter() -> void:
 	pass

@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=3 uid="uid://cbb5qfdj1r0sb"]
+[gd_scene load_steps=69 format=3 uid="uid://cbb5qfdj1r0sb"]
 
 [ext_resource type="Script" path="res://scenes/game/characters/player/player.gd" id="1_hkbnf"]
 [ext_resource type="PackedScene" uid="uid://61w51ai88ja0" path="res://scenes/HUD/death_screen/death_screen.tscn" id="2_ee4nu"]
@@ -16,6 +16,7 @@
 [ext_resource type="Script" path="res://scenes/game/characters/player/States/input_check.gd" id="12_oovai"]
 [ext_resource type="Script" path="res://scenes/game/characters/player/States/DeadState.gd" id="13_1kak5"]
 [ext_resource type="Script" path="res://scenes/game/characters/player/magic/magic_handler.gd" id="15_eafol"]
+[ext_resource type="Script" path="res://scenes/game/characters/player/controls.gd" id="17_msedg"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_epkqn"]
 radius = 8.0
@@ -462,7 +463,7 @@ can_dash = false
 can_climb = false
 
 [node name="climb_detach" type="Timer" parent="CharacterStateMachine/Climbing"]
-wait_time = 0.5
+wait_time = 0.2
 
 [node name="just_detached" type="Timer" parent="CharacterStateMachine/Climbing"]
 wait_time = 0.5
@@ -599,6 +600,9 @@ parameters/movement/current_index = 0
 parameters/run_state/current_state = "run"
 parameters/run_state/transition_request = ""
 parameters/run_state/current_index = 1
+
+[node name="controls" type="Node" parent="."]
+script = ExtResource("17_msedg")
 
 [connection signal="timeout" from="CharacterStateMachine/Climbing/climb_detach" to="CharacterStateMachine/Climbing" method="_on_climb_detach_timeout"]
 [connection signal="timeout" from="CharacterStateMachine/Climbing/just_detached" to="CharacterStateMachine/Climbing" method="_on_just_detached_timeout"]
