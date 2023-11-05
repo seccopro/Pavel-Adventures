@@ -20,7 +20,7 @@ var controls : Dictionary = {
 	"magic_orb" : "special_1",
 	#"dark_sphere" : "special_2",#dark sphere not unlocked yet / will work only in gravity mode
 	"climb" : "special_2",
-	"dash" : "special_3",	
+	"dash" : "special_3",
 	"climb_up" : "up",
 	"climb_down" : "down",
 	

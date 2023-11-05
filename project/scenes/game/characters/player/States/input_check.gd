@@ -37,10 +37,10 @@ func jump(state: State, event: InputEvent) -> void:
 
 func dash(state: State, event: InputEvent) -> void:
 	if Input.is_action_just_pressed(controls.dash):		
-		if get_parent().character.velocity.x < 0: 	#moving left WILL CHANGE WITH ANIM FANCING
-			get_parent().character.velocity.x = -get_parent().DASH_VELOCITY	#add dir
+		if $"../..".is_facing_right:
+			get_parent().character.velocity.x = +get_parent().DASH_VELOCITY		#dash right
 		else:
-			get_parent().character.velocity.x = +get_parent().DASH_VELOCITY
+			get_parent().character.velocity.x = -get_parent().DASH_VELOCITY		#dash left
 		
 		state.next_state = state.dashing_state
 
