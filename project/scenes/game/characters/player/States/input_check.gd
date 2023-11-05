@@ -2,7 +2,7 @@ class_name Input_Check extends Node
 
 var controls : Dictionary
 
-func permission_checker(state: State, event) -> void:	
+func permission_checker(state: State, event) -> void:
 	if state.can_move:		
 		if state != $"../Air":		#movement is handled differently in air
 			#TO WALKING STATE
@@ -51,6 +51,10 @@ func climb(state: State, event: InputEvent) -> void:
 		state.next_state = state.climbing_state
 
 func cast(state: State, event: InputEvent) -> void:
+	#cast magic blast
+	if Input.is_action_just_pressed(controls.magic_blast) && !$"../Casting/magic_handler".magic_orb_is_on_cooldown:
+		$"../Casting/magic_handler".cast("magic_blast", state)
+		state.next_state = state.casting_state
 	#cast magic orb
 	if Input.is_action_just_pressed(controls.magic_orb) && !$"../Casting/magic_handler".magic_orb_is_on_cooldown:
 		$"../Casting/magic_handler".cast("magic_orb", state)

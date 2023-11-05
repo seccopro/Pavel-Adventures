@@ -497,6 +497,8 @@ process_mode = 3
 wait_time = 5.0
 one_shot = true
 
+[node name="magic_blast_cooldown" type="Timer" parent="CharacterStateMachine/Casting/magic_handler"]
+
 [node name="Dead" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("idle_state", "walking_state", "air_state", "dashing_state", "climbing_state", "casting_state", "dead_state")]
 script = ExtResource("13_1kak5")
 idle_state = NodePath("../Idle")
@@ -608,3 +610,4 @@ script = ExtResource("17_msedg")
 [connection signal="timeout" from="CharacterStateMachine/Climbing/just_detached" to="CharacterStateMachine/Climbing" method="_on_just_detached_timeout"]
 [connection signal="timeout" from="CharacterStateMachine/Casting/magic_handler/magic_orb_cooldown" to="CharacterStateMachine/Casting/magic_handler" method="_on_magic_orb_cooldown_timeout"]
 [connection signal="timeout" from="CharacterStateMachine/Casting/magic_handler/dark_sphere_cooldown" to="CharacterStateMachine/Casting/magic_handler" method="_on_dark_sphere_cooldown_timeout"]
+[connection signal="timeout" from="CharacterStateMachine/Casting/magic_handler/magic_blast_cooldown" to="CharacterStateMachine/Casting/magic_handler" method="_on_magic_blast_cooldown_timeout"]

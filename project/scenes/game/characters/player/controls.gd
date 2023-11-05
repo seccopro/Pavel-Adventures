@@ -17,6 +17,7 @@ var controls : Dictionary = {
 	"special_2" : "special_2",		#shift and "Lb" button (xbox controller)
 	"special_3" : "special_3",		#right click mouse and "Lt" button (xbox controller)
 	
+	"magic_blast" : "attack",
 	"magic_orb" : "special_1",
 	#"dark_sphere" : "special_2",#dark sphere not unlocked yet / will work only in gravity mode
 	"climb" : "special_2",

@@ -10,6 +10,19 @@ var is_playing: bool = true
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 var is_facing_right : bool = true
+var is_looking_up : bool = false
+var is_looking_down : bool = false
+
+func _input(event:InputEvent) -> void:
+	#looking up and down logic	-PROBABLY SHOULDN'T BE HERE
+	if(Input.is_action_just_pressed("up")):
+		is_looking_up = true
+	if(Input.is_action_just_pressed("down")):
+		is_looking_down = true
+	if(Input.is_action_just_released("up")):
+		is_looking_up = false
+	if(Input.is_action_just_released("down")):
+		is_looking_down = false
 
 func _physics_process(delta: float) -> void:		#"MAIN" runs every delta time - CALLS ALL OTHER FUNCTIONS
 	# Add the gravity.
