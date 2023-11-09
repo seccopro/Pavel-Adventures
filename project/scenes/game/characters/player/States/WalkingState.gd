@@ -14,6 +14,7 @@ func state_process(delta: float) -> void:
 	
 	if !character.is_on_floor():	#TO AIR STATE (by falling)
 		$"../../AnimationTree".set("parameters/air_state/transition_request", "fall_state")
+		$"../Air".has_jump_forgiveness = true
 		next_state = air_state
 	elif character.velocity.x == 0:	#stopped walking #TO IDLE STATE
 		$"../../AnimationTree".set("parameters/run_state/transition_request", "run_idle")
@@ -25,11 +26,12 @@ func on_exit() -> void:
 func walk() -> void:
 	var direction = Input.get_axis(controls.move_left, controls.move_right)
 	if direction:
-		character.velocity.x = direction * get_parent().MOVING_SPEED	
-		if direction > 0:
-			$"../..".is_facing_right = true
-		else:
-			$"../..".is_facing_right = false
+		character.velocity.x = direction * get_parent().MOVING_SPEED
+		if $"../..".can_flip_sprite :
+			if direction > 0:
+				$"../..".is_facing_right = true
+			else:
+				$"../..".is_facing_right = false
 		$"../../AnimationTree".set("parameters/run_state/transition_request", "run")
 	else:
 		character.velocity.x = move_toward(character.velocity.x, 0, 50)

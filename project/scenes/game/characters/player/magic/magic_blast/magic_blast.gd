@@ -3,7 +3,7 @@ extends Area2D
 var offset_x : float = 30
 var offset_y : float = 50
 var time_elapsed : float = 0.0
-var duration : float = 0.5 #seconds
+var duration : float = 0.2 #seconds
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if(get_parent().is_looking_up):#aiming up

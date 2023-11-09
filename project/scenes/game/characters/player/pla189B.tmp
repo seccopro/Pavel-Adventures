@@ -480,7 +480,7 @@ offset_top = -235.0
 offset_right = -394.0
 offset_bottom = -235.0
 
-[node name="state_debug" type="Label" parent="HUD" node_paths=PackedStringArray("state_machine", "form_sm")]
+[node name="state_debug" type="Label" parent="HUD" node_paths=PackedStringArray("state_machine")]
 layout_mode = 0
 offset_left = -50.0
 offset_top = -100.0
@@ -488,7 +488,6 @@ offset_right = -10.0
 offset_bottom = -77.0
 script = ExtResource("11_7sifh")
 state_machine = NodePath("../../CharacterStateMachine")
-form_sm = NodePath("../../FormStateMachine")
 
 [node name="floor_checker" type="RayCast2D" parent="."]
 target_position = Vector2(0, 30)
@@ -538,6 +537,11 @@ dashing_state = NodePath("Dashing")
 climbing_state = NodePath("Climbing")
 casting_state = NodePath("Casting")
 dead_state = NodePath("Dead")
+WALKING_SPEED = null
+MOVING_SPEED = null
+JUMP_VELOCITY = null
+DOUBLE_JUMP_VELOCITY = null
+DASH_VELOCITY = null
 
 [node name="Dead" type="Node" parent="CharacterStateMachine"]
 script = ExtResource("13_1kak5")

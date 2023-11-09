@@ -1,9 +1,20 @@
 class_name CharacterStateMachine extends Node
 
 @export var character : CharacterBody2D
-@export var current_state : State
+@export var form_sm : FormStateMachine
+
 
 @onready var controls : Dictionary  = $"../controls".controls
+
+@export_group("Character States")
+@export var idle_state : State
+@export var walking_state : State
+@export var air_state : State
+@export var dashing_state : State
+@export var climbing_state : State
+@export var casting_state : State
+@export var dead_state : State
+var current_state : State
 
 @export_group("Character Movement")
 @export var WALKING_SPEED: float = 300
@@ -24,22 +35,38 @@ func _ready() -> void:
 				print("child isn't a state: " + str(child))
 			return
 		
-		child.character = character		
+		#load states
+		child.idle_state = idle_state
+		child.walking_state = walking_state
+		child.air_state = air_state
+		child.dashing_state = dashing_state
+		child.climbing_state = climbing_state
+		child.casting_state = casting_state
+		child.dead_state = dead_state
+		
+		#load variables
+		child.character = character
+		child.form_sm = form_sm
 		print("appended state: " + str(child))
+		
+		#starting state
+		current_state = idle_state
 
 func _physics_process(delta: float) -> void:	
-	#PICKS STATE
+	#CHANGES STATE
 	if current_state.next_state != null:
 		switch_states(current_state.next_state)
-		
+	
 	#RUNS STATE
 	current_state.state_process(delta)
 	get_parent().can_fall = current_state.can_fall		#applies gravity to states that can fall
 
 func switch_states(new_state: State) -> void:
-	if current_state != null:
-		current_state.on_exit()
-		current_state.next_state = null
+	if current_state == null:
+		return
+	
+	current_state.on_exit()
+	current_state.next_state = null	
 	
 	current_state = new_state
 	current_state.on_enter()

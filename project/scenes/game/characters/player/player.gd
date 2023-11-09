@@ -9,9 +9,15 @@ var is_playing: bool = true
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+var can_flip_sprite: bool = true
+
 var is_facing_right : bool = true
 var is_looking_up : bool = false
 var is_looking_down : bool = false
+
+var is_on_ground : bool = false
+var is_on_wall_r : bool = false
+var is_on_wall_l : bool = false
 
 func _input(event:InputEvent) -> void:
 	#looking up and down logic	-PROBABLY SHOULDN'T BE HERE
@@ -26,18 +32,41 @@ func _input(event:InputEvent) -> void:
 
 func _physics_process(delta: float) -> void:		#"MAIN" runs every delta time - CALLS ALL OTHER FUNCTIONS
 	# Add the gravity.
-	if !is_on_floor() && can_fall:	#gravity / falling
+	if !is_on_ground && can_fall:	#gravity / falling
 		velocity.y += gravity * delta
 	
 	if is_playing:
 		#and activate physics
 		move_and_slide()
 	#camera controlling, zoom
+	
+	raycasts()
+	
 	camera()
 	
 	animations()
 	
 	game_logic()
+
+func raycasts() -> void:
+#	print("touching:")
+#	print(is_on_ground)
+#	print(is_on_wall_l)
+#	print(is_on_wall_r)
+	if $floor_checker.is_colliding():
+		is_on_ground = true
+	else:
+		is_on_ground = false
+		
+	if $left_wall_checker.is_colliding():
+		is_on_wall_l = true
+	else:
+		is_on_wall_l = false
+		
+	if $right_wall_checker.is_colliding():
+		is_on_wall_r = true
+	else:
+		is_on_wall_r = false
 
 func camera() -> void:
 	if Input.is_action_just_pressed("camera_zoom_in"):

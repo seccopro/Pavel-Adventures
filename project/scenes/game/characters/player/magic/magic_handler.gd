@@ -8,7 +8,7 @@ extends Node
 @export var previous_state :State
 
 @export var magic_blast: Resource  = load("res://scenes/game/characters/player/magic/magic_blast/magic_blast.tscn")
-@export var magic_blast_cast_duration: float = 0.2	 #seconds
+@export var magic_blast_cast_duration: float = 0.0	 #seconds
 var magic_blast_is_on_cooldown: bool = false
 
 @export var magic_orb: Resource  = load("res://scenes/game/characters/player/magic/magic_orb/magic_orb.tscn")
@@ -34,21 +34,23 @@ func cast(magic: String, state: State) -> void:
 func cast_magic_blast() -> void:
 	if !magic_blast_is_on_cooldown:
 		cast_duration = magic_blast_cast_duration
-		get_parent().get_parent().get_parent().add_child(magic_blast.instantiate())
+		$"../../..".add_child(magic_blast.instantiate())
 		$magic_blast_cooldown.start()
 		magic_blast_is_on_cooldown = true
+		$"../../..".can_flip_sprite = false
+		$flipper_blocker_remover.start()
 		
 func cast_magic_orb() -> void:
 	if !magic_orb_is_on_cooldown:	#should not need this check
 		cast_duration = magic_orb_cast_duration
-		get_parent().get_parent().get_parent().add_child(magic_orb.instantiate())
+		$"../../..".add_child(magic_orb.instantiate())
 		$magic_orb_cooldown.start()
 		magic_orb_is_on_cooldown = true
 
 func cast_dark_sphere() -> void:
 	if !dark_sphere_is_on_cooldown:	#should not need this check
 		cast_duration = dark_sphere_cast_duration		
-		get_parent().get_parent().get_parent().add_child(dark_sphere.instantiate())
+		$"../../..".add_child(dark_sphere.instantiate())
 		$dark_sphere_cooldown.start()
 		dark_sphere_is_on_cooldown = true
 
@@ -64,7 +66,5 @@ func _on_magic_orb_cooldown_timeout() -> void:
 	print("magic orb off cooldown")
 	magic_orb_is_on_cooldown = false
 
-
-
-
-
+func _on_flipper_blocker_remover_timeout():
+	$"../../..".can_flip_sprite = true

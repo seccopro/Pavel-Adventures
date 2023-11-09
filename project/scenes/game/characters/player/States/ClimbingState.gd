@@ -4,10 +4,14 @@ class_name ClimbingState extends State
 
 func on_enter() -> void:
 	can_fall = false
-
-func state_process(delta: float) -> void:
-	if !character.is_on_wall() && !character.is_on_floor():	#to idle / air state by falling
-		print("fell from wall")				#♂temporary solution, while on floor is not on wall
+	if character.is_on_wall_r :
+		character.is_facing_right  = true
+	elif character.is_on_wall_l :
+		character.is_facing_right = false
+	
+func state_process(delta: float) -> void:		#handles detaching via being to far from wall
+	if ( !character.is_on_wall_l && !character.is_on_wall_r ):	#to idle / air state by falling
+		print("fell from wall")	
 		next_state = air_state
 	vertical_movement()
 
