@@ -3,7 +3,7 @@ class_name Ronda extends CharacterBody2D
 const SPEED: float = 200.0
 const JUMP_VELOCITY: float = -300.0
 
-const target_range: Array[int] = [1100, 2500]
+const target_range: Array[int] = [2000, 2400]
 var target_position: int = 1
 
 var is_okay: bool = true
@@ -57,10 +57,14 @@ func _on_damage_area_body_entered(body) -> void:
 func _on_damage_area_area_shape_entered(area_rid, area, area_shape_index, local_shape_index) -> void:
 	print("hit by a " + area.name)
 
-	match area.name:
-		"magic_orb":
-			print("ronda dead")
-			queue_free() #lose 1 health
-		"dark blast":
-			queue_free() #lose 5 health
-		
+	match area.name:	 #lose 2 health
+		"magic_blast":
+			die()
+		"magic_orb":	#lose 1 health
+			die() 
+		"dark blast":	#lose 5 health
+			die()
+
+func die():
+	print("ronda dead")
+	queue_free() #lose 1 health

@@ -25,8 +25,8 @@
 [ext_resource type="Script" path="res://scenes/game/characters/player/forms/gravity_form.gd" id="23_gx8tp"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_epkqn"]
-radius = 18.0
-height = 140.0
+radius = 8.0
+height = 56.0
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_vlif7"]
 diffuse_texture = ExtResource("2_rodcp")
@@ -377,7 +377,6 @@ input_1/auto_advance = false
 input_1/reset = true
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_e5o84"]
-graph_offset = Vector2(-830.537, 252.707)
 nodes/air_state/node = SubResource("AnimationNodeTransition_tjogy")
 nodes/air_state/position = Vector2(-340, 280)
 nodes/double_jump/node = SubResource("AnimationNodeStateMachine_lo6i5")
@@ -409,18 +408,17 @@ node_connections = [&"output", 0, &"ground_air", &"air_state", 0, &"fall_ground"
 
 [node name="player" type="CharacterBody2D"]
 script = ExtResource("1_hkbnf")
+lifes = null
 
 [node name="playerCollisionShape" type="CollisionShape2D" parent="."]
-position = Vector2(1, -1)
+position = Vector2(0, -1)
 shape = SubResource("CapsuleShape2D_epkqn")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-0.999996, -1.00001)
-scale = Vector2(0.4, 0.4)
+scale = Vector2(0.152542, 0.152542)
 texture = SubResource("CanvasTexture_vlif7")
 hframes = 13
 vframes = 3
-frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -451,7 +449,7 @@ parameters/run_state/transition_request = ""
 parameters/run_state/current_index = 1
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(0, -182)
+position = Vector2(0, -200)
 
 [node name="HUD" type="Control" parent="."]
 layout_mode = 3
@@ -461,10 +459,10 @@ offset_bottom = 40.0
 
 [node name="HP_bar" type="Label" parent="HUD"]
 layout_mode = 0
-offset_left = -19.0
-offset_top = -101.0
-offset_right = 21.0
-offset_bottom = -78.0
+offset_left = -32.0
+offset_top = -49.0
+offset_right = 8.0
+offset_bottom = -26.0
 
 [node name="victory_screen" parent="HUD" instance=ExtResource("3_0kecm")]
 visible = false
@@ -482,24 +480,23 @@ offset_top = -235.0
 offset_right = -394.0
 offset_bottom = -235.0
 
-[node name="state_debug" type="Label" parent="HUD" node_paths=PackedStringArray("state_machine", "form_sm")]
+[node name="state_debug" type="Label" parent="HUD" node_paths=PackedStringArray("state_machine")]
 layout_mode = 0
-offset_left = -37.0
-offset_top = -152.0
-offset_right = 3.0
-offset_bottom = -129.0
+offset_left = -50.0
+offset_top = -100.0
+offset_right = -10.0
+offset_bottom = -77.0
 script = ExtResource("11_7sifh")
 state_machine = NodePath("../../CharacterStateMachine")
-form_sm = NodePath("../../FormStateMachine")
 
 [node name="floor_checker" type="RayCast2D" parent="."]
-target_position = Vector2(0, 78)
+target_position = Vector2(0, 30)
 
 [node name="left_wall_checker" type="RayCast2D" parent="."]
-target_position = Vector2(-30, 0)
+target_position = Vector2(-11, 0)
 
 [node name="right_wall_checker" type="RayCast2D" parent="."]
-target_position = Vector2(28, 1)
+target_position = Vector2(12, 0)
 
 [node name="controls" type="Node" parent="."]
 script = ExtResource("17_msedg")
@@ -513,40 +510,21 @@ fire_form = NodePath("fire_form")
 gravity_form = NodePath("gravity_form")
 ice_form = NodePath("ice_form")
 
+[node name="no_form" type="Node" parent="FormStateMachine"]
+script = ExtResource("19_q3bpg")
+passive = "ice skating"
+
 [node name="rock_form" type="Node" parent="FormStateMachine"]
 script = ExtResource("20_qotna")
-passive = "sinking"
-special_1 = "eruption"
-special_2 = "climb"
-special_3 = "rock dash"
 
 [node name="fire_form" type="Node" parent="FormStateMachine"]
 script = ExtResource("22_js6q5")
-passive = "cold res + light"
-special_1 = "fire orb"
-special_2 = "flamethrower"
-special_3 = "fire dash"
-
-[node name="no_form" type="Node" parent="FormStateMachine"]
-script = ExtResource("19_q3bpg")
-passive = "nulll"
-special_1 = "null"
-special_2 = "null"
-special_3 = "null"
 
 [node name="gravity_form" type="Node" parent="FormStateMachine"]
 script = ExtResource("23_gx8tp")
-passive = "double jump"
-special_1 = "push"
-special_2 = "dark sphere"
-special_3 = "downward spell"
 
 [node name="ice_form" type="Node" parent="FormStateMachine"]
 script = ExtResource("21_1biub")
-passive = "ice skating"
-special_1 = "ice sword"
-special_2 = "aoe slow"
-special_3 = "ice shield"
 
 [node name="CharacterStateMachine" type="Node" parent="." node_paths=PackedStringArray("character", "form_sm", "idle_state", "walking_state", "air_state", "dashing_state", "climbing_state", "casting_state", "dead_state")]
 script = ExtResource("6_wfvl0")
@@ -559,29 +537,35 @@ dashing_state = NodePath("Dashing")
 climbing_state = NodePath("Climbing")
 casting_state = NodePath("Casting")
 dead_state = NodePath("Dead")
+WALKING_SPEED = null
+MOVING_SPEED = null
+JUMP_VELOCITY = null
+DOUBLE_JUMP_VELOCITY = null
+DASH_VELOCITY = null
 
 [node name="Dead" type="Node" parent="CharacterStateMachine"]
 script = ExtResource("13_1kak5")
 can_move = false
 can_dash = false
 can_jump = false
-can_wall_jump = false
 can_climb = false
 can_cast = false
 can_change_form = false
 
 [node name="Idle" type="Node" parent="CharacterStateMachine"]
 script = ExtResource("7_xcc5y")
-can_wall_jump = false
 
 [node name="Walking" type="Node" parent="CharacterStateMachine"]
 script = ExtResource("12_eyoi0")
-can_wall_jump = false
 
 [node name="Air" type="Node" parent="CharacterStateMachine"]
 script = ExtResource("6_wvrpb")
+can_move = null
+can_fall = null
+can_dash = null
 can_jump = false
-can_wall_jump = false
+can_climb = null
+can_cast = null
 
 [node name="Dashing" type="Node" parent="CharacterStateMachine"]
 script = ExtResource("11_bxnc5")
@@ -589,7 +573,6 @@ can_move = false
 can_fall = false
 can_dash = false
 can_jump = false
-can_wall_jump = false
 can_climb = false
 can_change_form = false
 
@@ -598,7 +581,6 @@ script = ExtResource("9_0x0ia")
 can_move = false
 can_fall = false
 can_dash = false
-can_jump = false
 can_climb = false
 can_change_form = false
 
@@ -608,18 +590,12 @@ wait_time = 0.2
 [node name="just_detached" type="Timer" parent="CharacterStateMachine/Climbing"]
 wait_time = 0.5
 
-[node name="jump_on_wall" type="Timer" parent="CharacterStateMachine/Climbing"]
-process_mode = 3
-wait_time = 0.2
-one_shot = true
-
 [node name="Casting" type="Node" parent="CharacterStateMachine"]
 script = ExtResource("10_v8iwg")
 can_move = false
 can_fall = false
 can_dash = false
 can_jump = false
-can_wall_jump = false
 can_climb = false
 can_cast = false
 can_change_form = false
@@ -638,9 +614,6 @@ wait_time = 5.0
 one_shot = true
 
 [node name="magic_blast_cooldown" type="Timer" parent="CharacterStateMachine/Casting/magic_handler"]
-process_mode = 3
-wait_time = 0.5
-one_shot = true
 
 [node name="flipper_blocker_remover" type="Timer" parent="CharacterStateMachine/Casting/magic_handler"]
 process_mode = 3
@@ -652,7 +625,6 @@ script = ExtResource("12_oovai")
 
 [connection signal="timeout" from="CharacterStateMachine/Climbing/climb_detach" to="CharacterStateMachine/Climbing" method="_on_climb_detach_timeout"]
 [connection signal="timeout" from="CharacterStateMachine/Climbing/just_detached" to="CharacterStateMachine/Climbing" method="_on_just_detached_timeout"]
-[connection signal="timeout" from="CharacterStateMachine/Climbing/jump_on_wall" to="CharacterStateMachine/Climbing" method="_on_jump_on_wall_timeout"]
 [connection signal="timeout" from="CharacterStateMachine/Casting/magic_handler/magic_orb_cooldown" to="CharacterStateMachine/Casting/magic_handler" method="_on_magic_orb_cooldown_timeout"]
 [connection signal="timeout" from="CharacterStateMachine/Casting/magic_handler/dark_sphere_cooldown" to="CharacterStateMachine/Casting/magic_handler" method="_on_dark_sphere_cooldown_timeout"]
 [connection signal="timeout" from="CharacterStateMachine/Casting/magic_handler/magic_blast_cooldown" to="CharacterStateMachine/Casting/magic_handler" method="_on_magic_blast_cooldown_timeout"]

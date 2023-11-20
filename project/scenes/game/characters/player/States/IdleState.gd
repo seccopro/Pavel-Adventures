@@ -1,8 +1,9 @@
 class_name IdleState extends State
 
+
 func on_enter() -> void:
-	$"../../AnimationTree".set("parameters/ground_air/transition_request", "movement")
-	$"../../AnimationTree".set("parameters/movement/transition_request", "idle")
+	animation_tree.set("parameters/ground_air/transition_request", "movement")
+	animation_tree.set("parameters/movement/transition_request", "idle")
 	pass
 
 func state_process(delta: float) -> void:	
@@ -11,7 +12,7 @@ func state_process(delta: float) -> void:
 		next_state = air_state
 
 func state_input(event: InputEvent) -> void:
-	$"../input_check".permission_checker($".", event)
+	input_check.permission_checker($".", event)
 
 func on_exit() -> void:
 	pass

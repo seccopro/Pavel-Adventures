@@ -3,13 +3,12 @@
 [ext_resource type="Script" path="res://scenes/game/characters/player/magic/dark_sphere/dark_sphere.gd" id="1_arjm0"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7kus8"]
-radius = 33.0151
+radius = 74.0068
 
 [node name="magic_orb" type="Area2D"]
 script = ExtResource("1_arjm0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(23, 0)
 shape = SubResource("CircleShape2D_7kus8")
 
 [node name="ColorRect" type="ColorRect" parent="CollisionShape2D"]
@@ -17,10 +16,10 @@ custom_minimum_size = Vector2(10, 10)
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -27.0
-offset_top = -27.0
-offset_right = 30.0
-offset_bottom = 94.0
+offset_left = -60.0
+offset_top = -58.0
+offset_right = 67.0
+offset_bottom = 203.0
 grow_horizontal = 2
 scale = Vector2(0.945234, 0.448653)
 color = Color(0.227451, 0.0901961, 0.243137, 1)

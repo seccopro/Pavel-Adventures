@@ -6,23 +6,67 @@ extends CharacterBody2D
 
 var can_fall: bool = true
 var is_playing: bool = true
-var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity") # Get the gravity from the project settings to be synced with RigidBody nodes.
+# Get the gravity from the project settings to be synced with RigidBody nodes.
+var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
+
+var can_flip_sprite: bool = true
+
 var is_facing_right : bool = true
+var is_looking_up : bool = false
+var is_looking_down : bool = false
+
+var is_on_ground : bool = false
+var is_on_wall_r : bool = false
+var is_on_wall_l : bool = false
+
+var has_mask_rock : bool = true
+var has_mask_fire : bool = true
+var has_mask_gravity : bool = true
+var has_mask_ice : bool = true
+
+func _input(event:InputEvent) -> void:
+	#looking up and down logic	-PROBABLY SHOULDN'T BE HERE
+	if(Input.is_action_just_pressed("up")):
+		is_looking_up = true
+	if(Input.is_action_just_pressed("down")):
+		is_looking_down = true
+	if(Input.is_action_just_released("up")):
+		is_looking_up = false
+	if(Input.is_action_just_released("down")):
+		is_looking_down = false
 
 func _physics_process(delta: float) -> void:		#"MAIN" runs every delta time - CALLS ALL OTHER FUNCTIONS
 	# Add the gravity.
-	if !is_on_floor() && can_fall:	#gravity / falling
+	if !is_on_ground && can_fall:	#gravity / falling
 		velocity.y += gravity * delta
 	
 	if is_playing:
 		#and activate physics
 		move_and_slide()
-	#camera controlling, zoom
-	camera()
+	
+	raycasts()
+	
+	#camera()
 	
 	animations()
 	
 	game_logic()
+
+func raycasts() -> void:
+	if $floor_checker.is_colliding():
+		is_on_ground = true
+	else:
+		is_on_ground = false
+		
+	if $left_wall_checker.is_colliding():
+		is_on_wall_l = true
+	else:
+		is_on_wall_l = false
+		
+	if $right_wall_checker.is_colliding():
+		is_on_wall_r = true
+	else:
+		is_on_wall_r = false
 
 func camera() -> void:
 	if Input.is_action_just_pressed("camera_zoom_in"):
