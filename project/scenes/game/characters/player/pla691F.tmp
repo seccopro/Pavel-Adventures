@@ -420,7 +420,6 @@ scale = Vector2(0.4, 0.4)
 texture = SubResource("CanvasTexture_vlif7")
 hframes = 13
 vframes = 3
-frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

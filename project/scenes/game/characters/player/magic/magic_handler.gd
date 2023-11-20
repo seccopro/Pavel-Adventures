@@ -4,7 +4,9 @@ extends Node
 #2- gets called to cast magic
 #3- passes to casting state all needed variables, including the state from which it casted
 
-#must add direction
+@onready var world = $"../../..".get_parent()	#can't use it yet, cause magic uses get parent to check player's stat
+@onready var player = $"../../.."
+
 @export var previous_state :State
 
 @export var magic_blast: Resource  = load("res://scenes/game/characters/player/magic/magic_blast/magic_blast.tscn")
@@ -34,23 +36,23 @@ func cast(magic: String, state: State) -> void:
 func cast_magic_blast() -> void:
 	if !magic_blast_is_on_cooldown:
 		cast_duration = magic_blast_cast_duration
-		$"../../..".add_child(magic_blast.instantiate())
+		player.add_child(magic_blast.instantiate())
 		$magic_blast_cooldown.start()
 		magic_blast_is_on_cooldown = true
-		$"../../..".can_flip_sprite = false
+		player.can_flip_sprite = false
 		$flipper_blocker_remover.start()
 		
 func cast_magic_orb() -> void:
 	if !magic_orb_is_on_cooldown:	#should not need this check
 		cast_duration = magic_orb_cast_duration
-		$"../../..".add_child(magic_orb.instantiate())
+		player.add_child(magic_orb.instantiate())
 		$magic_orb_cooldown.start()
 		magic_orb_is_on_cooldown = true
 
 func cast_dark_sphere() -> void:
 	if !dark_sphere_is_on_cooldown:	#should not need this check
 		cast_duration = dark_sphere_cast_duration		
-		$"../../..".add_child(dark_sphere.instantiate())
+		player.add_child(dark_sphere.instantiate())
 		$dark_sphere_cooldown.start()
 		dark_sphere_is_on_cooldown = true
 

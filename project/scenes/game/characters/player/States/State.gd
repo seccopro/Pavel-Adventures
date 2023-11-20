@@ -9,11 +9,18 @@ var climbing_state : State
 var casting_state : State
 var dead_state : State
 
+var player
+var input_check
+var animation_tree
+
+
 @export_group("Behaviour Flags")
 @export var can_move: bool = true
 @export var can_fall: bool = true
 @export var can_dash: bool = true
 @export var can_jump: bool = true
+@export var can_double_jump: bool = true
+@export var can_wall_jump: bool = true
 @export var can_climb: bool = true
 @export var can_cast: bool = true
 @export var can_change_form: bool = true

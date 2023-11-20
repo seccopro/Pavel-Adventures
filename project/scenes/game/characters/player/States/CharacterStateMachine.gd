@@ -4,7 +4,6 @@ class_name CharacterStateMachine extends Node
 @export var form_sm : FormStateMachine
 
 
-@onready var controls : Dictionary  = $"../controls".controls
 
 @export_group("Character States")
 @export var idle_state : State
@@ -17,11 +16,20 @@ class_name CharacterStateMachine extends Node
 var current_state : State
 
 @export_group("Character Movement")
-@export var WALKING_SPEED: float = 300
-@export var MOVING_SPEED : float = 300
-@export var JUMP_VELOCITY : float = -400
-@export var DOUBLE_JUMP_VELOCITY : float = -400
-@export var DASH_VELOCITY: float = 800
+#walking state ---------------------------
+@export var walking_velocity: float = 800
+#air state --------------------------------
+@export var jump_velocity: float = -800
+@export var moving_velocity: float = 500
+@export var double_jump_velocity: float = -800
+#input check----------
+@export var dash_velocity: float = 2000
+
+@onready var controls : Dictionary  = $"../controls".controls
+@onready var animation_tree: AnimationTree = $"../AnimationTree"
+@onready var player = $".."
+@onready var input_check = $input_check
+
 
 var just_detached: bool = false
 
@@ -29,7 +37,7 @@ func _ready() -> void:
 	for child in get_children():
 		child.controls = controls
 		if !(child is State):
-			if child == $input_check:
+			if child == input_check:
 				print("started input_check")
 			else:
 				print("child isn't a state: " + str(child))
@@ -45,8 +53,11 @@ func _ready() -> void:
 		child.dead_state = dead_state
 		
 		#load variables
-		child.character = character
+		child.character = character		#character rigid body
 		child.form_sm = form_sm
+		child.player = player			#player script, for variables
+		child.animation_tree = animation_tree
+		child.input_check = input_check
 		print("appended state: " + str(child))
 		
 		#starting state

@@ -4,7 +4,7 @@ var starting_position: float
 var height: float
 var travel_distance: float = 300.0	
 var final_position: float
-var shoot_speed: float = 400
+var shoot_speed: float = 1000
 var is_facing_right: bool
 
 # Called when the node enters the scene tree for the first time.

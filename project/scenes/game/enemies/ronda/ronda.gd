@@ -3,7 +3,7 @@ class_name Ronda extends CharacterBody2D
 const SPEED: float = 200.0
 const JUMP_VELOCITY: float = -300.0
 
-const target_range: Array[int] = [1100, 2500]
+const target_range: Array[int] = [2000, 2400]
 var target_position: int = 1
 
 var is_okay: bool = true

@@ -19,6 +19,11 @@ var is_on_ground : bool = false
 var is_on_wall_r : bool = false
 var is_on_wall_l : bool = false
 
+var has_mask_rock : bool = true
+var has_mask_fire : bool = true
+var has_mask_gravity : bool = true
+var has_mask_ice : bool = true
+
 func _input(event:InputEvent) -> void:
 	#looking up and down logic	-PROBABLY SHOULDN'T BE HERE
 	if(Input.is_action_just_pressed("up")):
@@ -38,21 +43,16 @@ func _physics_process(delta: float) -> void:		#"MAIN" runs every delta time - CA
 	if is_playing:
 		#and activate physics
 		move_and_slide()
-	#camera controlling, zoom
 	
 	raycasts()
 	
-	camera()
+	#camera()
 	
 	animations()
 	
 	game_logic()
 
 func raycasts() -> void:
-#	print("touching:")
-#	print(is_on_ground)
-#	print(is_on_wall_l)
-#	print(is_on_wall_r)
 	if $floor_checker.is_colliding():
 		is_on_ground = true
 	else:

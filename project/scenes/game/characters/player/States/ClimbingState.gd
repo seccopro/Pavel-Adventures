@@ -1,6 +1,6 @@
 class_name ClimbingState extends State
 
-@export var VERTICAL_SPEED :float = 300
+@export var VERTICAL_SPEED :float = 1000
 
 func on_enter() -> void:
 	can_fall = false
@@ -9,11 +9,16 @@ func on_enter() -> void:
 	elif character.is_on_wall_l :
 		character.is_facing_right = false
 	
-func state_process(delta: float) -> void:		#handles detaching via being to far from wall
-	if ( !character.is_on_wall_l && !character.is_on_wall_r ):	#to idle / air state by falling
-		print("fell from wall")	
-		next_state = air_state
+func state_process(delta: float) -> void:		
 	vertical_movement()
+	if ( !character.is_on_wall_l && !character.is_on_wall_r ): #handles detaching via being to far from wall	
+		if character.velocity.y < 0: #jump on top of the wall			
+			character.velocity.y += -100
+			$jump_on_wall.start()	#go left or right after .1 sec
+		else:
+			print("fell from wall")
+		
+		next_state = air_state
 
 func state_input(event : InputEvent) -> void:
 	if Input.is_action_just_pressed(controls.climb):	#starts detaching
@@ -21,7 +26,7 @@ func state_input(event : InputEvent) -> void:
 	if Input.is_action_just_released(controls.climb):	
 		$"climb_detach".stop()		
 	
-	$"../input_check".permission_checker($".", event)
+	input_check.permission_checker($".", event)
 
 func vertical_movement() -> void:
 	var direction: float = Input.get_axis(controls.move_up, controls.move_down)
@@ -32,12 +37,19 @@ func vertical_movement() -> void:
 
 func on_exit() -> void:
 	$"climb_detach".stop()
-	get_parent().get_parent().can_fall = true
+	player.can_fall = true
 
 func _on_climb_detach_timeout() -> void:	#TO IDLE STATE (OR AIR)
-	get_parent().just_detached = true
+	player.just_detached = true
 	$"just_detached".start()		#climbing cooldown
 	next_state = idle_state	
 
 func _on_just_detached_timeout():	#can re-attach
-	get_parent().just_detached = false
+	player.just_detached = false
+
+
+func _on_jump_on_wall_timeout():
+	if character.is_facing_right :
+		character.velocity.x = 400
+	else:
+		character.velocity.x = -400

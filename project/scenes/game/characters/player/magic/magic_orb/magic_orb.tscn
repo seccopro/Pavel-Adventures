@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://scenes/game/characters/player/magic/magic_orb/magic_orb.gd" id="1_v55m1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7kus8"]
+radius = 32.0624
 
 [node name="magic_orb" type="Area2D"]
 script = ExtResource("1_v55m1")
@@ -15,10 +16,10 @@ custom_minimum_size = Vector2(10, 10)
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -8.0
-offset_top = -8.0
-offset_right = 9.0
-offset_bottom = 28.0
+offset_left = -25.0
+offset_top = -29.0
+offset_right = 31.0
+offset_bottom = 100.0
 grow_horizontal = 2
 scale = Vector2(0.945234, 0.448653)
 color = Color(0, 0, 1, 1)
