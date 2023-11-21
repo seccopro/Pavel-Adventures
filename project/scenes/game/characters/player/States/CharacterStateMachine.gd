@@ -21,7 +21,7 @@ var current_state : State
 #air state --------------------------------
 @export var jump_velocity: float = -800
 @export var moving_velocity: float = 500
-@export var double_jump_velocity: float = -800
+@export var double_jump_velocity: float = -750    #good amount, less than 700 doesn't work
 #input check----------
 @export var dash_velocity: float = 2000
 

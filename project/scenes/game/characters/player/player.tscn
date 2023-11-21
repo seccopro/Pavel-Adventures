@@ -377,7 +377,7 @@ input_1/auto_advance = false
 input_1/reset = true
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_e5o84"]
-graph_offset = Vector2(-830.537, 252.707)
+graph_offset = Vector2(-827.164, 189.63)
 nodes/air_state/node = SubResource("AnimationNodeTransition_tjogy")
 nodes/air_state/position = Vector2(-340, 280)
 nodes/double_jump/node = SubResource("AnimationNodeStateMachine_lo6i5")
@@ -420,7 +420,6 @@ scale = Vector2(0.4, 0.4)
 texture = SubResource("CanvasTexture_vlif7")
 hframes = 13
 vframes = 3
-frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

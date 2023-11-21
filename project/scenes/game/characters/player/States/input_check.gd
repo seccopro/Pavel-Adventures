@@ -4,8 +4,9 @@ var controls : Dictionary
 @onready var player = $"../.."
 @onready var magic_handler = $"../Casting/magic_handler"
 @onready var CSM =  $".."
+@onready var animation_tree = $"../../AnimationTree"
 
-var wall_jump_velocity_y: float = -10000
+var wall_jump_velocity_y: float = -800
 var wall_jump_velocity_x: float = 1500
 
 func permission_checker(state: State, _event) -> void:
@@ -50,7 +51,7 @@ func walk(state: State, _event: InputEvent) -> void:
 func jump(state: State, _event: InputEvent) -> void:
 	if Input.is_action_just_pressed(controls.jump):
 		player.velocity.y = CSM.jump_velocity
-		
+		animation_tree.set("parameters/air_state/transition_request", "jump_state")
 		state.next_state = state.air_state
 		
 func wall_jump(state: State, _event: InputEvent) -> void:
@@ -111,7 +112,7 @@ func fire_dash(state: State, _event: InputEvent) -> void:	#fire dash
 		if player.is_facing_right:
 			player.velocity.x = +CSM.dash_velocity		#dash right
 		else:
-			player.character.velocity.x = -CSM.dash_velocity		#dash left
+			player.velocity.x = -CSM.dash_velocity		#dash left
 		
 		state.next_state = state.dashing_state
 
