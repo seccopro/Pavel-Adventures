@@ -9,7 +9,7 @@ class_name AirState extends State
 var true_gravity: float = 980	#gets set to player gravity in on enter
 
 var fast_fall_gravity_multiplier: float = 2.0
-var fall_velocity_cap: float = 2000
+var fall_velocity_cap: float = 1000
 var has_jump_forgiveness: bool = true
 var jump_forgiveness_time: float = 0.1   #seconds
 var has_double_jumped: bool = false
@@ -62,15 +62,19 @@ func jump_logic() -> void:
 
 func movement() -> void:
 	var direction = Input.get_axis(controls.move_left, controls.move_right)
-	if direction:
-		character.velocity.x = direction * moving_speed
-		if player.can_flip_sprite :
-			if direction > 0:
-				player.is_facing_right = true
-			else:
-				player.is_facing_right = false
-	else:	#stop moving
-		character.velocity.x = move_toward(character.velocity.x, 0, 50)	
+	if abs(player.velocity.x) > 600:
+		character.velocity.x = move_toward(character.velocity.x, 500, 50)	
+		
+	if abs(player.velocity.x) < 600:
+		if direction:
+			character.velocity.x = direction * moving_speed
+			if player.can_flip_sprite :
+				if direction > 0:
+					player.is_facing_right = true
+				else:
+					player.is_facing_right = false
+		else:	#stop moving
+			character.velocity.x = move_toward(character.velocity.x, 0, 50)	
 
 func double_jump() -> void:
 	character.gravity = true_gravity

@@ -1,6 +1,6 @@
 class_name ClimbingState extends State
 
-@export var VERTICAL_SPEED :float = 700
+@export var VERTICAL_SPEED :float = 400
 
 func on_enter() -> void:
 	can_fall = false
@@ -13,7 +13,7 @@ func state_process(delta: float) -> void:
 	vertical_movement()
 	if ( !character.is_on_wall_l && !character.is_on_wall_r ): #handles detaching via being too far from wall	
 		if character.velocity.y < 0: #jump on top of the wall			
-			character.velocity.y += 100
+			character.velocity.y -= 200
 			$jump_on_wall.start()	#go left or right after .1 sec
 		else:
 			print("fell from wall")

@@ -7,7 +7,7 @@ var controls : Dictionary
 @onready var animation_tree = $"../../AnimationTree"
 
 var wall_jump_velocity_y: float = -800
-var wall_jump_velocity_x: float = 1500
+var wall_jump_velocity_x: float = 1100
 
 func permission_checker(state: State, _event) -> void:
 	if state.can_move:		
@@ -64,6 +64,7 @@ func wall_jump(state: State, _event: InputEvent) -> void:
 			player.velocity.x += wall_jump_velocity_x
 			
 		player.velocity.y += wall_jump_velocity_y
+		
 		state.next_state = state.air_state
 
 

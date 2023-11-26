@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cunedphba4b6s"
-path="res://.godot/imported/chara_run_sheet_n.png-babc70cb7f938c677ead7c73a776c2c7.ctex"
+uid="uid://cdjjjkjygprcn"
+path="res://.godot/imported/chara_move_sheet_n.png-c6372d72e66f6fbd7decb4871ab14b27.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/player/chara_run_sheet_n.png"
-dest_files=["res://.godot/imported/chara_run_sheet_n.png-babc70cb7f938c677ead7c73a776c2c7.ctex"]
+source_file="res://assets/player/chara_move_sheet_n.png"
+dest_files=["res://.godot/imported/chara_move_sheet_n.png-c6372d72e66f6fbd7decb4871ab14b27.ctex"]
 
 [params]
 

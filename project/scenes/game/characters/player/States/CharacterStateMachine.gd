@@ -17,7 +17,7 @@ var current_state : State
 
 @export_group("Character Movement")
 #walking state ---------------------------
-@export var walking_velocity: float = 800
+@export var walking_velocity: float = 450
 #air state --------------------------------
 @export var jump_velocity: float = -800
 @export var moving_velocity: float = 500
