@@ -112,11 +112,12 @@ func _on_damage_area_area_entered(area):
 		print("!! - damaged on spikes")
 		#velocity = -velocity  #kek bouncy spikeys
 		if velocity.y > 0:
-			velocity.y = -1500
-		if velocity.x > 0:
-			velocity.x -= 1500 
+			velocity.y = -1000
 		else:
-			velocity.x = 1000
+			if velocity.x > 0:
+				velocity.x -= 1500 
+			else:
+				velocity.x = 1000
 	elif area.name == "ronda_damage_area":
 		lifes -= 1
 		print("!! Ronda hurts!")
