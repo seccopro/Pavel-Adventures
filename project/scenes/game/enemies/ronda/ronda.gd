@@ -49,11 +49,6 @@ func _on_event_detector_body_entered(body) -> void:
 	if body.name == "player":
 		velocity.y += JUMP_VELOCITY
 
-func _on_damage_area_body_entered(body) -> void:
-	if body.name == "player":
-		print("ronda has damaged you")
-		emit_signal("touched", 1)
-
 func _on_damage_area_area_shape_entered(area_rid, area, area_shape_index, local_shape_index) -> void:
 	print("hit by a " + area.name)
 

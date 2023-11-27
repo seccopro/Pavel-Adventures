@@ -15,7 +15,7 @@ func state_process(delta: float) -> void:
 	character.velocity.y = 0	#locks height
 	
 	if character.velocity.x == 0:	#if stuck  => end dash
-		if character.is_on_floor():
+		if character.is_on_ground:
 			next_state = idle_state		#TO IDLE STATE
 #		else:							#goes to air state anyway, if in idle is not on floor
 #			next_state = air_state		#TO AIR STATE (by falling)

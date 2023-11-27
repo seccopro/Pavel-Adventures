@@ -5,7 +5,8 @@ var controls : Dictionary
 @onready var magic_handler = $"../Casting/magic_handler"
 @onready var CSM =  $".."
 @onready var animation_tree = $"../../AnimationTree"
-
+@onready var area = $"../../playerCollisionShape/player_area"
+		
 var wall_jump_velocity_y: float = -800
 var wall_jump_velocity_x: float = 1100
 
@@ -16,7 +17,6 @@ func permission_checker(state: State, _event) -> void:
 			walk(state, _event)
 
 	if state.can_jump:
-		#TO AIR STATE (by jumping)
 		jump(state, _event)
 	
 	if state.can_wall_jump:
@@ -41,6 +41,9 @@ func permission_checker(state: State, _event) -> void:
 	if state.can_change_form:
 		change_form(state, _event)
 
+	if true: #can open door / can interact
+		interact(state, _event)
+
 
 #basic movement
 func walk(state: State, _event: InputEvent) -> void:
@@ -50,8 +53,8 @@ func walk(state: State, _event: InputEvent) -> void:
 
 func jump(state: State, _event: InputEvent) -> void:
 	if Input.is_action_just_pressed(controls.jump):
-		player.velocity.y = CSM.jump_velocity
-		animation_tree.set("parameters/air_state/transition_request", "jump_state")
+		player.velocity.y = CSM.jump_velocity  
+		#animation_tree.set("parameters/air_state/transition_request", "jump_state")
 		state.next_state = state.air_state
 		
 func wall_jump(state: State, _event: InputEvent) -> void:
@@ -67,9 +70,24 @@ func wall_jump(state: State, _event: InputEvent) -> void:
 		
 		state.next_state = state.air_state
 
-
+#basic actions
 func attack(state: State, _event: InputEvent) -> void:
 	pass
+
+func interact(state: State, _event: InputEvent):
+	if Input.is_action_just_pressed(controls.interact):
+		if area.get_overlapping_areas().any( func(area): return area.name == "door_area" ):
+			print("open door")
+		elif area.get_overlapping_areas().any( func(area): return area.name == "lever_area" ):
+			print("do stuff with this lever")
+		elif area.get_overlapping_areas().any( func(area): return area.name == "healing_flame_area" ):
+			print("the soothing flame makes you feel stronger...")
+			if player.lifes < 3:
+				player.lifes += 1
+		else:
+			print(area.get_overlapping_areas())
+			
+		#to do with match
 
 #-------rock-------
 #passive

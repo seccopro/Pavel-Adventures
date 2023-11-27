@@ -3,38 +3,39 @@
 [ext_resource type="Script" path="res://scenes/game/enemies/ronda/ronda.gd" id="1_17vce"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r8svd"]
-size = Vector2(20, 43)
+size = Vector2(18, 45)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ok2ic"]
 radius = 113.018
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vg1ld"]
-size = Vector2(25, 48)
+size = Vector2(24, 48)
 
 [node name="ronda" type="CharacterBody2D"]
 script = ExtResource("1_17vce")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 8.5)
+position = Vector2(0, 7.5)
 shape = SubResource("RectangleShape2D_r8svd")
 
-[node name="ColorRect" type="ColorRect" parent="CollisionShape2D"]
+[node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -12.0
-offset_top = -25.0
-offset_right = 13.0
-offset_bottom = 22.0
+offset_top = -17.0
+offset_right = 12.0
+offset_bottom = 30.0
 color = Color(0, 0, 0, 1)
 
 [node name="event_detector" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="event_detector"]
 position = Vector2(0, 7)
 shape = SubResource("CircleShape2D_ok2ic")
 
-[node name="damage_area" type="Area2D" parent="."]
+[node name="ronda_damage_area" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="damage_area"]
-position = Vector2(0.5, 7)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ronda_damage_area"]
+position = Vector2(0, 7)
 shape = SubResource("RectangleShape2D_vg1ld")
 
 [node name="global_position_label" type="Label" parent="."]
@@ -45,5 +46,4 @@ offset_right = 22.0
 offset_bottom = -95.0
 
 [connection signal="body_entered" from="event_detector" to="." method="_on_event_detector_body_entered"]
-[connection signal="area_shape_entered" from="damage_area" to="." method="_on_damage_area_area_shape_entered"]
-[connection signal="body_entered" from="damage_area" to="." method="_on_damage_area_body_entered"]
+[connection signal="area_shape_entered" from="ronda_damage_area" to="." method="_on_damage_area_area_shape_entered"]

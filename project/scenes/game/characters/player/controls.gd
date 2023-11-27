@@ -9,7 +9,7 @@ var controls : Dictionary = {
 	"move_down" : "down",			#s, down and "left stick down" controller 
 	"jump" : "jump",				#space button and "A" button (xbox controller)
 	
-	"iteract" : "interact",			#e and "B" button (xbox controller)
+	"interact" : "interact",			#e and "B" button (xbox controller)
 	"heal" : "heal",				#q and "Y"  button (xbox controller)
 	"attack" : "attack",			#left click mouse and "X"  button (xbox controller)
 	

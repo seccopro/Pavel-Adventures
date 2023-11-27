@@ -1,10 +1,12 @@
-[gd_scene load_steps=24 format=3 uid="uid://dqnfvaoaxxrfa"]
+[gd_scene load_steps=29 format=3 uid="uid://dqnfvaoaxxrfa"]
 
 [ext_resource type="Script" path="res://scenes/_debug/movement_test.gd" id="1_pcuud"]
 [ext_resource type="Texture2D" uid="uid://8ew4qqec7y84" path="res://assets/ruin_assets/env_1_assets.png" id="2_5mjq6"]
 [ext_resource type="PackedScene" uid="uid://cbb5qfdj1r0sb" path="res://scenes/game/characters/player/player.tscn" id="2_36yml"]
 [ext_resource type="PackedScene" uid="uid://c8wvmaehkj300" path="res://scenes/game/enemies/ronda/ronda.tscn" id="3_28jar"]
+[ext_resource type="Script" path="res://scenes/_debug/lever.gd" id="3_tv2l3"]
 [ext_resource type="Texture2D" uid="uid://cey0xyxxmqyca" path="res://assets/lights/default_light.tres" id="5_mlly0"]
+[ext_resource type="PackedScene" uid="uid://vouj7i5fu8um" path="res://assets/common/area_effects/spike_damage_area.tscn" id="6_o6kkb"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_7c2y5"]
 diffuse_texture = ExtResource("2_5mjq6")
@@ -12,6 +14,15 @@ diffuse_texture = ExtResource("2_5mjq6")
 [sub_resource type="CanvasTexture" id="CanvasTexture_d7rc2"]
 diffuse_texture = ExtResource("2_5mjq6")
 specular_color = Color(0.282353, 0.282353, 0.282353, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jxr5u"]
+size = Vector2(104, 118)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vpdvg"]
+size = Vector2(29, 51.7766)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pi7ac"]
+size = Vector2(127, 152)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_f2cew"]
 blend_mode = 2
@@ -52,13 +63,13 @@ size = Vector2(57.1311, 7.07465)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5clwn"]
 size = Vector2(85.0988, 20)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_fqnr7"]
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k5cre"]
 size = Vector2(448.57, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gw3nv"]
-size = Vector2(446.07, 20)
+size = Vector2(446.07, 19)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fqnr7"]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_pcuud")
@@ -68,6 +79,13 @@ color = Color(0.811765, 0.847059, 0.858824, 1)
 
 [node name="assets" type="Node2D" parent="."]
 position = Vector2(659, 395)
+
+[node name="blackground" type="ColorRect" parent="assets"]
+offset_left = -1736.0
+offset_top = -2280.0
+offset_right = 4050.0
+offset_bottom = 713.0
+color = Color(0, 0, 0, 1)
 
 [node name="back walls" type="Node2D" parent="assets"]
 
@@ -200,21 +218,21 @@ region_enabled = true
 region_rect = Rect2(758, 1083, 55, 119)
 
 [node name="Env1Assets36" type="Sprite2D" parent="assets/props"]
-position = Vector2(112.515, -233.502)
+position = Vector2(121.7, -384)
 scale = Vector2(0.7, 0.7)
 texture = SubResource("CanvasTexture_d7rc2")
 region_enabled = true
 region_rect = Rect2(1061, 1075, 36, 100)
 
 [node name="Env1Assets37" type="Sprite2D" parent="assets/props"]
-position = Vector2(112.515, -182.087)
+position = Vector2(121.7, -332.585)
 scale = Vector2(0.7, 0.7)
 texture = SubResource("CanvasTexture_d7rc2")
 region_enabled = true
 region_rect = Rect2(944, 1099, 62, 85)
 
 [node name="Env1Assets38" type="Sprite2D" parent="assets/props"]
-position = Vector2(112.515, -207.705)
+position = Vector2(121.7, -358.203)
 scale = Vector2(0.7, 0.7)
 texture = SubResource("CanvasTexture_d7rc2")
 region_enabled = true
@@ -257,6 +275,60 @@ texture = ExtResource("2_5mjq6")
 region_enabled = true
 region_rect = Rect2(1669, 1616, 32, 132)
 
+[node name="healing_flame" type="Node2D" parent="assets/props"]
+position = Vector2(117, 30)
+
+[node name="Sprite2D17" type="Sprite2D" parent="assets/props/healing_flame"]
+texture = ExtResource("2_5mjq6")
+region_enabled = true
+region_rect = Rect2(1606, 1336, 87, 134)
+
+[node name="healing_flame_light" type="PointLight2D" parent="assets/props/healing_flame"]
+z_index = 100
+position = Vector2(0, 9)
+scale = Vector2(1.61565, 1.29677)
+color = Color(0.666667, 0.329412, 0.0509804, 1)
+energy = 5.0
+shadow_enabled = true
+texture = ExtResource("5_mlly0")
+texture_scale = 1.47
+height = 160.0
+
+[node name="healing_flame_area" type="Area2D" parent="assets/props/healing_flame"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="assets/props/healing_flame/healing_flame_area"]
+position = Vector2(0, 9)
+shape = SubResource("RectangleShape2D_jxr5u")
+
+[node name="Sprite2D15" type="Sprite2D" parent="assets/props"]
+position = Vector2(1417, -391)
+texture = ExtResource("2_5mjq6")
+region_enabled = true
+region_rect = Rect2(723, 1437, 124, 123)
+
+[node name="Sprite2D16" type="Sprite2D" parent="assets/props"]
+position = Vector2(1416, -551.5)
+scale = Vector2(1, 0.985)
+texture = ExtResource("2_5mjq6")
+region_enabled = true
+region_rect = Rect2(893, 1361, 11, 200)
+
+[node name="lever" type="Node2D" parent="assets/props"]
+position = Vector2(1037, -286)
+scale = Vector2(1, 0.985)
+script = ExtResource("3_tv2l3")
+
+[node name="Sprite2D17" type="Sprite2D" parent="assets/props/lever"]
+texture = ExtResource("2_5mjq6")
+region_enabled = true
+region_rect = Rect2(1289, 1141, 30, 54)
+
+[node name="lever_area" type="Area2D" parent="assets/props/lever"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="assets/props/lever/lever_area"]
+position = Vector2(-0.5, 0.507614)
+shape = SubResource("RectangleShape2D_vpdvg")
+
 [node name="Sprite2D13" type="Sprite2D" parent="assets/props"]
 position = Vector2(699.22, -401.855)
 texture = ExtResource("2_5mjq6")
@@ -271,17 +343,25 @@ flip_h = true
 region_enabled = true
 region_rect = Rect2(773, 1588, 216, 105)
 
-[node name="Env1Assets24" type="Sprite2D" parent="assets/props"]
+[node name="door" type="Node2D" parent="assets"]
 position = Vector2(2540.2, -375.125)
+
+[node name="Env1Assets24" type="Sprite2D" parent="assets/door"]
 texture = SubResource("CanvasTexture_7c2y5")
 region_enabled = true
 region_rect = Rect2(208, 1408, 138, 159)
 
-[node name="Env1Assets23" type="Sprite2D" parent="assets/props"]
-position = Vector2(2540.2, -390.999)
+[node name="Env1Assets23" type="Sprite2D" parent="assets/door"]
+position = Vector2(0, -15.874)
 texture = SubResource("CanvasTexture_7c2y5")
 region_enabled = true
 region_rect = Rect2(385, 1375, 172, 192)
+
+[node name="door_area" type="Area2D" parent="assets/door"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="assets/door/door_area"]
+position = Vector2(0.300049, -0.875)
+shape = SubResource("RectangleShape2D_pi7ac")
 
 [node name="platforms" type="Node2D" parent="assets"]
 
@@ -412,12 +492,15 @@ texture = SubResource("CanvasTexture_7c2y5")
 region_enabled = true
 region_rect = Rect2(610, 38, 1152, 42)
 
-[node name="player" parent="." instance=ExtResource("2_36yml")]
-position = Vector2(588.426, 424.546)
-
-[node name="ronda" parent="." instance=ExtResource("3_28jar")]
+[node name="characters" type="Node2D" parent="."]
 position = Vector2(2496, 108.682)
 scale = Vector2(2, 2)
+
+[node name="player" parent="characters" instance=ExtResource("2_36yml")]
+position = Vector2(-953.787, 157.932)
+scale = Vector2(0.5, 0.5)
+
+[node name="ronda" parent="characters" instance=ExtResource("3_28jar")]
 
 [node name="front" type="Node2D" parent="."]
 
@@ -453,6 +536,13 @@ texture = SubResource("CanvasTexture_7c2y5")
 flip_h = true
 region_enabled = true
 region_rect = Rect2(1857, 38, 90, 54)
+
+[node name="spike_damage_area" parent="front/traps" instance=ExtResource("6_o6kkb")]
+position = Vector2(2982.95, 461.95)
+scale = Vector2(2.82, 1)
+
+[node name="CollisionShape2D" parent="front/traps/spike_damage_area" index="0"]
+position = Vector2(-19.3109, -1.47485)
 
 [node name="walls" type="Node2D" parent="front"]
 position = Vector2(659, 395)
@@ -640,13 +730,13 @@ color = Color(0, 0, 0, 1)
 offset_left = 2776.0
 offset_top = -1411.0
 offset_right = 4050.0
-offset_bottom = 719.0
+offset_bottom = 713.0
 color = Color(0, 0, 0, 1)
 
 [node name="ColorRect3" type="ColorRect" parent="front/color blocks"]
 offset_left = -110.0
-offset_top = -1321.0
-offset_right = 3116.0
+offset_top = -1711.0
+offset_right = 4050.0
 offset_bottom = -578.0
 color = Color(0, 0, 0, 1)
 
@@ -654,7 +744,7 @@ color = Color(0, 0, 0, 1)
 offset_left = -1736.0
 offset_top = -1541.0
 offset_right = -694.0
-offset_bottom = 725.0
+offset_bottom = 713.0
 color = Color(0, 0, 0, 1)
 
 [node name="collisions" type="Node2D" parent="."]
@@ -734,6 +824,20 @@ scale = Vector2(2.5, 2.5)
 position = Vector2(0.236511, 0)
 shape = SubResource("RectangleShape2D_5clwn")
 
+[node name="win_platform" type="StaticBody2D" parent="collisions"]
+position = Vector2(2389, -283)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="collisions/win_platform"]
+position = Vector2(57.7849, -10.0113)
+shape = SubResource("RectangleShape2D_k5cre")
+
+[node name="win_check" type="Area2D" parent="collisions/win_platform"]
+position = Vector2(0, -4)
+
+[node name="win_check_shape" type="CollisionShape2D" parent="collisions/win_platform/win_check"]
+position = Vector2(59.0349, -1.5)
+shape = SubResource("RectangleShape2D_gw3nv")
+
 [node name="ball" type="RigidBody2D" parent="."]
 position = Vector2(213, 16)
 
@@ -748,25 +852,11 @@ offset_bottom = 7.0
 color = Color(1, 0, 0, 1)
 metadata/_edit_use_anchors_ = true
 
-[node name="win_platform" type="StaticBody2D" parent="."]
-position = Vector2(3048, 112)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="win_platform"]
-position = Vector2(57.7849, -10.0113)
-shape = SubResource("RectangleShape2D_k5cre")
-
-[node name="win_check" type="Area2D" parent="win_platform"]
-position = Vector2(0, -4)
-
-[node name="win_check_shape" type="CollisionShape2D" parent="win_platform/win_check"]
-position = Vector2(59.0349, -2)
-shape = SubResource("RectangleShape2D_gw3nv")
-
 [node name="Lights" type="Node2D" parent="."]
 
 [node name="PointLight2D" type="PointLight2D" parent="Lights"]
 z_index = 100
-position = Vector2(771.828, 225.355)
+position = Vector2(776, 66)
 scale = Vector2(3.67764, 3.67764)
 color = Color(0.666667, 0.329412, 0.0509804, 1)
 energy = 5.0
@@ -776,8 +866,8 @@ texture_scale = 1.47
 height = 160.0
 
 [node name="PointLight2D2" type="PointLight2D" parent="Lights"]
-position = Vector2(1605.8, -74.632)
-scale = Vector2(6.202, 6.202)
+position = Vector2(1605.8, -73.548)
+scale = Vector2(6.202, 6.23588)
 color = Color(0.65098, 0.85098, 0.870588, 1)
 energy = 1.48
 texture = ExtResource("5_mlly0")
@@ -806,7 +896,7 @@ texture = ExtResource("5_mlly0")
 height = 160.0
 
 [node name="PointLight2D3" type="PointLight2D" parent="Lights"]
-position = Vector2(2853.55, 250.554)
+position = Vector2(2900.5, 250.504)
 scale = Vector2(8.92199, 8.92199)
 energy = 1.59
 texture = ExtResource("5_mlly0")
@@ -825,7 +915,9 @@ offset_right = 101.0
 offset_bottom = 8.0
 color = Color(1, 0, 1, 1)
 
-[connection signal="damaged" from="." to="player" method="_on_node_2d_damaged"]
-[connection signal="win" from="." to="player" method="_on_node_2d_win"]
-[connection signal="touched" from="ronda" to="player" method="_on_ronda_touched"]
-[connection signal="body_entered" from="win_platform/win_check" to="." method="_on_win_check_body_entered"]
+[connection signal="damaged" from="." to="characters/player" method="_on_node_2d_damaged"]
+[connection signal="win" from="." to="characters/player" method="_on_node_2d_win"]
+[connection signal="touched" from="characters/ronda" to="characters/player" method="_on_ronda_touched"]
+[connection signal="body_entered" from="collisions/win_platform/win_check" to="." method="_on_win_check_body_entered"]
+
+[editable path="front/traps/spike_damage_area"]

@@ -36,24 +36,19 @@ func _input(event:InputEvent) -> void:
 		is_looking_down = false
 
 func _physics_process(delta: float) -> void:		#"MAIN" runs every delta time - CALLS ALL OTHER FUNCTIONS
-	# Add the gravity.
 	if !is_on_ground && can_fall:	#gravity / falling
 		velocity.y += gravity * delta
 	
 	if is_playing:
 		#and activate physics
 		move_and_slide()
-	
-	raycasts()
-	
-	#camera()
-	
-	animations()
-	
-	game_logic()
+		raycasts()
+		#camera()
+		animations()
+		game_logic()
 
 func raycasts() -> void:
-	if $floor_checker.is_colliding():
+	if $floor_checker.is_colliding() ||  $floor_checker_l.is_colliding() ||  $floor_checker_r.is_colliding():
 		is_on_ground = true
 	else:
 		is_on_ground = false
@@ -110,5 +105,26 @@ func death() -> void:
 	is_playing = false
 	$HUD/death_screen.show()
 
-func _unhandled_input(event):
-	pass
+
+func _on_damage_area_area_entered(area):
+	if area.name == "spike_damage_area":
+		lifes -= 1 #area.damage
+		print("!! - damaged on spikes")
+		#velocity = -velocity  #kek bouncy spikeys
+		if velocity.y > 0:
+			velocity.y = -1500
+		if velocity.x > 0:
+			velocity.x -= 1500 
+		else:
+			velocity.x = 1000
+	elif area.name == "ronda_damage_area":
+		lifes -= 1
+		print("!! Ronda hurts!")
+		if velocity.x > 0:
+			velocity.x -= 1500 
+		else:
+			velocity.x = 1000
+	else:
+		print("player hit" + area.name)
+	
+	
