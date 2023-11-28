@@ -14,9 +14,8 @@ func state_input(event: InputEvent) -> void:
 func state_process(delta: float) -> void:
 	walk()
 	
-	if !character.is_on_floor():	#TO AIR STATE (by falling)
-		animation_tree.set("parameters/air_state/transition_request", "fall_state")
-#		$"../Air".has_jump_forgiveness = true
+	if !character.is_on_ground:	#TO AIR STATE (by falling)
+		#animation_tree.set("parameters/air_state/transition_request", "fall_state")
 		next_state = air_state
 	elif character.velocity.x == 0:	#stopped walking #TO IDLE STATE
 		animation_tree.set("parameters/run_state/transition_request", "run_idle")
@@ -27,7 +26,7 @@ func on_exit() -> void:
 
 func walk() -> void:
 	var direction = Input.get_axis(controls.move_left, controls.move_right)
-	if direction:
+	if abs(character.velocity.x) < 600 && direction:		#replace 600 with top walking speed maybe
 		character.velocity.x = direction * parent.walking_velocity
 		if player.can_flip_sprite :
 			if direction > 0:

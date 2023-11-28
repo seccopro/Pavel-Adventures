@@ -2,6 +2,8 @@ class_name ClimbingState extends State
 
 @export var VERTICAL_SPEED :float = 400
 
+@onready var csm = $".."
+
 func on_enter() -> void:
 	can_fall = false
 	if character.is_on_wall_r :
@@ -40,12 +42,12 @@ func on_exit() -> void:
 	player.can_fall = true
 
 func _on_climb_detach_timeout() -> void:	#TO IDLE STATE (OR AIR)
-	player.just_detached = true
+	csm.just_detached = true
 	$"just_detached".start()		#climbing cooldown
 	next_state = idle_state	
 
 func _on_just_detached_timeout():	#can re-attach
-	player.just_detached = false
+	csm.just_detached = false
 
 
 func _on_jump_on_wall_timeout():

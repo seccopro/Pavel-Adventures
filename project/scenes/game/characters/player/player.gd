@@ -36,21 +36,16 @@ func _input(event:InputEvent) -> void:
 		is_looking_down = false
 
 func _physics_process(delta: float) -> void:		#"MAIN" runs every delta time - CALLS ALL OTHER FUNCTIONS
-	# Add the gravity.
 	if !is_on_ground && can_fall:	#gravity / falling
 		velocity.y += gravity * delta
 	
 	if is_playing:
 		#and activate physics
 		move_and_slide()
-	
-	raycasts()
-	
-	#camera()
-	
-	animations()
-	
-	game_logic()
+		raycasts()
+		#camera()
+		animations()
+		game_logic()
 
 func raycasts() -> void:
 	if $floor_checker.is_colliding():
@@ -110,5 +105,54 @@ func death() -> void:
 	is_playing = false
 	$HUD/death_screen.show()
 
-func _unhandled_input(event):
-	pass
+
+func _on_damage_area_area_entered(area):
+	match area.name:	 #lose 2 health
+		"spike_damage_area":
+			lifes -= 1 #area.damage
+			print("!! - damaged on spikes")
+			#velocity = -velocity  #kek bouncy spikeys
+			if velocity.y > 0:
+				velocity.y = -1000
+			else:
+				if velocity.x > 0:
+					velocity.x -= 1500 
+				else:
+					velocity.x = 1000
+		
+		"ronda_damage_area":	#lose 1 health
+			lifes -= 1
+			print("!! Ronda hurts!")
+			if velocity.x > 0:
+				velocity.x -= 1500 
+			else:
+				velocity.x = 1000
+		
+		"heavy_object":	#lose 5 health
+			lifes -= 1
+			
+		_:		#default
+			print("player hit " + area.name)
+			
+#	if area.name == "spike_damage_area":
+#		lifes -= 1 #area.damage
+#		print("!! - damaged on spikes")
+#		#velocity = -velocity  #kek bouncy spikeys
+#		if velocity.y > 0:
+#			velocity.y = -1000
+#		else:
+#			if velocity.x > 0:
+#				velocity.x -= 1500 
+#			else:
+#				velocity.x = 1000
+#	elif area.name == "ronda_damage_area":
+#		lifes -= 1
+#		print("!! Ronda hurts!")
+#		if velocity.x > 0:
+#			velocity.x -= 1500 
+#		else:
+#			velocity.x = 1000
+#	else:
+#		print("player hit" + area.name)
+#
+	

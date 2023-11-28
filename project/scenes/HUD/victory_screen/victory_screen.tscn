@@ -23,18 +23,18 @@ autowrap_mode = 1
 
 [node name="replay" type="Button" parent="."]
 layout_mode = 0
-offset_left = 232.0
-offset_top = 247.0
-offset_right = 560.0
-offset_bottom = 290.0
+offset_left = 224.0
+offset_top = 300.0
+offset_right = 552.0
+offset_bottom = 343.0
 text = "REPLAY"
 
 [node name="quit" type="Button" parent="."]
 layout_mode = 0
-offset_left = 227.0
-offset_top = 328.0
-offset_right = 555.0
-offset_bottom = 371.0
+offset_left = 219.0
+offset_top = 381.0
+offset_right = 547.0
+offset_bottom = 424.0
 text = "QUIT"
 
 [connection signal="pressed" from="replay" to="." method="_on_replay_pressed"]

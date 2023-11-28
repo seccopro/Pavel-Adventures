@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=3 uid="uid://cbb5qfdj1r0sb"]
+[gd_scene load_steps=77 format=3 uid="uid://cbb5qfdj1r0sb"]
 
 [ext_resource type="Script" path="res://scenes/game/characters/player/player.gd" id="1_hkbnf"]
 [ext_resource type="PackedScene" uid="uid://61w51ai88ja0" path="res://scenes/HUD/death_screen/death_screen.tscn" id="2_ee4nu"]
@@ -25,7 +25,10 @@
 [ext_resource type="Script" path="res://scenes/game/characters/player/forms/gravity_form.gd" id="23_gx8tp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rrxu0"]
-size = Vector2(38, 141)
+size = Vector2(38, 142)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b1661"]
+size = Vector2(38, 141.5)
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_vlif7"]
 diffuse_texture = ExtResource("2_n1ixg")
@@ -376,7 +379,6 @@ input_1/auto_advance = false
 input_1/reset = true
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_e5o84"]
-graph_offset = Vector2(-827.164, 189.63)
 nodes/air_state/node = SubResource("AnimationNodeTransition_tjogy")
 nodes/air_state/position = Vector2(-340, 280)
 nodes/double_jump/node = SubResource("AnimationNodeStateMachine_lo6i5")
@@ -406,12 +408,21 @@ nodes/run_state/node = SubResource("AnimationNodeTransition_tbjjs")
 nodes/run_state/position = Vector2(-660, 100)
 node_connections = [&"output", 0, &"ground_air", &"air_state", 0, &"fall_ground", &"air_state", 1, &"jump_state", &"ground_air", 0, &"landing", &"ground_air", 1, &"air_state", &"jump_state", 0, &"jump", &"jump_state", 1, &"double_jump", &"landing", 0, &"movement", &"landing", 1, &"fall", &"movement", 0, &"idle", &"movement", 1, &"run_state", &"run_state", 0, &"run_idle", &"run_state", 1, &"run"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0lt8o"]
+size = Vector2(38, 5)
+
 [node name="player" type="CharacterBody2D"]
 script = ExtResource("1_hkbnf")
 
 [node name="playerCollisionShape" type="CollisionShape2D" parent="."]
-position = Vector2(1, -2.5)
+position = Vector2(1, -2)
 shape = SubResource("RectangleShape2D_rrxu0")
+
+[node name="player_area" type="Area2D" parent="playerCollisionShape"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="playerCollisionShape/player_area"]
+position = Vector2(0, 0.25)
+shape = SubResource("RectangleShape2D_b1661")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-0.999996, -1.00001)
@@ -419,6 +430,7 @@ scale = Vector2(0.4, 0.4)
 texture = SubResource("CanvasTexture_vlif7")
 hframes = 13
 vframes = 3
+metadata/_edit_lock_ = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -467,18 +479,18 @@ offset_bottom = -78.0
 [node name="victory_screen" parent="HUD" instance=ExtResource("3_0kecm")]
 visible = false
 layout_mode = 1
-offset_left = -400.0
-offset_top = -191.0
-offset_right = -400.0
-offset_bottom = -191.0
+offset_left = -397.0
+offset_top = -335.0
+offset_right = -397.0
+offset_bottom = -335.0
 
 [node name="death_screen" parent="HUD" instance=ExtResource("2_ee4nu")]
 visible = false
 layout_mode = 1
-offset_left = -394.0
-offset_top = -235.0
-offset_right = -394.0
-offset_bottom = -235.0
+offset_left = -399.0
+offset_top = -339.0
+offset_right = -399.0
+offset_bottom = -339.0
 
 [node name="state_debug" type="Label" parent="HUD" node_paths=PackedStringArray("state_machine", "form_sm")]
 layout_mode = 0
@@ -490,8 +502,11 @@ script = ExtResource("11_7sifh")
 state_machine = NodePath("../../CharacterStateMachine")
 form_sm = NodePath("../../FormStateMachine")
 
-[node name="floor_checker" type="RayCast2D" parent="."]
-target_position = Vector2(0, 78)
+[node name="floor_checker" type="ShapeCast2D" parent="."]
+position = Vector2(1, 68)
+scale = Vector2(0.995741, 1)
+shape = SubResource("RectangleShape2D_0lt8o")
+target_position = Vector2(0, 0)
 
 [node name="left_wall_checker" type="RayCast2D" parent="."]
 target_position = Vector2(-30, 0)
@@ -648,6 +663,7 @@ one_shot = true
 [node name="input_check" type="Node" parent="CharacterStateMachine"]
 script = ExtResource("12_oovai")
 
+[connection signal="area_entered" from="playerCollisionShape/player_area" to="." method="_on_damage_area_area_entered"]
 [connection signal="timeout" from="CharacterStateMachine/Climbing/climb_detach" to="CharacterStateMachine/Climbing" method="_on_climb_detach_timeout"]
 [connection signal="timeout" from="CharacterStateMachine/Climbing/just_detached" to="CharacterStateMachine/Climbing" method="_on_just_detached_timeout"]
 [connection signal="timeout" from="CharacterStateMachine/Climbing/jump_on_wall" to="CharacterStateMachine/Climbing" method="_on_jump_on_wall_timeout"]

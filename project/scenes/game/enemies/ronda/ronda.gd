@@ -8,7 +8,6 @@ var target_position: int = 1
 
 var is_okay: bool = true
 
-signal touched(value)
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -49,13 +48,8 @@ func _on_event_detector_body_entered(body) -> void:
 	if body.name == "player":
 		velocity.y += JUMP_VELOCITY
 
-func _on_damage_area_body_entered(body) -> void:
-	if body.name == "player":
-		print("ronda has damaged you")
-		emit_signal("touched", 1)
-
 func _on_damage_area_area_shape_entered(area_rid, area, area_shape_index, local_shape_index) -> void:
-	print("hit by a " + area.name)
+	print("ronda is hit by a " + area.name)
 
 	match area.name:	 #lose 2 health
 		"magic_blast":
@@ -63,6 +57,8 @@ func _on_damage_area_area_shape_entered(area_rid, area, area_shape_index, local_
 		"magic_orb":	#lose 1 health
 			die() 
 		"dark blast":	#lose 5 health
+			die()
+		"heavy_object":	#die squished
 			die()
 
 func die():

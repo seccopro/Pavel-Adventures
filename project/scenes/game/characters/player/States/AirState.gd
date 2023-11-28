@@ -19,6 +19,11 @@ var time_elapsed: float = 0
 func on_enter() -> void:
 	true_gravity = player.gravity
 	animation_tree.set("parameters/ground_air/transition_request", "air_state")
+	if character.velocity.y < 0:	#if speed is negative, we are jumping, therefore play jumping animation 
+		animation_tree.set("parameters/air_state/transition_request", "jump_state")
+	else:	#likewise, if velocity is positve we must be falling, therefore play falling animation
+		animation_tree.set("parameters/air_state/transition_request", "fall_state")
+	
 
 func state_process(delta: float) -> void:
 	time_elapsed += delta
@@ -27,15 +32,15 @@ func state_process(delta: float) -> void:
 	#hold for higher jump, variable max height
 	jump_logic()
 	movement()  	#instead of walking state
-
+	
 	#change state
-	if character.is_on_floor():
+	if character.is_on_ground:
 		if character.velocity.x == 0:
 			next_state = idle_state			#TO IDLE STATE
 		else:
 			next_state = walking_state		#TO WALKING STATE
 
-	
+
 func state_input(event: InputEvent) -> void:
 	#all possible movements
 	input_check.permission_checker($".", event)	
@@ -51,7 +56,7 @@ func state_input(event: InputEvent) -> void:
 func jump_logic() -> void:
 	if Input.is_action_just_released(controls.jump) && character.velocity.y < 0:
 		character.velocity.y /= 2           #smooths the player before falling after releasing jump
-
+	
 	#falling
 	if character.velocity.y > -600:                     #while ascending:
 		if character.velocity.y < fall_velocity_cap:	#faster fall
@@ -60,21 +65,18 @@ func jump_logic() -> void:
 			character.velocity.y = fall_velocity_cap
 			character.gravity = true_gravity
 
-func movement() -> void:
+func movement() -> void:	
+	#slows down (gradually) after a wall jump  (to avoid getting the bonus speed overridden by basic movement)
 	var direction = Input.get_axis(controls.move_left, controls.move_right)
-	if abs(player.velocity.x) > 600:
-		character.velocity.x = move_toward(character.velocity.x, 500, 50)	
-		
-	if abs(player.velocity.x) < 600:
-		if direction:
+	if abs(character.velocity.x) < 600 && direction:	#replace 600 with top moving speed maybe
 			character.velocity.x = direction * moving_speed
 			if player.can_flip_sprite :
 				if direction > 0:
 					player.is_facing_right = true
 				else:
 					player.is_facing_right = false
-		else:	#stop moving
-			character.velocity.x = move_toward(character.velocity.x, 0, 50)	
+	else:	#stop moving
+		character.velocity.x = move_toward(character.velocity.x, 0, 50)	
 
 func double_jump() -> void:
 	character.gravity = true_gravity
