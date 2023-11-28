@@ -3,10 +3,10 @@
 [ext_resource type="Script" path="res://scenes/game/enemies/ronda/ronda.gd" id="1_17vce"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r8svd"]
-size = Vector2(18, 45)
+size = Vector2(22, 45)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ajq04"]
-size = Vector2(310, 160)
+size = Vector2(310, 81)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vg1ld"]
 size = Vector2(24, 48)
@@ -28,7 +28,7 @@ color = Color(0, 0, 0, 1)
 [node name="event_detector" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="event_detector"]
-position = Vector2(0, -52)
+position = Vector2(0, -12.5)
 shape = SubResource("RectangleShape2D_ajq04")
 
 [node name="ronda_damage_area" type="Area2D" parent="."]

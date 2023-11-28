@@ -1,19 +1,24 @@
-[gd_scene load_steps=33 format=3 uid="uid://dqnfvaoaxxrfa"]
+[gd_scene load_steps=32 format=3 uid="uid://dqnfvaoaxxrfa"]
 
 [ext_resource type="Script" path="res://scenes/_debug/movement_test.gd" id="1_pcuud"]
-[ext_resource type="Texture2D" uid="uid://8ew4qqec7y84" path="res://assets/ruin_assets/env_1_assets.png" id="2_5mjq6"]
 [ext_resource type="PackedScene" uid="uid://cbb5qfdj1r0sb" path="res://scenes/game/characters/player/player.tscn" id="2_36yml"]
 [ext_resource type="PackedScene" uid="uid://c8wvmaehkj300" path="res://scenes/game/enemies/ronda/ronda.tscn" id="3_28jar"]
-[ext_resource type="Script" path="res://scenes/_debug/lever.gd" id="3_tv2l3"]
-[ext_resource type="Script" path="res://scenes/_debug/hanging_weight.gd" id="5_f6fvg"]
+[ext_resource type="Script" path="res://scenes/_debug/door.gd" id="3_kmxw5"]
+[ext_resource type="Texture2D" uid="uid://cunr5af44uwoa" path="res://assets/ruin_assets/env_1_assets.png" id="5_emj5j"]
 [ext_resource type="Texture2D" uid="uid://cey0xyxxmqyca" path="res://assets/lights/default_light.tres" id="5_mlly0"]
+[ext_resource type="PackedScene" uid="uid://b0gmmb6vucy2n" path="res://assets/common/interactable/lever_logic.tscn" id="5_w3r5y"]
+[ext_resource type="PackedScene" uid="uid://d1eurxocqst0e" path="res://assets/ruin_assets/interactable/ruin_lever_spr_1.tscn" id="6_jrxx6"]
 [ext_resource type="PackedScene" uid="uid://vouj7i5fu8um" path="res://assets/common/area_effects/spike_damage_area.tscn" id="6_o6kkb"]
+[ext_resource type="PackedScene" uid="uid://b7vjkbti3ify8" path="res://assets/common/interactable/hanging_weight_logic.tscn" id="9_4t3vm"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_bohdh"]
+load_path = "res://.godot/imported/env_1_assets.png-b8695d348d589d83d28df7a4f31caac7.ctex"
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_7c2y5"]
-diffuse_texture = ExtResource("2_5mjq6")
+diffuse_texture = SubResource("CompressedTexture2D_bohdh")
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_d7rc2"]
-diffuse_texture = ExtResource("2_5mjq6")
+diffuse_texture = SubResource("CompressedTexture2D_bohdh")
 specular_color = Color(0.282353, 0.282353, 0.282353, 1)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_f2cew"]
@@ -24,18 +29,6 @@ size = Vector2(127, 152)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jxr5u"]
 size = Vector2(104, 118)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vpdvg"]
-size = Vector2(29, 51.7766)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_griq8"]
-size = Vector2(126, 66)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7jp3b"]
-size = Vector2(277, 97)
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_o4a2x"]
-blend_mode = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jewis"]
 size = Vector2(663.984, 29.5)
@@ -86,9 +79,13 @@ script = ExtResource("1_pcuud")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.811765, 0.847059, 0.858824, 1)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
 
 [node name="assets" type="Node2D" parent="."]
 position = Vector2(659, 395)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
 
 [node name="blackground" type="ColorRect" parent="assets"]
 offset_left = -1736.0
@@ -98,6 +95,8 @@ offset_bottom = 713.0
 color = Color(0, 0, 0, 1)
 
 [node name="back walls" type="Node2D" parent="assets"]
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
 
 [node name="Env1Assets" type="Sprite2D" parent="assets/back walls"]
 position = Vector2(-322.428, -62)
@@ -220,6 +219,8 @@ region_enabled = true
 region_rect = Rect2(22, 36, 570, 330)
 
 [node name="props" type="Node2D" parent="assets"]
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
 
 [node name="Env1Assets33" type="Sprite2D" parent="assets/props"]
 position = Vector2(944.969, -428.709)
@@ -262,44 +263,46 @@ region_rect = Rect2(758, 1083, 55, 119)
 
 [node name="Sprite2D9" type="Sprite2D" parent="assets/props"]
 position = Vector2(105.896, -526.894)
-texture = ExtResource("2_5mjq6")
+texture = SubResource("CompressedTexture2D_bohdh")
 region_enabled = true
 region_rect = Rect2(478, 1605, 277, 82)
 
 [node name="Sprite2D10" type="Sprite2D" parent="assets/props"]
 position = Vector2(776.641, -526.894)
-texture = ExtResource("2_5mjq6")
+texture = SubResource("CompressedTexture2D_bohdh")
 region_enabled = true
 region_rect = Rect2(773, 1588, 216, 105)
 
 [node name="Sprite2D14" type="Sprite2D" parent="assets/props"]
 position = Vector2(2311.48, -255.815)
 scale = Vector2(0.727179, 0.56705)
-texture = ExtResource("2_5mjq6")
+texture = SubResource("CompressedTexture2D_bohdh")
 region_enabled = true
 region_rect = Rect2(773, 1588, 216, 105)
 
 [node name="Sprite2D12" type="Sprite2D" parent="assets/props"]
 position = Vector2(699.22, -504.201)
-texture = ExtResource("2_5mjq6")
+texture = SubResource("CompressedTexture2D_bohdh")
 region_enabled = true
 region_rect = Rect2(1669, 1616, 32, 132)
 
 [node name="Sprite2D13" type="Sprite2D" parent="assets/props"]
 position = Vector2(699.22, -401.855)
-texture = ExtResource("2_5mjq6")
+texture = SubResource("CompressedTexture2D_bohdh")
 region_enabled = true
 region_rect = Rect2(1669, 1616, 32, 132)
 
 [node name="Sprite2D11" type="Sprite2D" parent="assets/props"]
 position = Vector2(622.584, -539.115)
 scale = Vector2(1.31908, 0.714608)
-texture = ExtResource("2_5mjq6")
+texture = SubResource("CompressedTexture2D_bohdh")
 flip_h = true
 region_enabled = true
 region_rect = Rect2(773, 1588, 216, 105)
 
 [node name="platforms" type="Node2D" parent="assets"]
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
 
 [node name="CanvasGroup" type="CanvasGroup" parent="assets/platforms"]
 
@@ -333,21 +336,21 @@ region_rect = Rect2(975, 903, 310, 65)
 [node name="Env1Assets26" type="Sprite2D" parent="assets/platforms"]
 position = Vector2(1239.14, -51.1297)
 scale = Vector2(0.815163, 0.848118)
-texture = ExtResource("2_5mjq6")
+texture = SubResource("CompressedTexture2D_bohdh")
 region_enabled = true
 region_rect = Rect2(1564, 1252, 129, 61)
 
 [node name="Env1Assets27" type="Sprite2D" parent="assets/platforms"]
 position = Vector2(1684.96, -51.1297)
 scale = Vector2(0.815163, 0.848118)
-texture = ExtResource("2_5mjq6")
+texture = SubResource("CompressedTexture2D_bohdh")
 region_enabled = true
 region_rect = Rect2(1564, 1252, 129, 61)
 
 [node name="Env1Assets28" type="Sprite2D" parent="assets/platforms"]
 position = Vector2(1399.08, -51.1297)
 scale = Vector2(0.815163, 0.848118)
-texture = ExtResource("2_5mjq6")
+texture = SubResource("CompressedTexture2D_bohdh")
 flip_h = true
 region_enabled = true
 region_rect = Rect2(1564, 1252, 129, 61)
@@ -355,7 +358,7 @@ region_rect = Rect2(1564, 1252, 129, 61)
 [node name="Env1Assets29" type="Sprite2D" parent="assets/platforms"]
 position = Vector2(1844.55, -51.1297)
 scale = Vector2(0.815163, 0.848118)
-texture = ExtResource("2_5mjq6")
+texture = SubResource("CompressedTexture2D_bohdh")
 flip_h = true
 region_enabled = true
 region_rect = Rect2(1564, 1252, 129, 61)
@@ -413,6 +416,8 @@ region_enabled = true
 region_rect = Rect2(1887, 282, 75, 552)
 
 [node name="floor" type="Node2D" parent="assets"]
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
 
 [node name="Env1Assets5" type="Sprite2D" parent="assets/floor"]
 position = Vector2(16.3858, 118.885)
@@ -428,40 +433,63 @@ texture = SubResource("CanvasTexture_7c2y5")
 region_enabled = true
 region_rect = Rect2(610, 38, 1152, 42)
 
-[node name="front" type="Node2D" parent="."]
+[node name="interactable" type="Node2D" parent="assets"]
 
-[node name="interactable" type="Node2D" parent="front"]
-position = Vector2(659, 395)
+[node name="hanging_weight" parent="assets/interactable" node_paths=PackedStringArray("weight_sprite") instance=ExtResource("9_4t3vm")]
+position = Vector2(1380, -395)
+weight_sprite = NodePath("weight")
+metadata/_edit_group_ = true
 
-[node name="door" type="Node2D" parent="front/interactable"]
+[node name="rope" type="Sprite2D" parent="assets/interactable/hanging_weight"]
+position = Vector2(0, -165)
+texture = ExtResource("5_emj5j")
+region_enabled = true
+region_rect = Rect2(893, 1361, 11, 200)
+
+[node name="weight" type="Sprite2D" parent="assets/interactable/hanging_weight"]
+position = Vector2(0, -46)
+texture = ExtResource("5_emj5j")
+region_enabled = true
+region_rect = Rect2(723, 1466, 124, 94)
+
+[node name="lever" parent="assets/interactable" node_paths=PackedStringArray("affected_body") instance=ExtResource("5_w3r5y")]
+position = Vector2(1014, -215)
+affected_body = NodePath("../hanging_weight")
+
+[node name="lever_1" parent="assets/interactable/lever" instance=ExtResource("6_jrxx6")]
+
+[node name="door" type="Node2D" parent="assets/interactable"]
 position = Vector2(2540.2, -375.125)
+script = ExtResource("3_kmxw5")
+metadata/_edit_group_ = true
 
-[node name="Env1Assets24" type="Sprite2D" parent="front/interactable/door"]
+[node name="Env1Assets24" type="Sprite2D" parent="assets/interactable/door"]
 texture = SubResource("CanvasTexture_7c2y5")
 region_enabled = true
 region_rect = Rect2(208, 1408, 138, 159)
 
-[node name="Env1Assets23" type="Sprite2D" parent="front/interactable/door"]
+[node name="Env1Assets23" type="Sprite2D" parent="assets/interactable/door"]
 position = Vector2(0, -15.874)
 texture = SubResource("CanvasTexture_7c2y5")
 region_enabled = true
 region_rect = Rect2(385, 1375, 172, 192)
 
-[node name="door_area" type="Area2D" parent="front/interactable/door"]
+[node name="door_area" type="Area2D" parent="assets/interactable/door"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="front/interactable/door/door_area"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="assets/interactable/door/door_area"]
 position = Vector2(0.300049, -0.875)
 shape = SubResource("RectangleShape2D_pi7ac")
 
-[node name="healing_flame" type="Node2D" parent="front/interactable"]
+[node name="healing_flame" type="Node2D" parent="assets/interactable"]
 position = Vector2(117, 30)
+metadata/_edit_group_ = true
 
-[node name="Sprite2D17" type="Sprite2D" parent="front/interactable/healing_flame"]
-texture = ExtResource("2_5mjq6")
+[node name="Sprite2D17" type="Sprite2D" parent="assets/interactable/healing_flame"]
+texture = SubResource("CompressedTexture2D_bohdh")
 region_enabled = true
 region_rect = Rect2(1606, 1336, 87, 134)
 
-[node name="healing_flame_light" type="PointLight2D" parent="front/interactable/healing_flame"]
+[node name="healing_flame_light" type="PointLight2D" parent="assets/interactable/healing_flame"]
 z_index = 100
 position = Vector2(0, 9)
 scale = Vector2(1.61565, 1.29677)
@@ -472,71 +500,38 @@ texture = ExtResource("5_mlly0")
 texture_scale = 1.47
 height = 160.0
 
-[node name="healing_flame_area" type="Area2D" parent="front/interactable/healing_flame"]
+[node name="healing_flame_area" type="Area2D" parent="assets/interactable/healing_flame"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="front/interactable/healing_flame/healing_flame_area"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="assets/interactable/healing_flame/healing_flame_area"]
 position = Vector2(0, 9)
 shape = SubResource("RectangleShape2D_jxr5u")
 
-[node name="lever" type="Node2D" parent="front/interactable" node_paths=PackedStringArray("victim")]
-position = Vector2(1037, -286)
-scale = Vector2(1, 0.985)
-script = ExtResource("3_tv2l3")
-victim = NodePath("../hanging_weight/weight_rigidbody")
+[node name="popup_text" type="Label" parent="assets/interactable/healing_flame"]
+visible = false
+offset_left = -52.0
+offset_right = 55.0
+offset_bottom = 31.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "heal"
 
-[node name="Sprite2D17" type="Sprite2D" parent="front/interactable/lever"]
-texture = ExtResource("2_5mjq6")
-region_enabled = true
-region_rect = Rect2(1289, 1141, 30, 54)
+[node name="characters" type="Node2D" parent="."]
+position = Vector2(2496, 108.682)
+scale = Vector2(2, 2)
 
-[node name="lever_area" type="Area2D" parent="front/interactable/lever"]
+[node name="player" parent="characters" instance=ExtResource("2_36yml")]
+position = Vector2(-953.787, 157.932)
+scale = Vector2(0.5, 0.5)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="front/interactable/lever/lever_area"]
-position = Vector2(-0.5, 0.507614)
-shape = SubResource("RectangleShape2D_vpdvg")
+[node name="ronda" parent="characters" instance=ExtResource("3_28jar")]
+position = Vector2(0, 61.159)
 
-[node name="hanging_weight" type="Node2D" parent="front/interactable" node_paths=PackedStringArray("rb")]
-position = Vector2(1417, -391)
-script = ExtResource("5_f6fvg")
-rb = NodePath("weight_rigidbody")
-
-[node name="rope" type="Sprite2D" parent="front/interactable/hanging_weight"]
-position = Vector2(-1, -160.5)
-scale = Vector2(1, 0.985)
-texture = ExtResource("2_5mjq6")
-region_enabled = true
-region_rect = Rect2(893, 1361, 11, 200)
-
-[node name="weight_rigidbody" type="RigidBody2D" parent="front/interactable/hanging_weight"]
-position = Vector2(0, -33)
-mass = 50.0
-sleeping = true
-can_sleep = false
-freeze = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="front/interactable/hanging_weight/weight_rigidbody"]
-position = Vector2(0, 27)
-shape = SubResource("RectangleShape2D_griq8")
-
-[node name="heavy_object" type="Area2D" parent="front/interactable/hanging_weight/weight_rigidbody"]
-position = Vector2(0, 33)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="front/interactable/hanging_weight/weight_rigidbody/heavy_object"]
-position = Vector2(0, -9)
-shape = SubResource("RectangleShape2D_7jp3b")
-
-[node name="CanvasGroup" type="CanvasGroup" parent="front/interactable/hanging_weight/weight_rigidbody"]
-
-[node name="weight" type="Sprite2D" parent="front/interactable/hanging_weight/weight_rigidbody/CanvasGroup"]
-texture = ExtResource("2_5mjq6")
-region_enabled = true
-region_rect = Rect2(723, 1437, 124, 123)
-
-[node name="Polygon2D" type="Polygon2D" parent="front/interactable/hanging_weight/weight_rigidbody/CanvasGroup"]
-material = SubResource("CanvasItemMaterial_o4a2x")
-polygon = PackedVector2Array(-9, -62, 7, -62, 7, -33, -9, -33)
+[node name="front" type="Node2D" parent="."]
 
 [node name="props" type="Node2D" parent="front"]
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
 
 [node name="Env1Assets22" type="Sprite2D" parent="front/props"]
 position = Vector2(2947.93, 124.111)
@@ -546,6 +541,8 @@ region_enabled = true
 region_rect = Rect2(1294, 1618, 138, 77)
 
 [node name="traps" type="Node2D" parent="front"]
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
 
 [node name="Env1Assets20" type="Sprite2D" parent="front/traps"]
 position = Vector2(2820.8, 477.827)
@@ -578,6 +575,8 @@ position = Vector2(-19.3109, -1.47485)
 
 [node name="walls" type="Node2D" parent="front"]
 position = Vector2(659, 395)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
 
 [node name="Env1Assets6" type="Sprite2D" parent="front/walls"]
 position = Vector2(-644.874, -25.9615)
@@ -686,70 +685,74 @@ region_rect = Rect2(604, 153, 1005, 34)
 
 [node name="Sprite2D" type="Sprite2D" parent="front/walls"]
 position = Vector2(-617.959, -770.217)
-texture = ExtResource("2_5mjq6")
+texture = SubResource("CompressedTexture2D_bohdh")
 region_enabled = true
 region_rect = Rect2(563, 1086, 73, 94)
 
 [node name="Sprite2D2" type="Sprite2D" parent="front/walls"]
 position = Vector2(-617.959, -1313.89)
-texture = ExtResource("2_5mjq6")
+texture = SubResource("CompressedTexture2D_bohdh")
 region_enabled = true
 region_rect = Rect2(563, 1086, 73, 94)
 
 [node name="ceiling" type="Node2D" parent="front"]
 position = Vector2(652, 395)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="front/ceiling"]
 position = Vector2(-77.912, -564.862)
-texture = ExtResource("2_5mjq6")
+texture = SubResource("CompressedTexture2D_bohdh")
 region_enabled = true
 region_rect = Rect2(791, 209, 67, 30)
 
 [node name="Sprite2D2" type="Sprite2D" parent="front/ceiling"]
 position = Vector2(212.688, -566.862)
-texture = ExtResource("2_5mjq6")
+texture = SubResource("CompressedTexture2D_bohdh")
 region_enabled = true
 region_rect = Rect2(865, 209, 516, 26)
 
 [node name="Sprite2D3" type="Sprite2D" parent="front/ceiling"]
 position = Vector2(728.604, -566.862)
-texture = ExtResource("2_5mjq6")
+texture = SubResource("CompressedTexture2D_bohdh")
 region_enabled = true
 region_rect = Rect2(865, 209, 516, 26)
 
 [node name="Sprite2D4" type="Sprite2D" parent="front/ceiling"]
 position = Vector2(1242.91, -566.862)
-texture = ExtResource("2_5mjq6")
+texture = SubResource("CompressedTexture2D_bohdh")
 region_enabled = true
 region_rect = Rect2(865, 209, 516, 26)
 
 [node name="Sprite2D5" type="Sprite2D" parent="front/ceiling"]
 position = Vector2(1758.87, -566.862)
-texture = ExtResource("2_5mjq6")
+texture = SubResource("CompressedTexture2D_bohdh")
 region_enabled = true
 region_rect = Rect2(865, 209, 516, 26)
 
 [node name="Sprite2D6" type="Sprite2D" parent="front/ceiling"]
 position = Vector2(2274.83, -566.862)
-texture = ExtResource("2_5mjq6")
+texture = SubResource("CompressedTexture2D_bohdh")
 region_enabled = true
 region_rect = Rect2(865, 209, 516, 26)
 
 [node name="Sprite2D7" type="Sprite2D" parent="front/ceiling"]
 position = Vector2(2789.73, -566.862)
-texture = ExtResource("2_5mjq6")
+texture = SubResource("CompressedTexture2D_bohdh")
 region_enabled = true
 region_rect = Rect2(865, 209, 516, 26)
 
 [node name="Sprite2D8" type="Sprite2D" parent="front/ceiling"]
 position = Vector2(2751.09, -564.862)
-texture = ExtResource("2_5mjq6")
+texture = SubResource("CompressedTexture2D_bohdh")
 flip_h = true
 region_enabled = true
 region_rect = Rect2(791, 209, 67, 30)
 
 [node name="color blocks" type="Node2D" parent="front"]
 position = Vector2(659, 395)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
 
 [node name="ColorRect" type="ColorRect" parent="front/color blocks"]
 offset_left = -700.0
@@ -781,6 +784,8 @@ color = Color(0, 0, 0, 1)
 
 [node name="collisions" type="Node2D" parent="."]
 position = Vector2(659, 395)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
 
 [node name="wall" type="StaticBody2D" parent="collisions"]
 position = Vector2(-634, -357)
@@ -924,7 +929,7 @@ texture = ExtResource("5_mlly0")
 height = 160.0
 
 [node name="ball" type="RigidBody2D" parent="."]
-position = Vector2(213, 16)
+position = Vector2(229, 425)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ball"]
 shape = SubResource("CircleShape2D_fqnr7")
@@ -937,20 +942,8 @@ offset_bottom = 7.0
 color = Color(1, 0, 0, 1)
 metadata/_edit_use_anchors_ = true
 
-[node name="characters" type="Node2D" parent="."]
-position = Vector2(2496, 108.682)
-scale = Vector2(2, 2)
-
-[node name="player" parent="characters" instance=ExtResource("2_36yml")]
-position = Vector2(-953.787, 157.932)
-scale = Vector2(0.5, 0.5)
-
-[node name="ronda" parent="characters" instance=ExtResource("3_28jar")]
-position = Vector2(0, 61.159)
-
 [connection signal="damaged" from="." to="characters/player" method="_on_node_2d_damaged"]
 [connection signal="win" from="." to="characters/player" method="_on_node_2d_win"]
-[connection signal="interact" from="front/interactable/lever" to="front/interactable/hanging_weight" method="_on_lever_interact"]
 [connection signal="body_entered" from="collisions/win_platform/win_check" to="." method="_on_win_check_body_entered"]
 
 [editable path="front/traps/spike_damage_area"]

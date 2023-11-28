@@ -48,7 +48,7 @@ func _physics_process(delta: float) -> void:		#"MAIN" runs every delta time - CA
 		game_logic()
 
 func raycasts() -> void:
-	if $floor_checker.is_colliding() ||  $floor_checker_l.is_colliding() ||  $floor_checker_r.is_colliding():
+	if $floor_checker.is_colliding():
 		is_on_ground = true
 	else:
 		is_on_ground = false
@@ -107,25 +107,52 @@ func death() -> void:
 
 
 func _on_damage_area_area_entered(area):
-	if area.name == "spike_damage_area":
-		lifes -= 1 #area.damage
-		print("!! - damaged on spikes")
-		#velocity = -velocity  #kek bouncy spikeys
-		if velocity.y > 0:
-			velocity.y = -1000
-		else:
+	match area.name:	 #lose 2 health
+		"spike_damage_area":
+			lifes -= 1 #area.damage
+			print("!! - damaged on spikes")
+			#velocity = -velocity  #kek bouncy spikeys
+			if velocity.y > 0:
+				velocity.y = -1000
+			else:
+				if velocity.x > 0:
+					velocity.x -= 1500 
+				else:
+					velocity.x = 1000
+		
+		"ronda_damage_area":	#lose 1 health
+			lifes -= 1
+			print("!! Ronda hurts!")
 			if velocity.x > 0:
 				velocity.x -= 1500 
 			else:
 				velocity.x = 1000
-	elif area.name == "ronda_damage_area":
-		lifes -= 1
-		print("!! Ronda hurts!")
-		if velocity.x > 0:
-			velocity.x -= 1500 
-		else:
-			velocity.x = 1000
-	else:
-		print("player hit" + area.name)
-	
+		
+		"heavy_object":	#lose 5 health
+			lifes -= 1
+			
+		_:		#default
+			print("player hit " + area.name)
+			
+#	if area.name == "spike_damage_area":
+#		lifes -= 1 #area.damage
+#		print("!! - damaged on spikes")
+#		#velocity = -velocity  #kek bouncy spikeys
+#		if velocity.y > 0:
+#			velocity.y = -1000
+#		else:
+#			if velocity.x > 0:
+#				velocity.x -= 1500 
+#			else:
+#				velocity.x = 1000
+#	elif area.name == "ronda_damage_area":
+#		lifes -= 1
+#		print("!! Ronda hurts!")
+#		if velocity.x > 0:
+#			velocity.x -= 1500 
+#		else:
+#			velocity.x = 1000
+#	else:
+#		print("player hit" + area.name)
+#
 	

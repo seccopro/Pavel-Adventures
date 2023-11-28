@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=3 uid="uid://cbb5qfdj1r0sb"]
+[gd_scene load_steps=77 format=3 uid="uid://cbb5qfdj1r0sb"]
 
 [ext_resource type="Script" path="res://scenes/game/characters/player/player.gd" id="1_hkbnf"]
 [ext_resource type="PackedScene" uid="uid://61w51ai88ja0" path="res://scenes/HUD/death_screen/death_screen.tscn" id="2_ee4nu"]
@@ -408,6 +408,9 @@ nodes/run_state/node = SubResource("AnimationNodeTransition_tbjjs")
 nodes/run_state/position = Vector2(-660, 100)
 node_connections = [&"output", 0, &"ground_air", &"air_state", 0, &"fall_ground", &"air_state", 1, &"jump_state", &"ground_air", 0, &"landing", &"ground_air", 1, &"air_state", &"jump_state", 0, &"jump", &"jump_state", 1, &"double_jump", &"landing", 0, &"movement", &"landing", 1, &"fall", &"movement", 0, &"idle", &"movement", 1, &"run_state", &"run_state", 0, &"run_idle", &"run_state", 1, &"run"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0lt8o"]
+size = Vector2(38, 5)
+
 [node name="player" type="CharacterBody2D"]
 script = ExtResource("1_hkbnf")
 
@@ -499,16 +502,11 @@ script = ExtResource("11_7sifh")
 state_machine = NodePath("../../CharacterStateMachine")
 form_sm = NodePath("../../FormStateMachine")
 
-[node name="floor_checker" type="RayCast2D" parent="."]
-target_position = Vector2(0, 78)
-
-[node name="floor_checker_r" type="RayCast2D" parent="."]
-position = Vector2(20, 0)
-target_position = Vector2(0, 78)
-
-[node name="floor_checker_l" type="RayCast2D" parent="."]
-position = Vector2(-18, 0)
-target_position = Vector2(0, 78)
+[node name="floor_checker" type="ShapeCast2D" parent="."]
+position = Vector2(1, 68)
+scale = Vector2(0.995741, 1)
+shape = SubResource("RectangleShape2D_0lt8o")
+target_position = Vector2(0, 0)
 
 [node name="left_wall_checker" type="RayCast2D" parent="."]
 target_position = Vector2(-30, 0)
