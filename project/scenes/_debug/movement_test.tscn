@@ -3,12 +3,12 @@
 [ext_resource type="Script" path="res://scenes/_debug/movement_test.gd" id="1_pcuud"]
 [ext_resource type="PackedScene" uid="uid://cbb5qfdj1r0sb" path="res://scenes/game/characters/player/player.tscn" id="2_36yml"]
 [ext_resource type="PackedScene" uid="uid://c8wvmaehkj300" path="res://scenes/game/enemies/ronda/ronda.tscn" id="3_28jar"]
-[ext_resource type="Script" path="res://scenes/_debug/door.gd" id="3_kmxw5"]
 [ext_resource type="Texture2D" uid="uid://cunr5af44uwoa" path="res://assets/ruin_assets/env_1_assets.png" id="5_emj5j"]
 [ext_resource type="Texture2D" uid="uid://cey0xyxxmqyca" path="res://assets/lights/default_light.tres" id="5_mlly0"]
 [ext_resource type="PackedScene" uid="uid://b0gmmb6vucy2n" path="res://assets/common/interactable/lever_logic.tscn" id="5_w3r5y"]
 [ext_resource type="PackedScene" uid="uid://d1eurxocqst0e" path="res://assets/ruin_assets/interactable/ruin_lever_spr_1.tscn" id="6_jrxx6"]
 [ext_resource type="PackedScene" uid="uid://vouj7i5fu8um" path="res://assets/common/area_effects/spike_damage_area.tscn" id="6_o6kkb"]
+[ext_resource type="Script" path="res://scripts/common/door.gd" id="6_wqccm"]
 [ext_resource type="PackedScene" uid="uid://b7vjkbti3ify8" path="res://assets/common/interactable/hanging_weight_logic.tscn" id="9_4t3vm"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_bohdh"]
@@ -84,8 +84,6 @@ metadata/_edit_group_ = true
 
 [node name="assets" type="Node2D" parent="."]
 position = Vector2(659, 395)
-metadata/_edit_lock_ = true
-metadata/_edit_group_ = true
 
 [node name="blackground" type="ColorRect" parent="assets"]
 offset_left = -1736.0
@@ -220,7 +218,6 @@ region_rect = Rect2(22, 36, 570, 330)
 
 [node name="props" type="Node2D" parent="assets"]
 metadata/_edit_lock_ = true
-metadata/_edit_group_ = true
 
 [node name="Env1Assets33" type="Sprite2D" parent="assets/props"]
 position = Vector2(944.969, -428.709)
@@ -238,7 +235,7 @@ region_rect = Rect2(1061, 1075, 36, 100)
 [node name="Env1Assets37" type="Sprite2D" parent="assets/props"]
 position = Vector2(121.7, -332.585)
 scale = Vector2(0.7, 0.7)
-texture = SubResource("CanvasTexture_d7rc2")
+texture = ExtResource("5_emj5j")
 region_enabled = true
 region_rect = Rect2(944, 1099, 62, 85)
 
@@ -460,7 +457,7 @@ affected_body = NodePath("../hanging_weight")
 
 [node name="door" type="Node2D" parent="assets/interactable"]
 position = Vector2(2540.2, -375.125)
-script = ExtResource("3_kmxw5")
+script = ExtResource("6_wqccm")
 metadata/_edit_group_ = true
 
 [node name="Env1Assets24" type="Sprite2D" parent="assets/interactable/door"]
@@ -526,6 +523,7 @@ scale = Vector2(0.5, 0.5)
 
 [node name="ronda" parent="characters" instance=ExtResource("3_28jar")]
 position = Vector2(0, 61.159)
+metadata/_edit_lock_ = true
 
 [node name="front" type="Node2D" parent="."]
 
