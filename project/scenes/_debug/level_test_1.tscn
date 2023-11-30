@@ -1,0 +1,524 @@
+[gd_scene load_steps=25 format=3 uid="uid://bpfsxpmf1a2bf"]
+
+[ext_resource type="Script" path="res://scenes/_debug/movement_test.gd" id="1_sroj5"]
+[ext_resource type="Texture2D" uid="uid://cunr5af44uwoa" path="res://assets/ruin_assets/env_1_assets.png" id="2_tupc8"]
+[ext_resource type="PackedScene" uid="uid://jlemkv0kieiv" path="res://assets/common/interactable/doors/door_area.tscn" id="2_vy3gs"]
+[ext_resource type="PackedScene" uid="uid://b7vjkbti3ify8" path="res://assets/common/interactable/hanging_weight_area.tscn" id="3_fjx70"]
+[ext_resource type="Script" path="res://scripts/Camera2D.gd" id="3_xo3t5"]
+[ext_resource type="PackedScene" uid="uid://bapscnaqdk7p0" path="res://assets/ruin_assets/interactable/doors/ruin_door_1/ruin_door_1.tscn" id="4_6c4o7"]
+[ext_resource type="PackedScene" uid="uid://cbb5qfdj1r0sb" path="res://scenes/game/characters/player/player.tscn" id="4_51yc3"]
+[ext_resource type="Texture2D" uid="uid://cey0xyxxmqyca" path="res://assets/lights/default_light.tres" id="5_dixnv"]
+[ext_resource type="PackedScene" uid="uid://vouj7i5fu8um" path="res://assets/common/area_effects/spike_damage_area.tscn" id="6_m8ti3"]
+[ext_resource type="PackedScene" uid="uid://b2p0v6qigf1ck" path="res://assets/ruin_assets/area_effects/ruin_spikes.tscn" id="7_83qdb"]
+[ext_resource type="PackedScene" uid="uid://d1eurxocqst0e" path="res://assets/ruin_assets/interactable/ruin_lever_1.tscn" id="10_0vs11"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_mt42k"]
+load_path = "res://.godot/imported/env_1_assets.png-b8695d348d589d83d28df7a4f31caac7.ctex"
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_7c2y5"]
+diffuse_texture = SubResource("CompressedTexture2D_mt42k")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_bohdh"]
+load_path = "res://.godot/imported/env_1_assets.png-b8695d348d589d83d28df7a4f31caac7.ctex"
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_d7rc2"]
+diffuse_texture = SubResource("CompressedTexture2D_bohdh")
+specular_color = Color(0.282353, 0.282353, 0.282353, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gmdwn"]
+size = Vector2(133.2, 41.2002)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2mycr"]
+size = Vector2(3624, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0gujp"]
+size = Vector2(1211.5, 37)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o6lwx"]
+size = Vector2(218, 21)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_3odj6"]
+load_path = "res://.godot/imported/env_1_assets.png-b8695d348d589d83d28df7a4f31caac7.ctex"
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_fbicx"]
+diffuse_texture = SubResource("CompressedTexture2D_3odj6")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o37sl"]
+size = Vector2(206.383, 68.9497)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a61r7"]
+size = Vector2(208.156, 68.9497)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5dw30"]
+size = Vector2(206.738, 76.4749)
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_sroj5")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.811765, 0.847059, 0.858824, 1)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="assets" type="Node2D" parent="."]
+position = Vector2(659, 395)
+
+[node name="blackground" type="ColorRect" parent="assets"]
+visible = false
+offset_left = -1736.0
+offset_top = -2280.0
+offset_right = 4050.0
+offset_bottom = 713.0
+color = Color(0, 0, 0, 1)
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="back walls" type="Node2D" parent="assets"]
+visible = false
+
+[node name="Env1Assets" type="Sprite2D" parent="assets/back walls"]
+position = Vector2(-322.428, -62)
+texture = SubResource("CanvasTexture_7c2y5")
+region_enabled = true
+region_rect = Rect2(22, 36, 570, 330)
+
+[node name="props" type="Node2D" parent="assets"]
+visible = false
+
+[node name="Env1Assets33" type="Sprite2D" parent="assets/props"]
+position = Vector2(944.969, -428.709)
+texture = SubResource("CanvasTexture_d7rc2")
+region_enabled = true
+region_rect = Rect2(758, 1083, 55, 119)
+
+[node name="platforms" type="Node2D" parent="assets"]
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="assets/platforms"]
+
+[node name="Env1Assets7" type="Sprite2D" parent="assets/platforms"]
+position = Vector2(659, -1883)
+scale = Vector2(0.672749, 0.741519)
+texture = SubResource("CanvasTexture_d7rc2")
+region_enabled = true
+region_rect = Rect2(962, 551, 325, 332)
+
+[node name="Env1Assets11" type="Sprite2D" parent="assets/platforms"]
+position = Vector2(659, -1888.45)
+scale = Vector2(0.672749, 0.774374)
+texture = SubResource("CanvasTexture_d7rc2")
+region_enabled = true
+region_rect = Rect2(962, 551, 325, 332)
+
+[node name="Env1Assets12" type="Sprite2D" parent="assets/platforms"]
+position = Vector2(1376, -1304)
+scale = Vector2(0.672749, 0.774374)
+texture = SubResource("CanvasTexture_d7rc2")
+region_enabled = true
+region_rect = Rect2(962, 551, 325, 332)
+
+[node name="Env1Assets16" type="Sprite2D" parent="assets/platforms"]
+position = Vector2(230, -1151)
+scale = Vector2(0.672749, 0.774374)
+texture = ExtResource("2_tupc8")
+region_enabled = true
+region_rect = Rect2(635, 551, 310, 490)
+
+[node name="Env1Assets15" type="Sprite2D" parent="assets/platforms"]
+position = Vector2(729, -666)
+scale = Vector2(0.672749, 0.774374)
+texture = SubResource("CanvasTexture_d7rc2")
+region_enabled = true
+region_rect = Rect2(962, 551, 325, 332)
+
+[node name="Env1Assets14" type="Sprite2D" parent="assets/platforms"]
+position = Vector2(323, -9)
+scale = Vector2(0.672749, 0.774374)
+texture = SubResource("CanvasTexture_d7rc2")
+region_enabled = true
+region_rect = Rect2(962, 551, 325, 332)
+
+[node name="Env1Assets13" type="Sprite2D" parent="assets/platforms"]
+position = Vector2(734, -14)
+scale = Vector2(0.672749, 0.774374)
+texture = SubResource("CanvasTexture_d7rc2")
+region_enabled = true
+region_rect = Rect2(962, 551, 325, 332)
+
+[node name="Env1Assets9" type="Sprite2D" parent="assets/platforms"]
+position = Vector2(1535, -20.0001)
+scale = Vector2(0.672749, 0.741519)
+texture = SubResource("CanvasTexture_d7rc2")
+region_enabled = true
+region_rect = Rect2(962, 551, 325, 332)
+
+[node name="Env1Assets10" type="Sprite2D" parent="assets/platforms"]
+position = Vector2(2763, -20)
+scale = Vector2(0.672749, 0.741519)
+texture = SubResource("CanvasTexture_d7rc2")
+region_enabled = true
+region_rect = Rect2(962, 551, 325, 332)
+
+[node name="Env1Assets8" type="Sprite2D" parent="assets/platforms"]
+position = Vector2(1156, -15.0002)
+scale = Vector2(0.672749, 0.741519)
+texture = SubResource("CanvasTexture_d7rc2")
+region_enabled = true
+region_rect = Rect2(962, 551, 325, 332)
+
+[node name="floor" type="Node2D" parent="assets"]
+
+[node name="Env1Assets5" type="Sprite2D" parent="assets/floor"]
+position = Vector2(16.3858, 118.885)
+scale = Vector2(1.05675, 1)
+texture = SubResource("CanvasTexture_7c2y5")
+region_enabled = true
+region_rect = Rect2(610, 38, 1152, 42)
+
+[node name="Env1Assets6" type="Sprite2D" parent="assets/floor"]
+position = Vector2(1223, 119)
+scale = Vector2(1.05675, 1)
+texture = SubResource("CanvasTexture_7c2y5")
+region_enabled = true
+region_rect = Rect2(610, 38, 1152, 42)
+
+[node name="Env1Assets8" type="Sprite2D" parent="assets/floor"]
+position = Vector2(2434, 118)
+scale = Vector2(1.05675, 1)
+texture = SubResource("CanvasTexture_7c2y5")
+region_enabled = true
+region_rect = Rect2(610, 38, 1152, 42)
+
+[node name="Env1Assets7" type="Sprite2D" parent="assets/floor"]
+position = Vector2(-51, -1632)
+scale = Vector2(1.05675, 1)
+texture = SubResource("CanvasTexture_7c2y5")
+region_enabled = true
+region_rect = Rect2(610, 38, 1152, 42)
+
+[node name="Env1Assets13" type="Sprite2D" parent="assets/floor"]
+position = Vector2(1476, -1157)
+scale = Vector2(1.05675, 1)
+texture = SubResource("CanvasTexture_7c2y5")
+region_enabled = true
+region_rect = Rect2(610, 38, 1152, 42)
+
+[node name="Env1Assets12" type="Sprite2D" parent="assets/floor"]
+position = Vector2(-24, -949)
+scale = Vector2(1.05675, 1)
+texture = SubResource("CanvasTexture_7c2y5")
+region_enabled = true
+region_rect = Rect2(610, 38, 1152, 42)
+
+[node name="Env1Assets9" type="Sprite2D" parent="assets/floor"]
+position = Vector2(673, -521)
+scale = Vector2(1.05675, 1)
+texture = SubResource("CanvasTexture_7c2y5")
+region_enabled = true
+region_rect = Rect2(610, 38, 1152, 42)
+
+[node name="Env1Assets11" type="Sprite2D" parent="assets/floor"]
+position = Vector2(-51, -1610.5)
+scale = Vector2(1.05675, -0.0238095)
+texture = SubResource("CanvasTexture_7c2y5")
+region_enabled = true
+region_rect = Rect2(610, 38, 1152, 42)
+
+[node name="Env1Assets10" type="Sprite2D" parent="assets/floor"]
+position = Vector2(1962, -302)
+scale = Vector2(1.05675, 1)
+texture = SubResource("CanvasTexture_7c2y5")
+region_enabled = true
+region_rect = Rect2(610, 38, 1152, 42)
+
+[node name="interactable" type="Node2D" parent="assets"]
+
+[node name="hanging_weight" parent="assets/interactable" instance=ExtResource("3_fjx70")]
+position = Vector2(141, -322)
+
+[node name="door" parent="assets/interactable" instance=ExtResource("2_vy3gs")]
+position = Vector2(-477, 21)
+
+[node name="ruin_door_1" parent="assets/interactable/door" instance=ExtResource("4_6c4o7")]
+
+[node name="door2" parent="assets/interactable" instance=ExtResource("2_vy3gs")]
+position = Vector2(1988, -1255)
+
+[node name="ruin_door_1" parent="assets/interactable/door2" instance=ExtResource("4_6c4o7")]
+
+[node name="door3" parent="assets/interactable" instance=ExtResource("2_vy3gs")]
+position = Vector2(67, -1048)
+
+[node name="door_ruin_sprite" parent="assets/interactable/door3" instance=ExtResource("4_6c4o7")]
+
+[node name="ruin_lever_1" parent="assets/interactable" instance=ExtResource("10_0vs11")]
+position = Vector2(330, -138)
+
+[node name="characters" type="Node2D" parent="."]
+position = Vector2(2496, 108.682)
+scale = Vector2(2, 2)
+
+[node name="camera" type="Camera2D" parent="characters" node_paths=PackedStringArray("player")]
+position = Vector2(-1153.5, 155.659)
+limit_left = -100
+limit_top = -1160
+limit_right = 3585
+limit_bottom = 710
+limit_smoothed = true
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+editor_draw_limits = true
+script = ExtResource("3_xo3t5")
+player = NodePath("../player")
+
+[node name="player" parent="characters" instance=ExtResource("4_51yc3")]
+position = Vector2(-1151.5, 144.659)
+scale = Vector2(0.5, 0.5)
+
+[node name="front" type="Node2D" parent="."]
+
+[node name="traps" type="Node2D" parent="front"]
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="Env1Assets20" type="Sprite2D" parent="front/traps"]
+position = Vector2(2067, -1267)
+scale = Vector2(1.07328, 1)
+texture = SubResource("CanvasTexture_7c2y5")
+region_enabled = true
+region_rect = Rect2(1313, 266, 544, 114)
+
+[node name="Env1Assets26" type="Sprite2D" parent="front/traps"]
+position = Vector2(2067, -1267)
+scale = Vector2(1.07328, 1)
+texture = SubResource("CanvasTexture_7c2y5")
+region_enabled = true
+region_rect = Rect2(1313, 266, 544, 114)
+
+[node name="Env1Assets27" type="Sprite2D" parent="front/traps"]
+position = Vector2(2099, -845)
+scale = Vector2(1.07328, 1)
+texture = SubResource("CanvasTexture_7c2y5")
+region_enabled = true
+region_rect = Rect2(1313, 266, 544, 114)
+
+[node name="Env1Assets25" type="Sprite2D" parent="front/traps"]
+position = Vector2(332, -621)
+scale = Vector2(1.07328, 1)
+texture = SubResource("CanvasTexture_7c2y5")
+region_enabled = true
+region_rect = Rect2(1313, 266, 544, 114)
+
+[node name="Env1Assets24" type="Sprite2D" parent="front/traps"]
+position = Vector2(1016, -173)
+scale = Vector2(1.07328, 1)
+texture = SubResource("CanvasTexture_7c2y5")
+region_enabled = true
+region_rect = Rect2(1313, 266, 544, 114)
+
+[node name="Env1Assets21" type="Sprite2D" parent="front/traps"]
+position = Vector2(1047, 479)
+scale = Vector2(1.07328, 1)
+texture = SubResource("CanvasTexture_7c2y5")
+region_enabled = true
+region_rect = Rect2(1313, 266, 544, 114)
+
+[node name="Env1Assets22" type="Sprite2D" parent="front/traps"]
+position = Vector2(1629, 479)
+scale = Vector2(1.07328, 1)
+texture = SubResource("CanvasTexture_7c2y5")
+region_enabled = true
+region_rect = Rect2(1313, 266, 544, 114)
+
+[node name="Env1Assets23" type="Sprite2D" parent="front/traps"]
+position = Vector2(2215, 477)
+scale = Vector2(1.07328, 1)
+texture = SubResource("CanvasTexture_7c2y5")
+region_enabled = true
+region_rect = Rect2(1313, 266, 544, 114)
+
+[node name="walls" type="Node2D" parent="front"]
+position = Vector2(659, 395)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Env1Assets6" type="Sprite2D" parent="front/walls"]
+position = Vector2(-644.874, -25.9615)
+scale = Vector2(1.07328, 1)
+texture = SubResource("CanvasTexture_7c2y5")
+flip_h = true
+region_enabled = true
+region_rect = Rect2(1871, 1490, 100, 330)
+
+[node name="ceiling" type="Node2D" parent="front"]
+position = Vector2(652, 395)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="front/ceiling"]
+position = Vector2(-93, -2107)
+texture = SubResource("CompressedTexture2D_bohdh")
+region_enabled = true
+region_rect = Rect2(791, 209, 67, 30)
+
+[node name="color blocks" type="Node2D" parent="front"]
+visible = false
+position = Vector2(659, 395)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="ColorRect" type="ColorRect" parent="front/color blocks"]
+offset_left = -700.0
+offset_top = 138.0
+offset_right = 2902.0
+offset_bottom = 713.0
+color = Color(0, 0, 0, 1)
+
+[node name="collisions" type="Node2D" parent="."]
+position = Vector2(659, 395)
+
+[node name="wall" type="StaticBody2D" parent="collisions"]
+position = Vector2(-634, -357)
+rotation = 1.5708
+scale = Vector2(2.5, 2.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="collisions/wall"]
+position = Vector2(132.4, 2.79952)
+shape = SubResource("RectangleShape2D_gmdwn")
+
+[node name="floor" type="StaticBody2D" parent="collisions"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="collisions/floor"]
+position = Vector2(1223, 119)
+shape = SubResource("RectangleShape2D_2mycr")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="collisions/floor"]
+position = Vector2(1958.25, -304)
+shape = SubResource("RectangleShape2D_0gujp")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="collisions/floor"]
+position = Vector2(669, -522)
+shape = SubResource("RectangleShape2D_0gujp")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="collisions/floor"]
+position = Vector2(-29, -950.5)
+shape = SubResource("RectangleShape2D_0gujp")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="collisions/floor"]
+position = Vector2(1469, -1162)
+shape = SubResource("RectangleShape2D_0gujp")
+
+[node name="platforms" type="StaticBody2D" parent="collisions"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="collisions/platforms"]
+position = Vector2(323, -127.5)
+shape = SubResource("RectangleShape2D_o6lwx")
+
+[node name="platforms2" type="StaticBody2D" parent="collisions"]
+position = Vector2(410, -3)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="collisions/platforms2"]
+position = Vector2(323, -127.5)
+shape = SubResource("RectangleShape2D_o6lwx")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="collisions/platforms2"]
+position = Vector2(747, -124)
+shape = SubResource("RectangleShape2D_o6lwx")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="collisions/platforms2"]
+position = Vector2(319, -780)
+shape = SubResource("RectangleShape2D_o6lwx")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="collisions/platforms2"]
+position = Vector2(-248, -1327)
+shape = SubResource("RectangleShape2D_o6lwx")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="collisions/platforms2"]
+position = Vector2(967, -1417)
+shape = SubResource("RectangleShape2D_o6lwx")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="collisions/platforms2"]
+position = Vector2(1125, -131)
+shape = SubResource("RectangleShape2D_o6lwx")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="collisions/platforms2"]
+position = Vector2(2353, -129)
+shape = SubResource("RectangleShape2D_o6lwx")
+
+[node name="traps" type="Node2D" parent="collisions"]
+
+[node name="Env1Assets20" type="Sprite2D" parent="collisions/traps"]
+position = Vector2(2820.8, 477.827)
+scale = Vector2(1.07328, 1)
+texture = SubResource("CanvasTexture_fbicx")
+region_enabled = true
+region_rect = Rect2(1313, 266, 544, 114)
+
+[node name="Env1Assets21" type="Sprite2D" parent="collisions/traps"]
+position = Vector2(3392.31, 478.357)
+scale = Vector2(1.07328, 1)
+texture = SubResource("CanvasTexture_fbicx")
+region_enabled = true
+region_rect = Rect2(1313, 266, 544, 114)
+
+[node name="Env1Assets18" type="Sprite2D" parent="collisions/traps"]
+position = Vector2(2490.42, 523.096)
+scale = Vector2(1.03255, 1.1052)
+texture = SubResource("CanvasTexture_fbicx")
+flip_h = true
+region_enabled = true
+region_rect = Rect2(1857, 38, 90, 54)
+
+[node name="ruin_spikes" parent="collisions/traps" instance=ExtResource("7_83qdb")]
+
+[node name="spike_2" type="Node2D" parent="collisions/traps"]
+
+[node name="spike_damage_area" parent="collisions/traps/spike_2" instance=ExtResource("6_m8ti3")]
+position = Vector2(-172, -1030)
+scale = Vector2(2.82, 1)
+
+[node name="CollisionShape2D" parent="collisions/traps/spike_2/spike_damage_area" index="0"]
+position = Vector2(-56.7376, -1.47485)
+shape = SubResource("RectangleShape2D_o37sl")
+
+[node name="spike_3" type="Node2D" parent="collisions/traps"]
+
+[node name="spike_damage_area" parent="collisions/traps/spike_3" instance=ExtResource("6_m8ti3")]
+position = Vector2(512, -586)
+scale = Vector2(2.82, 1)
+
+[node name="CollisionShape2D" parent="collisions/traps/spike_3/spike_damage_area" index="0"]
+position = Vector2(-55.4965, -1.47485)
+shape = SubResource("RectangleShape2D_a61r7")
+
+[node name="spike_4" type="Node2D" parent="collisions/traps"]
+
+[node name="spike_damage_area" parent="collisions/traps/spike_4" instance=ExtResource("6_m8ti3")]
+position = Vector2(1604, -1254)
+scale = Vector2(2.82, 1)
+
+[node name="CollisionShape2D" parent="collisions/traps/spike_4/spike_damage_area" index="0"]
+position = Vector2(-58.5107, -5.76257)
+shape = SubResource("RectangleShape2D_5dw30")
+
+[node name="Lights" type="Node2D" parent="."]
+visible = false
+position = Vector2(5, 4)
+
+[node name="PointLight2D" type="PointLight2D" parent="Lights"]
+visible = false
+z_index = 100
+position = Vector2(776, 66)
+scale = Vector2(3.67764, 3.67764)
+color = Color(0.666667, 0.329412, 0.0509804, 1)
+energy = 5.0
+shadow_enabled = true
+texture = ExtResource("5_dixnv")
+texture_scale = 1.47
+height = 160.0
+
+[connection signal="damaged" from="." to="characters/player" method="_on_node_2d_damaged" flags=18]
+[connection signal="win" from="." to="characters/player" method="_on_node_2d_win" flags=18]
+
+[editable path="collisions/traps/spike_2/spike_damage_area"]
+[editable path="collisions/traps/spike_3/spike_damage_area"]
+[editable path="collisions/traps/spike_4/spike_damage_area"]

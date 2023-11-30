@@ -1,24 +1,27 @@
 class_name State extends Node
 
 #("Character States")
-var idle_state : State
-var walking_state : State
-var air_state : State
-var dashing_state : State
-var climbing_state : State
-var casting_state : State
-var dead_state : State
+var idle_state: State
+var walking_state: State
+var air_state: State
+var attack_state: State
+var dashing_state: State
+var climbing_state: State
+var casting_state: State
+var dead_state: State
 
 var player
 var input_check
 var animation_tree
-
+var CSM
+var variables
 
 @export_group("Behaviour Flags")
 @export var can_move: bool = true
 @export var can_fall: bool = true
 @export var can_dash: bool = true
 @export var can_jump: bool = true
+@export var can_attack: bool = true
 @export var can_double_jump: bool = true
 @export var can_wall_jump: bool = true
 @export var can_climb: bool = true

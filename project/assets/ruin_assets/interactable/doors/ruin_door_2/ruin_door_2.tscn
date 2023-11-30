@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://banaip4kb67ug"]
+
+[ext_resource type="Texture2D" uid="uid://cunr5af44uwoa" path="res://assets/ruin_assets/env_1_assets.png" id="1_4vjc6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_47qce"]
+size = Vector2(45, 156)
+
+[node name="ruin_door_2" type="Node2D"]
+
+[node name="ruin_door_2_a" type="Sprite2D" parent="."]
+position = Vector2(-10, 20)
+texture = ExtResource("1_4vjc6")
+region_enabled = true
+region_rect = Rect2(17, 1409, 46, 158)
+
+[node name="door_collision" type="StaticBody2D" parent="ruin_door_2_a"]
+position = Vector2(9, -13)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ruin_door_2_a/door_collision"]
+position = Vector2(-8.5, 13)
+shape = SubResource("RectangleShape2D_47qce")
+
+[node name="ruin_door_2_b" type="Sprite2D" parent="."]
+texture = ExtResource("1_4vjc6")
+region_enabled = true
+region_rect = Rect2(95, 1373, 65, 194)

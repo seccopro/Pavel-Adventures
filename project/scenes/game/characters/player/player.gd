@@ -107,8 +107,8 @@ func death() -> void:
 
 
 func _on_damage_area_area_entered(area):
-	match area.name:	 #lose 2 health
-		"spike_damage_area":
+	match area.collision_layer:	 #lose 2 health
+		3:	#layer 3 is trap layer
 			lifes -= 1 #area.damage
 			print("!! - damaged on spikes")
 			#velocity = -velocity  #kek bouncy spikeys
@@ -120,7 +120,7 @@ func _on_damage_area_area_entered(area):
 				else:
 					velocity.x = 1000
 		
-		"ronda_damage_area":	#lose 1 health
+		4:				#layer 4 is enemies layer
 			lifes -= 1
 			print("!! Ronda hurts!")
 			if velocity.x > 0:
@@ -132,27 +132,5 @@ func _on_damage_area_area_entered(area):
 			lifes -= 1
 			
 		_:		#default
-			print("player hit " + area.name)
-			
-#	if area.name == "spike_damage_area":
-#		lifes -= 1 #area.damage
-#		print("!! - damaged on spikes")
-#		#velocity = -velocity  #kek bouncy spikeys
-#		if velocity.y > 0:
-#			velocity.y = -1000
-#		else:
-#			if velocity.x > 0:
-#				velocity.x -= 1500 
-#			else:
-#				velocity.x = 1000
-#	elif area.name == "ronda_damage_area":
-#		lifes -= 1
-#		print("!! Ronda hurts!")
-#		if velocity.x > 0:
-#			velocity.x -= 1500 
-#		else:
-#			velocity.x = 1000
-#	else:
-#		print("player hit" + area.name)
-#
-	
+			#print("player hit " + area.name)
+			pass

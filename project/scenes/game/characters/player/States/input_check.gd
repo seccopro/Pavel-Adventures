@@ -2,10 +2,11 @@ class_name Input_Check extends Node
 
 var controls : Dictionary
 @onready var player = $"../.."
-@onready var magic_handler = $"../Casting/magic_handler"
+@onready var variables = $"../../variables"
 @onready var CSM =  $".."
 @onready var animation_tree = $"../../AnimationTree"
 @onready var area = $"../../playerCollisionShape/player_area"
+@onready var magic_handler = $"../Casting/magic_handler"
 		
 var wall_jump_velocity_y: float = -800
 var wall_jump_velocity_x: float = 1100
@@ -18,6 +19,9 @@ func permission_checker(state: State, _event) -> void:
 
 	if state.can_jump:
 		jump(state, _event)
+	
+	if state.can_attack:
+		attack(state, _event)
 	
 	if state.can_wall_jump:
 		wall_jump(state, _event)
@@ -53,26 +57,13 @@ func walk(state: State, _event: InputEvent) -> void:
 
 func jump(state: State, _event: InputEvent) -> void:
 	if Input.is_action_just_pressed(controls.jump):
-		player.velocity.y = CSM.jump_velocity  
-		#animation_tree.set("parameters/air_state/transition_request", "jump_state")
-		state.next_state = state.air_state
-		
-func wall_jump(state: State, _event: InputEvent) -> void:
-	if Input.is_action_just_pressed(controls.jump):
-		if player.is_on_wall_r:
-			print("wall jump r")
-			player.velocity.x -= wall_jump_velocity_x
-		elif player.is_on_wall_l:
-			print("wall jump l")
-			player.velocity.x += wall_jump_velocity_x
-			
-		player.velocity.y += wall_jump_velocity_y
-		
+		player.velocity.y = variables.jump_velocity 
 		state.next_state = state.air_state
 
-#basic actions
 func attack(state: State, _event: InputEvent) -> void:
-	pass
+	if Input.is_action_just_pressed(controls.attack):
+		CSM.previous_state = state
+		state.next_state = state.attack_state
 
 func interact(state: State, _event: InputEvent):
 	if Input.is_action_just_pressed(controls.interact):
@@ -91,7 +82,7 @@ func interact(state: State, _event: InputEvent):
 
 #-------rock-------
 #passive
-	#somewhere else, can sink surviving (xand maybe extra resistances)
+	#somewhere else, can sink surviving (and maybe extra resistances)
 	
 #special 1
 	#cast special 1
@@ -103,14 +94,25 @@ func climb(state: State, _event: InputEvent) -> void:
 		&& !get_parent().just_detached:
 		state.next_state = state.climbing_state
 
+func wall_jump(state: State, _event: InputEvent) -> void:
+	if Input.is_action_just_pressed(controls.jump):
+		if player.is_on_wall_r:
+			print("wall jump r")
+			player.velocity.x -= wall_jump_velocity_x
+		elif player.is_on_wall_l:
+			print("wall jump l")
+			player.velocity.x += wall_jump_velocity_x
+			
+		player.velocity.y = wall_jump_velocity_y
+		state.next_state = state.air_state
+
 #special 3
 func rock_dash(state: State, _event: InputEvent) -> void:	#rock dash
-	if Input.is_action_just_pressed(controls.dash):		
-		print("rock dash")
-		if $"../..".is_facing_right:
-			get_parent().character.velocity.x = +CSM.dash_velocity / 2		#dash right
+	if Input.is_action_just_pressed(controls.dash):	
+		if player.is_facing_right:
+			get_parent().character.velocity.x = +variables.dash_velocity / 1.5		#dash right
 		else:
-			get_parent().character.velocity.x = -CSM.dash_velocity / 2	#dash left
+			get_parent().character.velocity.x = -variables.dash_velocity / 1.5	#dash left
 		
 		state.next_state = state.dashing_state
 
@@ -129,9 +131,9 @@ func fire_dash(state: State, _event: InputEvent) -> void:	#fire dash
 	if Input.is_action_just_pressed(controls.dash):		
 		print("fiery dash")
 		if player.is_facing_right:
-			player.velocity.x = +CSM.dash_velocity		#dash right
+			player.velocity.x = +variables.dash_velocity		#dash right
 		else:
-			player.velocity.x = -CSM.dash_velocity		#dash left
+			player.velocity.x = -variables.dash_velocity		#dash left
 		
 		state.next_state = state.dashing_state
 
@@ -167,16 +169,12 @@ func cast(state: State, _event: InputEvent) -> void:
 	#avoid casting when changing form
 	if Input.is_action_pressed(controls.form_wheel):
 		return
-	#cast magic blast
-	if Input.is_action_just_pressed(controls.magic_blast) && !magic_handler.magic_blast_is_on_cooldown:
-		magic_handler.cast("magic_blast", state)
-		state.next_state = state.casting_state
 	#cast magic orb
 	if Input.is_action_just_pressed(controls.magic_orb) && !magic_handler.magic_orb_is_on_cooldown:
 		magic_handler.cast("magic_orb", state)
 		state.next_state = state.casting_state
-	#cast dark sphere		NOT USABLE IN CURRENT FORM ,SHOULD BE MAPPED ON SPECIAL_2 OR JUST CONTROLS.MAGIC_ORB
-	if Input.is_action_just_pressed(controls.spell_2) && !magic_handler.dark_sphere_is_on_cooldown:
+	#cast dark sphere
+	if Input.is_action_just_pressed(controls.dark_sphere) && !magic_handler.dark_sphere_is_on_cooldown:
 		magic_handler.cast("dark_sphere", state)
 		state.next_state = state.casting_state
 

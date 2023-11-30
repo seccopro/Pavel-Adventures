@@ -1,15 +1,18 @@
 extends Node2D
 
 @onready var lever_area = $lever_area
+@onready var popup_text = $lever_area/popup_text
+
 @export var affected_body: Node
 @export var togglable: bool #if one shot or togglable lever
+
 var is_interactable = true
 
 signal interact()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$popup_text.hide()
+	$lever_area/popup_text.hide()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

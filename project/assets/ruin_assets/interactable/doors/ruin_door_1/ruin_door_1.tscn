@@ -1,0 +1,12 @@
+[gd_scene load_steps=4 format=3 uid="uid://bapscnaqdk7p0"]
+
+[ext_resource type="Script" path="res://scripts/common/door.gd" id="1_pp8m4"]
+[ext_resource type="PackedScene" uid="uid://cwcasoec7jliw" path="res://assets/ruin_assets/interactable/doors/ruin_door_1/ruin_door_1_spr.tscn" id="3_wgmvc"]
+[ext_resource type="PackedScene" uid="uid://jlemkv0kieiv" path="res://assets/common/interactable/doors/door_area.tscn" id="3_ygix3"]
+
+[node name="ruin_door_1" type="Node2D"]
+script = ExtResource("1_pp8m4")
+
+[node name="door_area" parent="." instance=ExtResource("3_ygix3")]
+
+[node name="ruin_door_1_spr" parent="." instance=ExtResource("3_wgmvc")]

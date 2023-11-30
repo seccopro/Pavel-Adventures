@@ -1,4 +1,4 @@
-[gd_scene load_steps=79 format=3 uid="uid://cbb5qfdj1r0sb"]
+[gd_scene load_steps=78 format=3 uid="uid://cbb5qfdj1r0sb"]
 
 [ext_resource type="Script" path="res://scenes/game/characters/player/player.gd" id="1_hkbnf"]
 [ext_resource type="PackedScene" uid="uid://61w51ai88ja0" path="res://scenes/HUD/death_screen/death_screen.tscn" id="2_ee4nu"]
@@ -16,7 +16,6 @@
 [ext_resource type="Script" path="res://scenes/game/characters/player/States/input_check.gd" id="12_oovai"]
 [ext_resource type="Script" path="res://scenes/game/characters/player/States/DeadState.gd" id="13_1kak5"]
 [ext_resource type="Script" path="res://scenes/game/characters/player/magic/magic_handler.gd" id="15_eafol"]
-[ext_resource type="Script" path="res://scripts/variables/variables.gd" id="15_hx332"]
 [ext_resource type="Script" path="res://scenes/game/characters/player/controls.gd" id="17_msedg"]
 [ext_resource type="Script" path="res://scenes/game/characters/player/forms/FormStateMachine.gd" id="18_2xi6w"]
 [ext_resource type="Script" path="res://scenes/game/characters/player/States/AttackState.gd" id="19_1v1dr"]
@@ -514,9 +513,6 @@ target_position = Vector2(-30, 0)
 [node name="right_wall_checker" type="RayCast2D" parent="."]
 target_position = Vector2(28, 1)
 
-[node name="variables" type="Node" parent="."]
-script = ExtResource("15_hx332")
-
 [node name="controls" type="Node" parent="."]
 script = ExtResource("17_msedg")
 
@@ -564,9 +560,8 @@ special_1 = "ice sword"
 special_2 = "aoe slow"
 special_3 = "ice shield"
 
-[node name="CharacterStateMachine" type="Node" parent="." node_paths=PackedStringArray("variables_list", "character", "form_sm", "idle_state", "walking_state", "air_state", "attack_state", "dashing_state", "climbing_state", "casting_state", "dead_state")]
+[node name="CharacterStateMachine" type="Node" parent="." node_paths=PackedStringArray("character", "form_sm", "idle_state", "walking_state", "air_state", "attack_state", "dashing_state", "climbing_state", "casting_state", "dead_state")]
 script = ExtResource("6_wfvl0")
-variables_list = NodePath("../variables")
 character = NodePath("..")
 form_sm = NodePath("../FormStateMachine")
 idle_state = NodePath("Idle")
@@ -659,8 +654,9 @@ can_climb = false
 can_cast = false
 can_change_form = false
 
-[node name="magic_handler" type="Node" parent="CharacterStateMachine/Casting"]
+[node name="magic_handler" type="Node" parent="CharacterStateMachine/Casting" node_paths=PackedStringArray("previous_state")]
 script = ExtResource("15_eafol")
+previous_state = NodePath("../../Idle")
 
 [node name="magic_orb_cooldown" type="Timer" parent="CharacterStateMachine/Casting/magic_handler"]
 process_mode = 3
