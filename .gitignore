@@ -18,6 +18,8 @@
 bin
 tmp
 temp
+*.tmp
+*.temp
 obj
 output
 *.exe
