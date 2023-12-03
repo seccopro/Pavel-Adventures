@@ -20,7 +20,8 @@ func _process(delta):
 	if Input.is_action_just_pressed("interact"):
 		if lever_area.get_overlapping_areas().any( func(area): return area.name == "player_area" ):
 			print("player pulls the lever")
-			affected_body.set_process(true)
+			if affected_body != null:
+				affected_body.set_process(true)
 			interact.emit()
 			if !togglable:
 				is_interactable = false

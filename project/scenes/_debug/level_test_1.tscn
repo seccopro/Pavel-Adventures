@@ -1,14 +1,10 @@
-[gd_scene load_steps=25 format=3 uid="uid://bpfsxpmf1a2bf"]
+[gd_scene load_steps=17 format=3 uid="uid://bpfsxpmf1a2bf"]
 
-[ext_resource type="Script" path="res://scenes/_debug/movement_test.gd" id="1_sroj5"]
 [ext_resource type="Texture2D" uid="uid://cunr5af44uwoa" path="res://assets/ruin_assets/env_1_assets.png" id="2_tupc8"]
-[ext_resource type="PackedScene" uid="uid://jlemkv0kieiv" path="res://assets/common/interactable/doors/door_area.tscn" id="2_vy3gs"]
-[ext_resource type="PackedScene" uid="uid://b7vjkbti3ify8" path="res://assets/common/interactable/hanging_weight_area.tscn" id="3_fjx70"]
 [ext_resource type="Script" path="res://scripts/Camera2D.gd" id="3_xo3t5"]
 [ext_resource type="PackedScene" uid="uid://bapscnaqdk7p0" path="res://assets/ruin_assets/interactable/doors/ruin_door_1/ruin_door_1.tscn" id="4_6c4o7"]
 [ext_resource type="PackedScene" uid="uid://cbb5qfdj1r0sb" path="res://scenes/game/characters/player/player.tscn" id="4_51yc3"]
 [ext_resource type="Texture2D" uid="uid://cey0xyxxmqyca" path="res://assets/lights/default_light.tres" id="5_dixnv"]
-[ext_resource type="PackedScene" uid="uid://vouj7i5fu8um" path="res://assets/common/area_effects/spike_damage_area.tscn" id="6_m8ti3"]
 [ext_resource type="PackedScene" uid="uid://b2p0v6qigf1ck" path="res://assets/ruin_assets/area_effects/ruin_spikes.tscn" id="7_83qdb"]
 [ext_resource type="PackedScene" uid="uid://d1eurxocqst0e" path="res://assets/ruin_assets/interactable/ruin_lever_1.tscn" id="10_0vs11"]
 
@@ -35,25 +31,13 @@ size = Vector2(3624, 40)
 size = Vector2(1211.5, 37)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o6lwx"]
-size = Vector2(218, 21)
+size = Vector2(206, 21)
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_3odj6"]
-load_path = "res://.godot/imported/env_1_assets.png-b8695d348d589d83d28df7a4f31caac7.ctex"
-
-[sub_resource type="CanvasTexture" id="CanvasTexture_fbicx"]
-diffuse_texture = SubResource("CompressedTexture2D_3odj6")
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_o37sl"]
-size = Vector2(206.383, 68.9497)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_a61r7"]
-size = Vector2(208.156, 68.9497)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5dw30"]
-size = Vector2(206.738, 76.4749)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e67qg"]
+size = Vector2(123.759, 69)
 
 [node name="Node2D" type="Node2D"]
-script = ExtResource("1_sroj5")
+script = ExtResource("3_xo3t5")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.811765, 0.847059, 0.858824, 1)
@@ -224,7 +208,7 @@ region_enabled = true
 region_rect = Rect2(610, 38, 1152, 42)
 
 [node name="Env1Assets10" type="Sprite2D" parent="assets/floor"]
-position = Vector2(1962, -302)
+position = Vector2(2011.69, -324)
 scale = Vector2(1.05675, 1)
 texture = SubResource("CanvasTexture_7c2y5")
 region_enabled = true
@@ -232,26 +216,23 @@ region_rect = Rect2(610, 38, 1152, 42)
 
 [node name="interactable" type="Node2D" parent="assets"]
 
-[node name="hanging_weight" parent="assets/interactable" instance=ExtResource("3_fjx70")]
-position = Vector2(141, -322)
-
-[node name="door" parent="assets/interactable" instance=ExtResource("2_vy3gs")]
-position = Vector2(-477, 21)
-
-[node name="ruin_door_1" parent="assets/interactable/door" instance=ExtResource("4_6c4o7")]
-
-[node name="door2" parent="assets/interactable" instance=ExtResource("2_vy3gs")]
-position = Vector2(1988, -1255)
-
-[node name="ruin_door_1" parent="assets/interactable/door2" instance=ExtResource("4_6c4o7")]
-
-[node name="door3" parent="assets/interactable" instance=ExtResource("2_vy3gs")]
-position = Vector2(67, -1048)
-
-[node name="door_ruin_sprite" parent="assets/interactable/door3" instance=ExtResource("4_6c4o7")]
-
 [node name="ruin_lever_1" parent="assets/interactable" instance=ExtResource("10_0vs11")]
 position = Vector2(330, -138)
+
+[node name="door_enter" type="Node2D" parent="assets/interactable"]
+position = Vector2(-504, 4)
+
+[node name="ruin_door_1" parent="assets/interactable/door_enter" instance=ExtResource("4_6c4o7")]
+
+[node name="door_other" type="Node2D" parent="assets/interactable"]
+position = Vector2(-549, -1059)
+
+[node name="ruin_door_1" parent="assets/interactable/door_other" instance=ExtResource("4_6c4o7")]
+
+[node name="door_exit" type="Node2D" parent="assets/interactable"]
+position = Vector2(1975, -1277)
+
+[node name="ruin_door_1" parent="assets/interactable/door_exit" instance=ExtResource("4_6c4o7")]
 
 [node name="characters" type="Node2D" parent="."]
 position = Vector2(2496, 108.682)
@@ -259,9 +240,9 @@ scale = Vector2(2, 2)
 
 [node name="camera" type="Camera2D" parent="characters" node_paths=PackedStringArray("player")]
 position = Vector2(-1153.5, 155.659)
-limit_left = -100
-limit_top = -1160
-limit_right = 3585
+limit_left = -40
+limit_top = -1270
+limit_right = 3705
 limit_bottom = 710
 limit_smoothed = true
 position_smoothing_enabled = true
@@ -271,70 +252,10 @@ script = ExtResource("3_xo3t5")
 player = NodePath("../player")
 
 [node name="player" parent="characters" instance=ExtResource("4_51yc3")]
-position = Vector2(-1151.5, 144.659)
+position = Vector2(-1153.5, 146.659)
 scale = Vector2(0.5, 0.5)
 
 [node name="front" type="Node2D" parent="."]
-
-[node name="traps" type="Node2D" parent="front"]
-metadata/_edit_group_ = true
-metadata/_edit_lock_ = true
-
-[node name="Env1Assets20" type="Sprite2D" parent="front/traps"]
-position = Vector2(2067, -1267)
-scale = Vector2(1.07328, 1)
-texture = SubResource("CanvasTexture_7c2y5")
-region_enabled = true
-region_rect = Rect2(1313, 266, 544, 114)
-
-[node name="Env1Assets26" type="Sprite2D" parent="front/traps"]
-position = Vector2(2067, -1267)
-scale = Vector2(1.07328, 1)
-texture = SubResource("CanvasTexture_7c2y5")
-region_enabled = true
-region_rect = Rect2(1313, 266, 544, 114)
-
-[node name="Env1Assets27" type="Sprite2D" parent="front/traps"]
-position = Vector2(2099, -845)
-scale = Vector2(1.07328, 1)
-texture = SubResource("CanvasTexture_7c2y5")
-region_enabled = true
-region_rect = Rect2(1313, 266, 544, 114)
-
-[node name="Env1Assets25" type="Sprite2D" parent="front/traps"]
-position = Vector2(332, -621)
-scale = Vector2(1.07328, 1)
-texture = SubResource("CanvasTexture_7c2y5")
-region_enabled = true
-region_rect = Rect2(1313, 266, 544, 114)
-
-[node name="Env1Assets24" type="Sprite2D" parent="front/traps"]
-position = Vector2(1016, -173)
-scale = Vector2(1.07328, 1)
-texture = SubResource("CanvasTexture_7c2y5")
-region_enabled = true
-region_rect = Rect2(1313, 266, 544, 114)
-
-[node name="Env1Assets21" type="Sprite2D" parent="front/traps"]
-position = Vector2(1047, 479)
-scale = Vector2(1.07328, 1)
-texture = SubResource("CanvasTexture_7c2y5")
-region_enabled = true
-region_rect = Rect2(1313, 266, 544, 114)
-
-[node name="Env1Assets22" type="Sprite2D" parent="front/traps"]
-position = Vector2(1629, 479)
-scale = Vector2(1.07328, 1)
-texture = SubResource("CanvasTexture_7c2y5")
-region_enabled = true
-region_rect = Rect2(1313, 266, 544, 114)
-
-[node name="Env1Assets23" type="Sprite2D" parent="front/traps"]
-position = Vector2(2215, 477)
-scale = Vector2(1.07328, 1)
-texture = SubResource("CanvasTexture_7c2y5")
-region_enabled = true
-region_rect = Rect2(1313, 266, 544, 114)
 
 [node name="walls" type="Node2D" parent="front"]
 position = Vector2(659, 395)
@@ -392,7 +313,7 @@ position = Vector2(1223, 119)
 shape = SubResource("RectangleShape2D_2mycr")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="collisions/floor"]
-position = Vector2(1958.25, -304)
+position = Vector2(2007.94, -326)
 shape = SubResource("RectangleShape2D_0gujp")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="collisions/floor"]
@@ -429,7 +350,7 @@ position = Vector2(319, -780)
 shape = SubResource("RectangleShape2D_o6lwx")
 
 [node name="CollisionShape2D5" type="CollisionShape2D" parent="collisions/platforms2"]
-position = Vector2(-248, -1327)
+position = Vector2(-180, -1327)
 shape = SubResource("RectangleShape2D_o6lwx")
 
 [node name="CollisionShape2D7" type="CollisionShape2D" parent="collisions/platforms2"]
@@ -446,59 +367,27 @@ shape = SubResource("RectangleShape2D_o6lwx")
 
 [node name="traps" type="Node2D" parent="collisions"]
 
-[node name="Env1Assets20" type="Sprite2D" parent="collisions/traps"]
-position = Vector2(2820.8, 477.827)
-scale = Vector2(1.07328, 1)
-texture = SubResource("CanvasTexture_fbicx")
-region_enabled = true
-region_rect = Rect2(1313, 266, 544, 114)
-
-[node name="Env1Assets21" type="Sprite2D" parent="collisions/traps"]
-position = Vector2(3392.31, 478.357)
-scale = Vector2(1.07328, 1)
-texture = SubResource("CanvasTexture_fbicx")
-region_enabled = true
-region_rect = Rect2(1313, 266, 544, 114)
-
-[node name="Env1Assets18" type="Sprite2D" parent="collisions/traps"]
-position = Vector2(2490.42, 523.096)
-scale = Vector2(1.03255, 1.1052)
-texture = SubResource("CanvasTexture_fbicx")
-flip_h = true
-region_enabled = true
-region_rect = Rect2(1857, 38, 90, 54)
-
 [node name="ruin_spikes" parent="collisions/traps" instance=ExtResource("7_83qdb")]
+position = Vector2(507, 81)
 
-[node name="spike_2" type="Node2D" parent="collisions/traps"]
+[node name="ruin_spikes2" parent="collisions/traps" instance=ExtResource("7_83qdb")]
+position = Vector2(1088, 81)
 
-[node name="spike_damage_area" parent="collisions/traps/spike_2" instance=ExtResource("6_m8ti3")]
-position = Vector2(-172, -1030)
-scale = Vector2(2.82, 1)
+[node name="ruin_spikes5" parent="collisions/traps" instance=ExtResource("7_83qdb")]
+position = Vector2(890, -560)
 
-[node name="CollisionShape2D" parent="collisions/traps/spike_2/spike_damage_area" index="0"]
-position = Vector2(-56.7376, -1.47485)
-shape = SubResource("RectangleShape2D_o37sl")
+[node name="ruin_spikes6" parent="collisions/traps" instance=ExtResource("7_83qdb")]
+position = Vector2(444, -988)
 
-[node name="spike_3" type="Node2D" parent="collisions/traps"]
+[node name="CollisionShape2D" parent="collisions/traps/ruin_spikes6/spike_damage_area" index="0"]
+position = Vector2(-42.0213, -19.5)
+shape = SubResource("RectangleShape2D_e67qg")
 
-[node name="spike_damage_area" parent="collisions/traps/spike_3" instance=ExtResource("6_m8ti3")]
-position = Vector2(512, -586)
-scale = Vector2(2.82, 1)
+[node name="ruin_spikes3" parent="collisions/traps" instance=ExtResource("7_83qdb")]
+position = Vector2(1382, 81)
 
-[node name="CollisionShape2D" parent="collisions/traps/spike_3/spike_damage_area" index="0"]
-position = Vector2(-55.4965, -1.47485)
-shape = SubResource("RectangleShape2D_a61r7")
-
-[node name="spike_4" type="Node2D" parent="collisions/traps"]
-
-[node name="spike_damage_area" parent="collisions/traps/spike_4" instance=ExtResource("6_m8ti3")]
-position = Vector2(1604, -1254)
-scale = Vector2(2.82, 1)
-
-[node name="CollisionShape2D" parent="collisions/traps/spike_4/spike_damage_area" index="0"]
-position = Vector2(-58.5107, -5.76257)
-shape = SubResource("RectangleShape2D_5dw30")
+[node name="ruin_spikes4" parent="collisions/traps" instance=ExtResource("7_83qdb")]
+position = Vector2(2743, 82)
 
 [node name="Lights" type="Node2D" parent="."]
 visible = false
@@ -516,9 +405,5 @@ texture = ExtResource("5_dixnv")
 texture_scale = 1.47
 height = 160.0
 
-[connection signal="damaged" from="." to="characters/player" method="_on_node_2d_damaged" flags=18]
-[connection signal="win" from="." to="characters/player" method="_on_node_2d_win" flags=18]
-
-[editable path="collisions/traps/spike_2/spike_damage_area"]
-[editable path="collisions/traps/spike_3/spike_damage_area"]
-[editable path="collisions/traps/spike_4/spike_damage_area"]
+[editable path="collisions/traps/ruin_spikes6"]
+[editable path="collisions/traps/ruin_spikes6/spike_damage_area"]

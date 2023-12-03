@@ -18,3 +18,9 @@ var penis = true
 #input check----------
 @export var dash_velocity: float = 1000
 
+
+@export_group("World Interactions")
+#world interaction
+@export var spikes_bounce:float = 1000
+@export var spikes_knockback: float = 2000
+@export var ronda_knockback: float = 1000

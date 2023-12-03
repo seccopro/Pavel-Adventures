@@ -10,6 +10,8 @@ region_enabled = true
 region_rect = Rect2(385, 1375, 172, 192)
 
 [node name="ruin_door_1_b" type="Sprite2D" parent="."]
+position = Vector2(-0.500004, 17.4239)
+scale = Vector2(1.00725, 1.00725)
 texture = ExtResource("1_5j0b5")
 region_enabled = true
 region_rect = Rect2(208, 1408, 138, 159)

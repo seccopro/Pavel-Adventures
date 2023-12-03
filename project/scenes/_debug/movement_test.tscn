@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://dqnfvaoaxxrfa"]
+[gd_scene load_steps=34 format=3 uid="uid://dqnfvaoaxxrfa"]
 
 [ext_resource type="Script" path="res://scenes/_debug/movement_test.gd" id="1_pcuud"]
 [ext_resource type="PackedScene" uid="uid://cbb5qfdj1r0sb" path="res://scenes/game/characters/player/player.tscn" id="2_36yml"]
@@ -10,7 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://dadxrk63fjvqw" path="res://assets/ruin_assets/interactable/healing_flame_temp.tscn" id="5_y4gft"]
 [ext_resource type="PackedScene" uid="uid://d1eurxocqst0e" path="res://assets/ruin_assets/interactable/ruin_lever_1.tscn" id="6_jrxx6"]
 [ext_resource type="PackedScene" uid="uid://vouj7i5fu8um" path="res://assets/common/area_effects/spike_damage_area.tscn" id="6_o6kkb"]
-[ext_resource type="PackedScene" uid="uid://bpfsxpmf1a2bf" path="res://scenes/_debug/level_test_1.tscn" id="7_ct4yc"]
 [ext_resource type="Script" path="res://scripts/Camera2D.gd" id="10_hjwi2"]
 [ext_resource type="PackedScene" uid="uid://banaip4kb67ug" path="res://assets/ruin_assets/interactable/doors/ruin_door_2/ruin_door_2.tscn" id="12_uotk6"]
 
@@ -31,7 +30,7 @@ specular_color = Color(0.282353, 0.282353, 0.282353, 1)
 blend_mode = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jewis"]
-size = Vector2(588.734, 29.5)
+size = Vector2(602.734, 29.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mh7pj"]
 size = Vector2(527.96, 32.8068)
@@ -85,7 +84,7 @@ func _on_body_entered(body):
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mqdr8"]
 size = Vector2(566.5, 90)
 
-[node name="Node2D" type="Node2D"]
+[node name="movement_test" type="Node2D"]
 script = ExtResource("1_pcuud")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
@@ -456,21 +455,20 @@ position = Vector2(1441, -292)
 
 [node name="ruin_door_1" parent="assets/interactable" instance=ExtResource("4_dq65g")]
 position = Vector2(2467, -375)
-next_scene = ExtResource("7_ct4yc")
 
 [node name="characters" type="Node2D" parent="."]
-position = Vector2(2496, 108.682)
+position = Vector2(185, 4)
 scale = Vector2(2, 2)
 
-[node name="player" parent="characters" instance=ExtResource("2_36yml")]
-position = Vector2(-953.787, 157.932)
+[node name="player" parent="characters" node_paths=PackedStringArray("level") instance=ExtResource("2_36yml")]
+position = Vector2(58, 209.5)
 scale = Vector2(0.5, 0.5)
+level = NodePath("../..")
 
 [node name="ronda" parent="characters" instance=ExtResource("3_28jar")]
-position = Vector2(0, 61.159)
+position = Vector2(1171.5, 115.5)
 collision_layer = 8
 collision_mask = 5
-metadata/_edit_lock_ = true
 
 [node name="camera" type="Camera2D" parent="characters" node_paths=PackedStringArray("player")]
 position = Vector2(-952.5, 120.659)
@@ -782,8 +780,7 @@ rotation = 1.5708
 scale = Vector2(2.5, 2.5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="collisions/wall"]
-position = Vector2(-188.367, -2.00007)
-scale = Vector2(1, 1)
+position = Vector2(-181.367, -2.00007)
 shape = SubResource("RectangleShape2D_jewis")
 
 [node name="wall 2" type="StaticBody2D" parent="collisions"]
@@ -934,7 +931,6 @@ metadata/_edit_use_anchors_ = true
 
 [node name="next_scene_up" type="Area2D" parent="areas"]
 script = SubResource("GDScript_kp53u")
-next_scene = ExtResource("7_ct4yc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="areas/next_scene_up"]
 position = Vector2(187.25, -1212)

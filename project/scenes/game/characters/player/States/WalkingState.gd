@@ -2,8 +2,6 @@ class_name WalkingState extends State
 
 @onready var parent = get_parent()
 
-
-
 func on_enter() -> void:
 	animation_tree.set("parameters/landing/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
 	animation_tree.set("parameters/ground_air/transition_request", "movement")

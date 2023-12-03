@@ -413,15 +413,17 @@ node_connections = [&"output", 0, &"ground_air", &"air_state", 0, &"fall_ground"
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0lt8o"]
 size = Vector2(38, 5)
 
-[node name="player" type="CharacterBody2D"]
+[node name="player" type="CharacterBody2D" node_paths=PackedStringArray("variables")]
 collision_mask = 255
 script = ExtResource("1_hkbnf")
+variables = NodePath("variables")
 
 [node name="playerCollisionShape" type="CollisionShape2D" parent="."]
 position = Vector2(1, -2)
 shape = SubResource("RectangleShape2D_rrxu0")
 
 [node name="player_area" type="Area2D" parent="playerCollisionShape"]
+collision_mask = 255
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="playerCollisionShape/player_area"]
 position = Vector2(0, 0.25)
@@ -435,14 +437,15 @@ hframes = 13
 vframes = 3
 metadata/_edit_lock_ = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+root_node = NodePath("../..")
 libraries = {
 "": SubResource("AnimationLibrary_twtli")
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeBlendTree_e5o84")
-anim_player = NodePath("../AnimationPlayer")
+anim_player = NodePath("../Sprite2D/AnimationPlayer")
 active = true
 parameters/air_state/current_state = "jump_state"
 parameters/air_state/transition_request = ""
@@ -564,9 +567,8 @@ special_1 = "ice sword"
 special_2 = "aoe slow"
 special_3 = "ice shield"
 
-[node name="CharacterStateMachine" type="Node" parent="." node_paths=PackedStringArray("variables_list", "character", "form_sm", "idle_state", "walking_state", "air_state", "attack_state", "dashing_state", "climbing_state", "casting_state", "dead_state")]
+[node name="CharacterStateMachine" type="Node" parent="." node_paths=PackedStringArray("character", "form_sm", "idle_state", "walking_state", "air_state", "attack_state", "dashing_state", "climbing_state", "casting_state", "dead_state")]
 script = ExtResource("6_wfvl0")
-variables_list = NodePath("../variables")
 character = NodePath("..")
 form_sm = NodePath("../FormStateMachine")
 idle_state = NodePath("Idle")
@@ -615,7 +617,7 @@ can_change_form = false
 
 [node name="attack_cooldown" type="Timer" parent="CharacterStateMachine/Attack"]
 process_mode = 3
-wait_time = 0.25
+wait_time = 0.5
 one_shot = true
 
 [node name="Dashing" type="Node" parent="CharacterStateMachine"]
@@ -639,9 +641,11 @@ can_change_form = false
 
 [node name="climb_detach" type="Timer" parent="CharacterStateMachine/Climbing"]
 wait_time = 0.2
+one_shot = true
 
 [node name="just_detached" type="Timer" parent="CharacterStateMachine/Climbing"]
 wait_time = 0.5
+one_shot = true
 
 [node name="jump_on_wall" type="Timer" parent="CharacterStateMachine/Climbing"]
 process_mode = 3

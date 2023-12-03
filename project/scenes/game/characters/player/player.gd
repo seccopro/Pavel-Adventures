@@ -1,8 +1,13 @@
 extends CharacterBody2D
 
+@export var variables: Node
+@export var lifes : int = 3
+@export var level: Node
+
+
 @onready var state_machine : CharacterStateMachine = $"CharacterStateMachine"
 
-@export var lifes : int = 3
+
 
 var can_fall: bool = true
 var is_playing: bool = true
@@ -40,7 +45,6 @@ func _physics_process(delta: float) -> void:		#"MAIN" runs every delta time - CA
 		velocity.y += gravity * delta
 	
 	if is_playing:
-		#and activate physics
 		move_and_slide()
 		raycasts()
 		#camera()
@@ -63,7 +67,7 @@ func raycasts() -> void:
 	else:
 		is_on_wall_r = false
 
-func camera() -> void:
+func camera() -> void:	#not used 
 	if Input.is_action_just_pressed("camera_zoom_in"):
 		print("zoom in")
 		$"Camera2D".zoom.x += 0.5
@@ -78,15 +82,6 @@ func animations():
 		$Sprite2D.flip_h = false
 	else:
 		$Sprite2D.flip_h = true
-
-func _on_node_2d_damaged() -> void:
-	lifes -= 1 
-
-func _on_ronda_touched(value: int) -> void:
-	lifes -= value
-
-func _on_node_2d_win(score: int) -> void:
-	win()
 
 func game_logic() -> void:
 	var hearts = ""
@@ -106,27 +101,34 @@ func death() -> void:
 	$HUD/death_screen.show()
 
 
+
+
+func _on_node_2d_win(score: int) -> void:
+	win()
+
+
 func _on_damage_area_area_entered(area):
-	match area.collision_layer:	 #lose 2 health
-		3:	#layer 3 is trap layer
+	print(area.name)
+	match area.name:	 #lose 2 health
+		"spike_damage_area":	#layer 3 is trap layer
 			lifes -= 1 #area.damage
 			print("!! - damaged on spikes")
 			#velocity = -velocity  #kek bouncy spikeys
 			if velocity.y > 0:
-				velocity.y = -1000
+				velocity.y = -variables.spikes_bounce
 			else:
 				if velocity.x > 0:
-					velocity.x -= 1500 
+					velocity.x -= variables.spikes_knockback
 				else:
-					velocity.x = 1000
+					velocity.x = variables.spikes_knockback
 		
-		4:				#layer 4 is enemies layer
+		"ronda_damage_area":				#layer 4 is enemies layer
 			lifes -= 1
 			print("!! Ronda hurts!")
 			if velocity.x > 0:
-				velocity.x -= 1500 
+				velocity.x -= variables.ronda_knockback
 			else:
-				velocity.x = 1000
+				velocity.x = variables.ronda_knockback
 		
 		"heavy_object":	#lose 5 health
 			lifes -= 1
