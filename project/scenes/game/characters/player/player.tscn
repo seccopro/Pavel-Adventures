@@ -406,7 +406,7 @@ nodes/run_idle/node = SubResource("AnimationNodeStateMachine_whysm")
 nodes/run_idle/position = Vector2(-860, 60)
 nodes/run_state/node = SubResource("AnimationNodeTransition_tbjjs")
 nodes/run_state/position = Vector2(-660, 100)
-node_connections = [&"output", 0, &"ground_air", &"air_state", 0, &"fall_ground", &"air_state", 1, &"jump_state", &"ground_air", 0, &"landing", &"ground_air", 1, &"air_state", &"jump_state", 0, &"jump", &"jump_state", 1, &"double_jump", &"landing", 0, &"movement", &"landing", 1, &"fall", &"movement", 0, &"idle", &"movement", 1, &"run_state", &"run_state", 0, &"run_idle", &"run_state", 1, &"run"]
+node_connections = [&"air_state", 0, &"fall_ground", &"air_state", 1, &"jump_state", &"ground_air", 0, &"landing", &"ground_air", 1, &"air_state", &"jump_state", 0, &"jump", &"jump_state", 1, &"double_jump", &"landing", 0, &"movement", &"landing", 1, &"fall", &"movement", 0, &"idle", &"movement", 1, &"run_state", &"output", 0, &"ground_air", &"run_state", 0, &"run_idle", &"run_state", 1, &"run"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0lt8o"]
 size = Vector2(38, 5)
@@ -438,9 +438,11 @@ libraries = {
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_twtli")
+}
 tree_root = SubResource("AnimationNodeBlendTree_e5o84")
 anim_player = NodePath("../AnimationPlayer")
-active = true
 parameters/air_state/current_state = "jump_state"
 parameters/air_state/transition_request = ""
 parameters/air_state/current_index = 1
@@ -517,14 +519,20 @@ target_position = Vector2(28, 1)
 [node name="controls" type="Node" parent="."]
 script = ExtResource("17_msedg")
 
-[node name="FormStateMachine" type="Node" parent="." node_paths=PackedStringArray("current_form", "no_form", "rock_form", "fire_form", "gravity_form", "ice_form")]
+[node name="FormStateMachine" type="Node" parent="."]
 script = ExtResource("18_2xi6w")
-current_form = NodePath("no_form")
-no_form = NodePath("no_form")
-rock_form = NodePath("rock_form")
-fire_form = NodePath("fire_form")
-gravity_form = NodePath("gravity_form")
-ice_form = NodePath("ice_form")
+current_form = Object(Node,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","script":ExtResource("19_q3bpg"),"passive":"nulll","special_1":"null","special_2":"null","special_3":"null")
+
+no_form = Object(Node,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","script":ExtResource("19_q3bpg"),"passive":"nulll","special_1":"null","special_2":"null","special_3":"null")
+
+rock_form = Object(Node,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","script":ExtResource("20_qotna"),"passive":"sinking","special_1":"eruption","special_2":"climb","special_3":"rock dash")
+
+fire_form = Object(Node,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","script":ExtResource("22_js6q5"),"passive":"cold res + light","special_1":"fire orb","special_2":"flamethrower","special_3":"fire dash")
+
+gravity_form = Object(Node,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","script":ExtResource("23_gx8tp"),"passive":"double jump","special_1":"push","special_2":"dark sphere","special_3":"downward spell")
+
+ice_form = Object(Node,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","script":ExtResource("21_1biub"),"passive":"ice skating","special_1":"ice sword","special_2":"aoe slow","special_3":"ice shield")
+
 
 [node name="rock_form" type="Node" parent="FormStateMachine"]
 script = ExtResource("20_qotna")
@@ -561,17 +569,32 @@ special_1 = "ice sword"
 special_2 = "aoe slow"
 special_3 = "ice shield"
 
-[node name="CharacterStateMachine" type="Node" parent="." node_paths=PackedStringArray("character", "form_sm", "idle_state", "walking_state", "air_state", "dashing_state", "climbing_state", "casting_state", "dead_state")]
+[node name="CharacterStateMachine" type="Node" parent="."]
 script = ExtResource("6_wfvl0")
-character = NodePath("..")
-form_sm = NodePath("../FormStateMachine")
-idle_state = NodePath("Idle")
-walking_state = NodePath("Walking")
-air_state = NodePath("Air")
-dashing_state = NodePath("Dashing")
-climbing_state = NodePath("Climbing")
-casting_state = NodePath("Casting")
-dead_state = NodePath("Dead")
+character = Object(CharacterBody2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(0, 0),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"disable_mode":0,"collision_layer":1,"collision_mask":1,"collision_priority":1.0,"input_pickable":false,"motion_mode":0,"up_direction":Vector2(0, -1),"velocity":Vector2(0, 0),"slide_on_ceiling":true,"max_slides":4,"wall_min_slide_angle":0.261799,"floor_stop_on_slope":true,"floor_constant_speed":false,"floor_block_on_wall":true,"floor_max_angle":0.785398,"floor_snap_length":1.0,"platform_on_leave":0,"platform_floor_layers":4294967295,"platform_wall_layers":0,"safe_margin":0.08,"script":ExtResource("1_hkbnf"))
+
+form_sm = Object(Node,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","script":ExtResource("18_2xi6w"),"current_form":Object(Node,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","script":ExtResource("19_q3bpg"),"passive":"nulll","special_1":"null","special_2":"null","special_3":"null")
+,"no_form":Object(Node,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","script":ExtResource("19_q3bpg"),"passive":"nulll","special_1":"null","special_2":"null","special_3":"null")
+,"rock_form":Object(Node,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","script":ExtResource("20_qotna"),"passive":"sinking","special_1":"eruption","special_2":"climb","special_3":"rock dash")
+,"fire_form":Object(Node,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","script":ExtResource("22_js6q5"),"passive":"cold res + light","special_1":"fire orb","special_2":"flamethrower","special_3":"fire dash")
+,"gravity_form":Object(Node,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","script":ExtResource("23_gx8tp"),"passive":"double jump","special_1":"push","special_2":"dark sphere","special_3":"downward spell")
+,"ice_form":Object(Node,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","script":ExtResource("21_1biub"),"passive":"ice skating","special_1":"ice sword","special_2":"aoe slow","special_3":"ice shield")
+)
+
+idle_state = Object(Node,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","script":ExtResource("7_xcc5y"),"can_wall_jump":false)
+
+walking_state = Object(Node,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","script":ExtResource("12_eyoi0"),"can_wall_jump":false)
+
+air_state = Object(Node,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","script":ExtResource("6_wvrpb"),"can_jump":false,"can_wall_jump":false)
+
+dashing_state = Object(Node,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","script":ExtResource("11_bxnc5"),"can_move":false,"can_fall":false,"can_dash":false,"can_jump":false,"can_wall_jump":false,"can_climb":false,"can_change_form":false)
+
+climbing_state = Object(Node,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","script":ExtResource("9_0x0ia"),"can_move":false,"can_fall":false,"can_dash":false,"can_jump":false,"can_climb":false,"can_change_form":false)
+
+casting_state = Object(Node,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","script":ExtResource("10_v8iwg"),"can_move":false,"can_fall":false,"can_dash":false,"can_jump":false,"can_wall_jump":false,"can_climb":false,"can_cast":false,"can_change_form":false)
+
+dead_state = Object(Node,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","script":ExtResource("13_1kak5"),"can_move":false,"can_dash":false,"can_jump":false,"can_wall_jump":false,"can_climb":false,"can_cast":false,"can_change_form":false)
+
 
 [node name="Dead" type="Node" parent="CharacterStateMachine"]
 script = ExtResource("13_1kak5")
@@ -637,9 +660,10 @@ can_climb = false
 can_cast = false
 can_change_form = false
 
-[node name="magic_handler" type="Node" parent="CharacterStateMachine/Casting" node_paths=PackedStringArray("previous_state")]
+[node name="magic_handler" type="Node" parent="CharacterStateMachine/Casting"]
 script = ExtResource("15_eafol")
-previous_state = NodePath("../../Idle")
+previous_state = Object(Node,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","script":ExtResource("7_xcc5y"),"can_wall_jump":false)
+
 
 [node name="magic_orb_cooldown" type="Timer" parent="CharacterStateMachine/Casting/magic_handler"]
 process_mode = 3
