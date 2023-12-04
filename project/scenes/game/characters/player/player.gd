@@ -75,9 +75,11 @@ func camera() -> void:
 
 func animations():
 	if is_facing_right: 
-		$Sprite2D.flip_h = false
+		
+		$Sprite2D.set_scale(Vector2(1, 1))
 	else:
-		$Sprite2D.flip_h = true
+		
+		$Sprite2D.set_scale(Vector2(-1, 1))
 
 func _on_node_2d_damaged() -> void:
 	lifes -= 1 
