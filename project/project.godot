@@ -12,8 +12,15 @@ config_version=5
 
 config/name="Pavel's Adventures"
 run/main_scene="res://scenes/main.tscn"
-config/features=PackedStringArray("4.1", "Forward Plus")
+config/features=PackedStringArray("4.2", "Mobile")
 config/icon="res://icon.svg"
+
+[debug]
+
+gdscript/warnings/untyped_declaration=2
+gdscript/warnings/inferred_declaration=1
+gdscript/warnings/narrowing_conversion=2
+gdscript/warnings/deprecated_keyword=2
 
 [input]
 
@@ -161,3 +168,7 @@ reset_position={
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":8,"pressure":0.0,"pressed":true,"script":null)
 ]
 }
+
+[rendering]
+
+renderer/rendering_method="mobile"
