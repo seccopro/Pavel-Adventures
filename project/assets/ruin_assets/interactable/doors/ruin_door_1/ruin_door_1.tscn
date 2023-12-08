@@ -7,6 +7,6 @@
 [node name="ruin_door_1" type="Node2D"]
 script = ExtResource("1_pp8m4")
 
-[node name="door_area" parent="." instance=ExtResource("3_ygix3")]
-
 [node name="ruin_door_1_spr" parent="." instance=ExtResource("3_wgmvc")]
+
+[node name="door_area" parent="." instance=ExtResource("3_ygix3")]

@@ -2,7 +2,7 @@ class_name Input_Check extends Node
 
 var controls : Dictionary
 @onready var player = $"../.."
-@onready var variables = $"../../variables"
+@onready var variables = player.variables
 @onready var CSM =  $".."
 @onready var animation_tree = $"../../AnimationTree"
 @onready var area = $"../../playerCollisionShape/player_area"
@@ -12,8 +12,8 @@ var wall_jump_velocity_y: float = -800
 var wall_jump_velocity_x: float = 1100
 
 func permission_checker(state: State, _event) -> void:
-	if state.can_move:		
-		if state != $"../Air":		#movement is handled differently in air
+	if state.can_move:
+		if state != state.air_state:		#movement is handled differently in air
 			#TO WALKING STATE
 			walk(state, _event)
 
@@ -65,10 +65,10 @@ func attack(state: State, _event: InputEvent) -> void:
 		CSM.previous_state = state
 		state.next_state = state.attack_state
 
-func interact(state: State, _event: InputEvent):
+func interact(state: State, _event: InputEvent) -> void:	 #at the moment the interaction is handled by the receiving area/object
 	if Input.is_action_just_pressed(controls.interact):
 		if area.get_overlapping_areas().any( func(area): return area.name == "door_area" ):
-			print("open door")
+			print("press up to go through the door")
 		elif area.get_overlapping_areas().any( func(area): return area.name == "lever_area" ):
 			print("do stuff with this lever")
 		elif area.get_overlapping_areas().any( func(area): return area.name == "healing_flame_area" ):

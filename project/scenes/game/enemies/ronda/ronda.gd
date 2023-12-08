@@ -13,7 +13,6 @@ var is_okay: bool = true
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _physics_process(delta) -> void:
-	# Add the gravity.
 	move_and_slide()
 
 	if !is_on_floor():
@@ -24,13 +23,13 @@ func _physics_process(delta) -> void:
 
 func walk_right() -> void:
 	velocity.x = SPEED
-	
+
 func walk_left() -> void:
 	velocity.x = -SPEED
 
 func stop_walking() -> void:
 	velocity.x = 0
-	
+
 func range_walking() -> void:
 	$"global_position_label".text = str(global_position.x)
 	if target_position == 1:
@@ -49,7 +48,7 @@ func _on_event_detector_body_entered(body) -> void:
 		velocity.y += JUMP_VELOCITY
 
 func _on_damage_area_area_shape_entered(area_rid, area, area_shape_index, local_shape_index) -> void:
-	print("ronda is hit by a " + area.name)
+	#print("ronda is hit by a " + area.name)
 
 	match area.name:	 #lose 2 health
 		"magic_blast":
@@ -62,5 +61,5 @@ func _on_damage_area_area_shape_entered(area_rid, area, area_shape_index, local_
 			die()
 
 func die():
-	print("ronda dead")
+	#print("ronda dead")
 	queue_free() #lose 1 health

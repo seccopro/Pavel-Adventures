@@ -43,18 +43,18 @@ func on_exit() -> void:
 	$"climb_detach".stop()
 	player.can_fall = true
 	
-	CSM.previous_state = $"."
+	CSM.previous_state = climbing_state
 
 func _on_climb_detach_timeout() -> void:	#TO IDLE STATE (OR AIR)
 	CSM.just_detached = true
 	$"just_detached".start()		#climbing cooldown
-	next_state = idle_state	
+	next_state = self
 
-func _on_just_detached_timeout():	#can re-attach
+func _on_just_detached_timeout() -> void:	#can re-attach
 	CSM.just_detached = false
 
 
-func _on_jump_on_wall_timeout():
+func _on_jump_on_wall_timeout() -> void:
 	if character.is_facing_right :
 		character.velocity.x = jump_on_wall_x_velocity
 	else:

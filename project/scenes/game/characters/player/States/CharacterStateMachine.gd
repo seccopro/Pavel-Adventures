@@ -53,7 +53,7 @@ func _ready() -> void:
 		child.input_check = input_check
 		child.CSM = $"."
 		child.variables = player.variables
-		print("appended state: " + str(child))
+		#print("appended state: " + str(child))
 		
 		#starting state
 		current_state = idle_state

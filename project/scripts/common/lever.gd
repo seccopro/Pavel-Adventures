@@ -10,9 +10,10 @@ var is_interactable = true
 
 signal interact()
 
-# Called when the node enters the scene tree for the first time.
+@onready var indicator: Label = $popup_text	 #can be changed to a visual effect or a light or whatever
+
 func _ready():
-	$lever_area/popup_text.hide()
+	indicator.hide()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -24,15 +25,15 @@ func _process(delta):
 				affected_body.set_process(true)
 			interact.emit()
 			if !togglable:
+				indicator.hide()
 				is_interactable = false
 
+func _on_lever_area_body_entered(body) -> void:
+	print(body)
+	if body.name == "player" && is_interactable:
+		indicator.show()
 
-func _on_lever_area_body_entered(body):
-	if is_interactable:
-		if body.name == "player" && is_interactable:
-			$popup_text.show()
 
-
-func _on_lever_area_body_exited(body):
+func _on_lever_area_body_exited(body) -> void:
 	if body.name == "player":
-		$popup_text.hide()
+		indicator.hide()

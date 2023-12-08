@@ -40,6 +40,5 @@ func _process(delta: float) -> void:
 			queue_free()
 
 func _on_body_entered(body: PhysicsBody2D) -> void:
-	print(body)
-	if body.name != "player" && body.name != "ground":
+	if body.name != "player":
 		queue_free()

@@ -96,4 +96,4 @@ func on_exit() -> void:
 		animation_tree.set("parameters/jump_state/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
 		animation_tree.set("parameters/landing/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 	
-	CSM.previous_state = $"."
+	CSM.previous_state = self

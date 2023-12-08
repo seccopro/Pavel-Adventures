@@ -1,4 +1,4 @@
-[gd_scene load_steps=79 format=3 uid="uid://cbb5qfdj1r0sb"]
+[gd_scene load_steps=80 format=3 uid="uid://cbb5qfdj1r0sb"]
 
 [ext_resource type="Script" path="res://scenes/game/characters/player/player.gd" id="1_hkbnf"]
 [ext_resource type="PackedScene" uid="uid://61w51ai88ja0" path="res://scenes/HUD/death_screen/death_screen.tscn" id="2_ee4nu"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cdjjjkjygprcn" path="res://assets/player/chara_move_sheet_n.png" id="3_w22gh"]
 [ext_resource type="Script" path="res://scenes/game/characters/player/States/CharacterStateMachine.gd" id="6_wfvl0"]
 [ext_resource type="Script" path="res://scenes/game/characters/player/States/AirState.gd" id="6_wvrpb"]
+[ext_resource type="Script" path="res://scripts/variables/player_config.gd" id="7_5nfh0"]
 [ext_resource type="Script" path="res://scenes/game/characters/player/States/IdleState.gd" id="7_xcc5y"]
 [ext_resource type="Script" path="res://scenes/game/characters/player/States/ClimbingState.gd" id="9_0x0ia"]
 [ext_resource type="Script" path="res://scenes/game/characters/player/States/CastingState.gd" id="10_v8iwg"]
@@ -15,8 +16,6 @@
 [ext_resource type="Script" path="res://scenes/game/characters/player/States/WalkingState.gd" id="12_eyoi0"]
 [ext_resource type="Script" path="res://scenes/game/characters/player/States/input_check.gd" id="12_oovai"]
 [ext_resource type="Script" path="res://scenes/game/characters/player/States/DeadState.gd" id="13_1kak5"]
-[ext_resource type="Script" path="res://scenes/game/characters/player/magic/magic_handler.gd" id="15_eafol"]
-[ext_resource type="Script" path="res://scripts/variables/variables.gd" id="15_hx332"]
 [ext_resource type="Script" path="res://scenes/game/characters/player/controls.gd" id="17_msedg"]
 [ext_resource type="Script" path="res://scenes/game/characters/player/forms/FormStateMachine.gd" id="18_2xi6w"]
 [ext_resource type="Script" path="res://scenes/game/characters/player/States/AttackState.gd" id="19_1v1dr"]
@@ -25,6 +24,8 @@
 [ext_resource type="Script" path="res://scenes/game/characters/player/forms/ice_form.gd" id="21_1biub"]
 [ext_resource type="Script" path="res://scenes/game/characters/player/forms/fire_form.gd" id="22_js6q5"]
 [ext_resource type="Script" path="res://scenes/game/characters/player/forms/gravity_form.gd" id="23_gx8tp"]
+[ext_resource type="Script" path="res://scenes/game/characters/player/States/magic_handler.gd" id="24_gbbjy"]
+[ext_resource type="PackedScene" uid="uid://bcqbm8xryrpdl" path="res://assets/common/magic/magic_orb/magic_orb.tscn" id="26_8mn0t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rrxu0"]
 size = Vector2(38, 142)
@@ -518,7 +519,7 @@ target_position = Vector2(-30, 0)
 target_position = Vector2(28, 1)
 
 [node name="variables" type="Node" parent="."]
-script = ExtResource("15_hx332")
+script = ExtResource("7_5nfh0")
 
 [node name="controls" type="Node" parent="."]
 script = ExtResource("17_msedg")
@@ -583,11 +584,8 @@ dead_state = NodePath("Dead")
 [node name="Dead" type="Node" parent="CharacterStateMachine"]
 script = ExtResource("13_1kak5")
 can_move = false
-can_fall = null
 can_dash = false
 can_jump = false
-can_attack = null
-can_double_jump = null
 can_wall_jump = false
 can_climb = false
 can_cast = false
@@ -664,7 +662,7 @@ can_cast = false
 can_change_form = false
 
 [node name="magic_handler" type="Node" parent="CharacterStateMachine/Casting"]
-script = ExtResource("15_eafol")
+script = ExtResource("24_gbbjy")
 
 [node name="magic_orb_cooldown" type="Timer" parent="CharacterStateMachine/Casting/magic_handler"]
 process_mode = 3
@@ -677,6 +675,8 @@ one_shot = true
 
 [node name="input_check" type="Node" parent="CharacterStateMachine"]
 script = ExtResource("12_oovai")
+
+[node name="magic_orb" parent="CharacterStateMachine" instance=ExtResource("26_8mn0t")]
 
 [connection signal="area_entered" from="playerCollisionShape/player_area" to="." method="_on_damage_area_area_entered"]
 [connection signal="timeout" from="CharacterStateMachine/Attack/attack_cooldown" to="CharacterStateMachine/Attack" method="_on_attack_cooldown_timeout"]

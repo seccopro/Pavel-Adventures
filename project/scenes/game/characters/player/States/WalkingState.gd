@@ -22,7 +22,7 @@ func state_process(delta: float) -> void:
 		next_state = idle_state
 
 func on_exit() -> void:
-	CSM.previous_state = $"."
+	CSM.previous_state = self
 
 func walk() -> void:
 	var direction = Input.get_axis(controls.move_left, controls.move_right)

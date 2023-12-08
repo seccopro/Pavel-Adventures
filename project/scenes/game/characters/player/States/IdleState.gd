@@ -14,8 +14,7 @@ func state_input(event: InputEvent) -> void:
 	input_check.permission_checker($".", event)
 
 func on_exit() -> void:
-	
-	CSM.previous_state = $"."
+	CSM.previous_state = self
 
 func die() -> void:
 	next_state = dead_state

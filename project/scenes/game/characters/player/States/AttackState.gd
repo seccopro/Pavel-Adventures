@@ -33,10 +33,10 @@ func state_process(delta: float) -> void:
 		next_state = CSM.previous_state
 
 func on_exit() -> void:
-	time_elapsed = 0.0	
-	CSM.previous_state = $"."
+	time_elapsed = 0.0
+	CSM.previous_state = self
 
 
-func _on_attack_cooldown_timeout():
+func _on_attack_cooldown_timeout() -> void:
 	print("basic blast off cooldown")
 	basic_blast_is_on_cooldown = false

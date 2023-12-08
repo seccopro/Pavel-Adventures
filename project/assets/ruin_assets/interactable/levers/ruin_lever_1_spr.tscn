@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://b3gou0aih254a"]
+
+[ext_resource type="Texture2D" uid="uid://cunr5af44uwoa" path="res://assets/ruin_assets/env_1_assets.png" id="1_elhu8"]
+
+[node name="ruin_lever_1_spr" type="Node2D"]
+
+[node name="lever_1_a" type="Sprite2D" parent="."]
+position = Vector2(0, -18)
+texture = ExtResource("1_elhu8")
+region_enabled = true
+region_rect = Rect2(596, 1392, 96, 36)
+
+[node name="lever_1_b" type="Sprite2D" parent="."]
+position = Vector2(0, -58)
+texture = ExtResource("1_elhu8")
+region_enabled = true
+region_rect = Rect2(763, 1354, 15, 72)
+
+[node name="lever_1_c" type="Sprite2D" parent="."]
+position = Vector2(0, -30)
+texture = ExtResource("1_elhu8")
+region_enabled = true
+region_rect = Rect2(708, 1379, 39, 40)

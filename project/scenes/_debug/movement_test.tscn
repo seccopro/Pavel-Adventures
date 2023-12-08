@@ -1,16 +1,17 @@
-[gd_scene load_steps=34 format=3 uid="uid://dqnfvaoaxxrfa"]
+[gd_scene load_steps=35 format=3 uid="uid://dqnfvaoaxxrfa"]
 
 [ext_resource type="Script" path="res://scenes/_debug/movement_test.gd" id="1_pcuud"]
 [ext_resource type="PackedScene" uid="uid://cbb5qfdj1r0sb" path="res://scenes/game/characters/player/player.tscn" id="2_36yml"]
 [ext_resource type="PackedScene" uid="uid://c8wvmaehkj300" path="res://scenes/game/enemies/ronda/ronda.tscn" id="3_28jar"]
-[ext_resource type="PackedScene" uid="uid://1ukiuvhvg6se" path="res://assets/ruin_assets/interactable/ruin_hanging_weight_1.tscn" id="3_osg4d"]
+[ext_resource type="PackedScene" uid="uid://1ukiuvhvg6se" path="res://assets/ruin_assets/interactable/hanging_weights/ruin_hanging_weight_1.tscn" id="3_osg4d"]
 [ext_resource type="PackedScene" uid="uid://bapscnaqdk7p0" path="res://assets/ruin_assets/interactable/doors/ruin_door_1/ruin_door_1.tscn" id="4_dq65g"]
 [ext_resource type="Texture2D" uid="uid://cunr5af44uwoa" path="res://assets/ruin_assets/env_1_assets.png" id="5_emj5j"]
 [ext_resource type="Texture2D" uid="uid://cey0xyxxmqyca" path="res://assets/lights/default_light.tres" id="5_mlly0"]
 [ext_resource type="PackedScene" uid="uid://dadxrk63fjvqw" path="res://assets/ruin_assets/interactable/healing_flame_temp.tscn" id="5_y4gft"]
-[ext_resource type="PackedScene" uid="uid://d1eurxocqst0e" path="res://assets/ruin_assets/interactable/ruin_lever_1.tscn" id="6_jrxx6"]
-[ext_resource type="PackedScene" uid="uid://vouj7i5fu8um" path="res://assets/common/area_effects/spike_damage_area.tscn" id="6_o6kkb"]
-[ext_resource type="Script" path="res://scripts/Camera2D.gd" id="10_hjwi2"]
+[ext_resource type="PackedScene" uid="uid://d1eurxocqst0e" path="res://assets/ruin_assets/interactable/levers/ruin_lever_1.tscn" id="6_jrxx6"]
+[ext_resource type="PackedScene" uid="uid://bpfsxpmf1a2bf" path="res://scenes/_debug/level_test_1.tscn" id="7_adu1f"]
+[ext_resource type="Script" path="res://scripts/Camera2D.gd" id="9_7wjax"]
+[ext_resource type="PackedScene" uid="uid://b2p0v6qigf1ck" path="res://assets/ruin_assets/area_effects/ruin_spikes.tscn" id="10_7x4ay"]
 [ext_resource type="PackedScene" uid="uid://banaip4kb67ug" path="res://assets/ruin_assets/interactable/doors/ruin_door_2/ruin_door_2.tscn" id="12_uotk6"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_nucmr"]
@@ -480,7 +481,7 @@ limit_smoothed = true
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
 editor_draw_limits = true
-script = ExtResource("10_hjwi2")
+script = ExtResource("9_7wjax")
 player = NodePath("../player")
 
 [node name="front" type="Node2D" parent="."]
@@ -489,34 +490,11 @@ player = NodePath("../player")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
-[node name="Env1Assets20" type="Sprite2D" parent="front/traps"]
-position = Vector2(2820.8, 477.827)
-scale = Vector2(1.07328, 1)
-texture = SubResource("CanvasTexture_7c2y5")
-region_enabled = true
-region_rect = Rect2(1313, 266, 544, 114)
+[node name="ruin_spikes" parent="front/traps" instance=ExtResource("10_7x4ay")]
+position = Vector2(2795, 479)
 
-[node name="Env1Assets21" type="Sprite2D" parent="front/traps"]
-position = Vector2(3392.31, 478.357)
-scale = Vector2(1.07328, 1)
-texture = SubResource("CanvasTexture_7c2y5")
-region_enabled = true
-region_rect = Rect2(1313, 266, 544, 114)
-
-[node name="Env1Assets18" type="Sprite2D" parent="front/traps"]
-position = Vector2(2490.42, 523.096)
-scale = Vector2(1.03255, 1.1052)
-texture = SubResource("CanvasTexture_7c2y5")
-flip_h = true
-region_enabled = true
-region_rect = Rect2(1857, 38, 90, 54)
-
-[node name="spike_damage_area" parent="front/traps" instance=ExtResource("6_o6kkb")]
-position = Vector2(2982.95, 461.95)
-scale = Vector2(2.82, 1)
-
-[node name="CollisionShape2D" parent="front/traps/spike_damage_area" index="0"]
-position = Vector2(-19.3109, -1.47485)
+[node name="ruin_spikes2" parent="front/traps" instance=ExtResource("10_7x4ay")]
+position = Vector2(3378, 481)
 
 [node name="walls" type="Node2D" parent="front"]
 position = Vector2(659, 395)
@@ -939,5 +917,3 @@ shape = SubResource("RectangleShape2D_mqdr8")
 [connection signal="damaged" from="." to="characters/player" method="_on_node_2d_damaged"]
 [connection signal="win" from="." to="characters/player" method="_on_node_2d_win"]
 [connection signal="body_entered" from="areas/next_scene_up" to="areas/next_scene_up" method="_on_body_entered"]
-
-[editable path="front/traps/spike_damage_area"]

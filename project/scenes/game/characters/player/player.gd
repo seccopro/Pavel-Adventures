@@ -7,8 +7,6 @@ extends CharacterBody2D
 
 @onready var state_machine : CharacterStateMachine = $"CharacterStateMachine"
 
-
-
 var can_fall: bool = true
 var is_playing: bool = true
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -47,7 +45,7 @@ func _physics_process(delta: float) -> void:		#"MAIN" runs every delta time - CA
 	if is_playing:
 		move_and_slide()
 		raycasts()
-		#camera()
+		#camera()	deactivated, can be used for animation debug (zoom in and out)
 		animations()
 		game_logic()
 
@@ -67,7 +65,7 @@ func raycasts() -> void:
 	else:
 		is_on_wall_r = false
 
-func camera() -> void:	#not used 
+func camera() -> void:		#deactivated, can be used for animation debug (zoom in and out)
 	if Input.is_action_just_pressed("camera_zoom_in"):
 		print("zoom in")
 		$"Camera2D".zoom.x += 0.5
@@ -108,7 +106,7 @@ func _on_node_2d_win(score: int) -> void:
 
 
 func _on_damage_area_area_entered(area):
-	print(area.name)
+	#print(area.name)
 	match area.name:	 #lose 2 health
 		"spike_damage_area":	#layer 3 is trap layer
 			lifes -= 1 #area.damage
@@ -132,7 +130,7 @@ func _on_damage_area_area_entered(area):
 		
 		"heavy_object":	#lose 5 health
 			lifes -= 1
-			
-		_:		#default
+	#default
+		_:
 			#print("player hit " + area.name)
 			pass

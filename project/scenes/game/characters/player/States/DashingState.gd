@@ -25,5 +25,4 @@ func state_process(delta: float) -> void:
 
 func on_exit() -> void:
 	time_elapsed = 0
-	
-	CSM.previous_state = $"."
+	CSM.previous_state = self
