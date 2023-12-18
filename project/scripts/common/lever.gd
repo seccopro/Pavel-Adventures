@@ -6,6 +6,8 @@ extends Node2D
 @export var single_use: bool #if one shot or togglable lever
 @export var is_interactable: bool = true
 
+var is_interactable: bool = true
+
 signal interact()
 signal animation()
 
@@ -24,3 +26,7 @@ func _process(delta: float) -> void:
 			if single_use:
 				is_interactable = false
 
+func _on_lever_area_body_entered(body: StaticBody2D) -> void:
+	print(body)
+	if body.name == "player" && is_interactable:
+		indicator.show()

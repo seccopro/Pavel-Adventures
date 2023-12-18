@@ -1198,6 +1198,8 @@ one_shot = true
 [node name="input_check" type="Node" parent="CharacterStateMachine"]
 script = ExtResource("12_oovai")
 
+[node name="magic_orb" parent="CharacterStateMachine" instance=ExtResource("26_8mn0t")]
+
 [connection signal="area_entered" from="playerCollisionShape/player_area" to="." method="_on_damage_area_area_entered"]
 [connection signal="timeout" from="CharacterStateMachine/Attack/attack_cooldown" to="CharacterStateMachine/Attack" method="_on_attack_cooldown_timeout"]
 [connection signal="timeout" from="CharacterStateMachine/Climbing/climb_detach" to="CharacterStateMachine/Climbing" method="_on_climb_detach_timeout"]
