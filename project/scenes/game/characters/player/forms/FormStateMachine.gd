@@ -16,7 +16,7 @@ func _ready() -> void:
 			print("child isn't a form: " + str(child))
 			return
 		
-		print("appended form: " + str(child))
+		#print("appended form: " + str(child))
 		#load states
 		child.no_form = no_form
 		child.rock_form = rock_form
@@ -43,5 +43,5 @@ func switch_forms(new_form: Form) -> void:
 	current_form.on_enter()
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta: float) -> void:
 	pass

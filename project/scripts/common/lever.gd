@@ -1,34 +1,26 @@
 extends Node2D
 
-@onready var lever_area = $lever_area
+@onready var lever_area: Area2D = $area
+
 @export var affected_body: Node
-@export var togglable: bool #if one shot or togglable lever
-var is_interactable = true
+@export var single_use: bool #if one shot or togglable lever
+@export var is_interactable: bool = true
 
 signal interact()
+signal animation()
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	$popup_text.hide()
-
+func _ready() -> void:
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	if Input.is_action_just_pressed("interact"):
-		if lever_area.get_overlapping_areas().any( func(area): return area.name == "player_area" ):
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("interact") && is_interactable:
+		if lever_area.get_overlapping_areas().any( func(area: Area2D) -> bool: return area.name == "player_area" ):
 			print("player pulls the lever")
-			affected_body.set_process(true)
+			if affected_body != null:
+				affected_body.set_process(true)
 			interact.emit()
-			if !togglable:
+			animation.emit()
+			if single_use:
 				is_interactable = false
 
-
-func _on_lever_area_body_entered(body):
-	if is_interactable:
-		if body.name == "player" && is_interactable:
-			$popup_text.show()
-
-
-func _on_lever_area_body_exited(body):
-	if body.name == "player":
-		$popup_text.hide()

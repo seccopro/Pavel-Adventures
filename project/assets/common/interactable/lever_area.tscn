@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://b217kt8g8kpc5"]
+
+[ext_resource type="Script" path="res://scripts/common/lever.gd" id="1_3wu14"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sv2cu"]
+size = Vector2(69.5485, 67.1536)
+
+[node name="lever_area" type="Node2D"]
+script = ExtResource("1_3wu14")
+
+[node name="area" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="area"]
+position = Vector2(0, -34.577)
+shape = SubResource("RectangleShape2D_sv2cu")

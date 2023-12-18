@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://b7vjkbti3ify8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l42fm"]
+size = Vector2(116, 68)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4hi34"]
+size = Vector2(114, 8)
+
+[node name="weight_rigidbody" type="RigidBody2D"]
+position = Vector2(0, -33)
+mass = 50.0
+sleeping = true
+can_sleep = false
+freeze = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_l42fm")
+
+[node name="heavy_object" type="Area2D" parent="."]
+
+[node name="weight_shape" type="CollisionShape2D" parent="heavy_object"]
+position = Vector2(0, 33)
+shape = SubResource("RectangleShape2D_4hi34")

@@ -1,6 +1,6 @@
 class_name WalkingState extends State
 
-@onready var parent = get_parent()
+@onready var parent: Node = get_parent()
 
 func on_enter() -> void:
 	animation_tree.set("parameters/landing/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
@@ -21,13 +21,13 @@ func state_process(delta: float) -> void:
 		next_state = idle_state
 
 func on_exit() -> void:
+	CSM.previous_state = self
 	animation_tree.set("parameters/run_state/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
-	pass
 
 func walk() -> void:
-	var direction = Input.get_axis(controls.move_left, controls.move_right)
-	if abs(character.velocity.x) < 600 && direction:		#replace 600 with top walking speed maybe
-		character.velocity.x = direction * parent.walking_velocity
+	var direction: float = Input.get_axis(controls.move_left, controls.move_right)
+	if abs(character.velocity.x) < player_config.walking_velocity_cap && direction:
+		character.velocity.x = direction * player_config.walking_velocity
 		if player.can_flip_sprite :
 			if direction > 0:
 				player.is_facing_right = true

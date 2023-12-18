@@ -1,8 +1,11 @@
 extends CharacterBody2D
 
-@onready var state_machine : CharacterStateMachine = $"CharacterStateMachine"
-
+@export var player_config: Node
 @export var lifes : int = 3
+@export var level: Node
+
+
+@onready var state_machine : CharacterStateMachine = $"CharacterStateMachine"
 
 var can_fall: bool = true
 var is_playing: bool = true
@@ -40,10 +43,9 @@ func _physics_process(delta: float) -> void:		#"MAIN" runs every delta time - CA
 		velocity.y += gravity * delta
 	
 	if is_playing:
-		#and activate physics
 		move_and_slide()
 		raycasts()
-		#camera()
+		#camera()	deactivated, can be used for animation debug (zoom in and out)
 		animations()
 		game_logic()
 
@@ -63,7 +65,7 @@ func raycasts() -> void:
 	else:
 		is_on_wall_r = false
 
-func camera() -> void:
+func camera() -> void:		#deactivated, can be used for animation debug (zoom in and out)
 	if Input.is_action_just_pressed("camera_zoom_in"):
 		print("zoom in")
 		$"Camera2D".zoom.x += 0.5
@@ -73,7 +75,7 @@ func camera() -> void:
 		$"Camera2D".zoom.x -= 0.5
 		$"Camera2D".zoom.y -= 0.5	
 
-func animations():
+func animations() -> void:
 	if is_facing_right: 
 		
 		$Sprite2D.set_scale(Vector2(1, 1))
@@ -81,17 +83,8 @@ func animations():
 		
 		$Sprite2D.set_scale(Vector2(-1, 1))
 
-func _on_node_2d_damaged() -> void:
-	lifes -= 1 
-
-func _on_ronda_touched(value: int) -> void:
-	lifes -= value
-
-func _on_node_2d_win(score: int) -> void:
-	win()
-
 func game_logic() -> void:
-	var hearts = ""
+	var hearts: String = ""
 	for i in lifes:
 		hearts += "♥"
 	$HUD/HP_bar.text = str(hearts)
@@ -108,53 +101,38 @@ func death() -> void:
 	$HUD/death_screen.show()
 
 
-func _on_damage_area_area_entered(area):
+
+
+func _on_node_2d_win(score: int) -> void:
+	win()
+
+
+func _on_damage_area_area_entered(area: Area2D) -> void:
+	#print(area.name)
 	match area.name:	 #lose 2 health
-		"spike_damage_area":
+		"spike_damage_area":	#layer 3 is trap layer
 			lifes -= 1 #area.damage
 			print("!! - damaged on spikes")
 			#velocity = -velocity  #kek bouncy spikeys
 			if velocity.y > 0:
-				velocity.y = -1000
+				velocity.y = -player_config.spikes_bounce
 			else:
 				if velocity.x > 0:
-					velocity.x -= 1500 
+					velocity.x -= player_config.spikes_knockback
 				else:
-					velocity.x = 1000
+					velocity.x = player_config.spikes_knockback
 		
-		"ronda_damage_area":	#lose 1 health
+		"ronda_damage_area":				#layer 4 is enemies layer
 			lifes -= 1
 			print("!! Ronda hurts!")
 			if velocity.x > 0:
-				velocity.x -= 1500 
+				velocity.x -= player_config.ronda_knockback
 			else:
-				velocity.x = 1000
+				velocity.x = player_config.ronda_knockback
 		
 		"heavy_object":	#lose 5 health
 			lifes -= 1
-			
-		_:		#default
-			print("player hit " + area.name)
-			
-#	if area.name == "spike_damage_area":
-#		lifes -= 1 #area.damage
-#		print("!! - damaged on spikes")
-#		#velocity = -velocity  #kek bouncy spikeys
-#		if velocity.y > 0:
-#			velocity.y = -1000
-#		else:
-#			if velocity.x > 0:
-#				velocity.x -= 1500 
-#			else:
-#				velocity.x = 1000
-#	elif area.name == "ronda_damage_area":
-#		lifes -= 1
-#		print("!! Ronda hurts!")
-#		if velocity.x > 0:
-#			velocity.x -= 1500 
-#		else:
-#			velocity.x = 1000
-#	else:
-#		print("player hit" + area.name)
-#
-	
+	#default
+		_:
+			#print("player hit " + area.name)
+			pass

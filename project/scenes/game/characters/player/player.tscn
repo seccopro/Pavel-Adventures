@@ -1,4 +1,4 @@
-[gd_scene load_steps=86 format=3 uid="uid://cbb5qfdj1r0sb"]
+[gd_scene load_steps=88 format=3 uid="uid://cbb5qfdj1r0sb"]
 
 [ext_resource type="Script" path="res://scenes/game/characters/player/player.gd" id="1_hkbnf"]
 [ext_resource type="PackedScene" uid="uid://61w51ai88ja0" path="res://scenes/HUD/death_screen/death_screen.tscn" id="2_ee4nu"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://dd2mqk7jaeqtg" path="res://assets/player/masks.png" id="5_2kjtw"]
 [ext_resource type="Script" path="res://scenes/game/characters/player/States/CharacterStateMachine.gd" id="6_wfvl0"]
 [ext_resource type="Script" path="res://scenes/game/characters/player/States/AirState.gd" id="6_wvrpb"]
+[ext_resource type="Script" path="res://scripts/variables/player_config.gd" id="7_5nfh0"]
 [ext_resource type="Script" path="res://scenes/game/characters/player/States/IdleState.gd" id="7_xcc5y"]
 [ext_resource type="Script" path="res://scenes/game/characters/player/States/ClimbingState.gd" id="9_0x0ia"]
 [ext_resource type="Script" path="res://scenes/game/characters/player/States/CastingState.gd" id="10_v8iwg"]
@@ -17,14 +18,15 @@
 [ext_resource type="Script" path="res://scenes/game/characters/player/States/WalkingState.gd" id="12_eyoi0"]
 [ext_resource type="Script" path="res://scenes/game/characters/player/States/input_check.gd" id="12_oovai"]
 [ext_resource type="Script" path="res://scenes/game/characters/player/States/DeadState.gd" id="13_1kak5"]
-[ext_resource type="Script" path="res://scenes/game/characters/player/magic/magic_handler.gd" id="15_eafol"]
 [ext_resource type="Script" path="res://scenes/game/characters/player/controls.gd" id="17_msedg"]
 [ext_resource type="Script" path="res://scenes/game/characters/player/forms/FormStateMachine.gd" id="18_2xi6w"]
+[ext_resource type="Script" path="res://scenes/game/characters/player/States/AttackState.gd" id="19_1v1dr"]
 [ext_resource type="Script" path="res://scenes/game/characters/player/forms/no_form.gd" id="19_q3bpg"]
 [ext_resource type="Script" path="res://scenes/game/characters/player/forms/Rock.gd" id="20_qotna"]
 [ext_resource type="Script" path="res://scenes/game/characters/player/forms/ice_form.gd" id="21_1biub"]
 [ext_resource type="Script" path="res://scenes/game/characters/player/forms/fire_form.gd" id="22_js6q5"]
 [ext_resource type="Script" path="res://scenes/game/characters/player/forms/gravity_form.gd" id="23_gx8tp"]
+[ext_resource type="Script" path="res://scenes/game/characters/player/States/magic_handler.gd" id="24_gbbjy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rrxu0"]
 size = Vector2(38, 142)
@@ -896,15 +898,17 @@ node_connections = [&"OneShot", 0, &"basic_attack_1", &"OneShot", 1, &"basic_att
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0lt8o"]
 size = Vector2(38, 5)
 
-[node name="player" type="CharacterBody2D"]
+[node name="player" type="CharacterBody2D" node_paths=PackedStringArray("player_config")]
+collision_mask = 255
 script = ExtResource("1_hkbnf")
+player_config = NodePath("player_config")
 
 [node name="playerCollisionShape" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(1, -2)
 shape = SubResource("RectangleShape2D_rrxu0")
 
 [node name="player_area" type="Area2D" parent="playerCollisionShape"]
+collision_mask = 255
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="playerCollisionShape/player_area"]
 position = Vector2(0, 0.25)
@@ -982,9 +986,6 @@ parameters/run_state/active = false
 parameters/run_state/internal_active = false
 parameters/run_state/request = 0
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(0, -155.031)
-
 [node name="HUD" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
@@ -1037,6 +1038,9 @@ target_position = Vector2(-30, 0)
 [node name="right_wall_checker" type="RayCast2D" parent="."]
 target_position = Vector2(28, 1)
 
+[node name="player_config" type="Node" parent="."]
+script = ExtResource("7_5nfh0")
+
 [node name="controls" type="Node" parent="."]
 script = ExtResource("17_msedg")
 
@@ -1084,22 +1088,26 @@ special_1 = "ice sword"
 special_2 = "aoe slow"
 special_3 = "ice shield"
 
-[node name="CharacterStateMachine" type="Node" parent="." node_paths=PackedStringArray("character", "form_sm", "idle_state", "walking_state", "air_state", "dashing_state", "climbing_state", "casting_state")]
+[node name="CharacterStateMachine" type="Node" parent="." node_paths=PackedStringArray("character", "form_sm", "dead_state", "idle_state", "walking_state", "air_state", "attack_state", "dashing_state", "climbing_state", "casting_state", "input_check")]
 script = ExtResource("6_wfvl0")
 character = NodePath("..")
 form_sm = NodePath("../FormStateMachine")
+dead_state = NodePath("Dead")
 idle_state = NodePath("Idle")
 walking_state = NodePath("Walking")
 air_state = NodePath("Air")
+attack_state = NodePath("Attack")
 dashing_state = NodePath("Dashing")
 climbing_state = NodePath("Climbing")
 casting_state = NodePath("Casting")
+input_check = NodePath("input_check")
 
 [node name="Dead" type="Node" parent="CharacterStateMachine"]
 script = ExtResource("13_1kak5")
 can_move = false
 can_dash = false
 can_jump = false
+can_attack = false
 can_wall_jump = false
 can_climb = false
 can_cast = false
@@ -1117,6 +1125,20 @@ can_wall_jump = false
 script = ExtResource("6_wvrpb")
 can_jump = false
 can_wall_jump = false
+
+[node name="Attack" type="Node" parent="CharacterStateMachine"]
+script = ExtResource("19_1v1dr")
+can_dash = false
+can_attack = false
+can_wall_jump = false
+can_climb = false
+can_cast = false
+can_change_form = false
+
+[node name="attack_cooldown" type="Timer" parent="CharacterStateMachine/Attack"]
+process_mode = 3
+wait_time = 0.5
+one_shot = true
 
 [node name="Dashing" type="Node" parent="CharacterStateMachine"]
 script = ExtResource("11_bxnc5")
@@ -1139,9 +1161,11 @@ can_change_form = false
 
 [node name="climb_detach" type="Timer" parent="CharacterStateMachine/Climbing"]
 wait_time = 0.2
+one_shot = true
 
 [node name="just_detached" type="Timer" parent="CharacterStateMachine/Climbing"]
 wait_time = 0.5
+one_shot = true
 
 [node name="jump_on_wall" type="Timer" parent="CharacterStateMachine/Climbing"]
 process_mode = 3
@@ -1160,7 +1184,7 @@ can_cast = false
 can_change_form = false
 
 [node name="magic_handler" type="Node" parent="CharacterStateMachine/Casting"]
-script = ExtResource("15_eafol")
+script = ExtResource("24_gbbjy")
 
 [node name="magic_orb_cooldown" type="Timer" parent="CharacterStateMachine/Casting/magic_handler"]
 process_mode = 3
@@ -1171,24 +1195,13 @@ process_mode = 3
 wait_time = 5.0
 one_shot = true
 
-[node name="magic_blast_cooldown" type="Timer" parent="CharacterStateMachine/Casting/magic_handler"]
-process_mode = 3
-wait_time = 0.5
-one_shot = true
-
-[node name="flipper_blocker_remover" type="Timer" parent="CharacterStateMachine/Casting/magic_handler"]
-process_mode = 3
-wait_time = 0.5
-one_shot = true
-
 [node name="input_check" type="Node" parent="CharacterStateMachine"]
 script = ExtResource("12_oovai")
 
 [connection signal="area_entered" from="playerCollisionShape/player_area" to="." method="_on_damage_area_area_entered"]
+[connection signal="timeout" from="CharacterStateMachine/Attack/attack_cooldown" to="CharacterStateMachine/Attack" method="_on_attack_cooldown_timeout"]
 [connection signal="timeout" from="CharacterStateMachine/Climbing/climb_detach" to="CharacterStateMachine/Climbing" method="_on_climb_detach_timeout"]
 [connection signal="timeout" from="CharacterStateMachine/Climbing/just_detached" to="CharacterStateMachine/Climbing" method="_on_just_detached_timeout"]
 [connection signal="timeout" from="CharacterStateMachine/Climbing/jump_on_wall" to="CharacterStateMachine/Climbing" method="_on_jump_on_wall_timeout"]
 [connection signal="timeout" from="CharacterStateMachine/Casting/magic_handler/magic_orb_cooldown" to="CharacterStateMachine/Casting/magic_handler" method="_on_magic_orb_cooldown_timeout"]
 [connection signal="timeout" from="CharacterStateMachine/Casting/magic_handler/dark_sphere_cooldown" to="CharacterStateMachine/Casting/magic_handler" method="_on_dark_sphere_cooldown_timeout"]
-[connection signal="timeout" from="CharacterStateMachine/Casting/magic_handler/magic_blast_cooldown" to="CharacterStateMachine/Casting/magic_handler" method="_on_magic_blast_cooldown_timeout"]
-[connection signal="timeout" from="CharacterStateMachine/Casting/magic_handler/flipper_blocker_remover" to="CharacterStateMachine/Casting/magic_handler" method="_on_flipper_blocker_remover_timeout"]

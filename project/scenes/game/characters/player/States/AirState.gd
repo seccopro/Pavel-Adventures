@@ -1,15 +1,17 @@
 class_name AirState extends State
 
 
-@onready var double_jump_velocity: float = get_parent().double_jump_velocity
-@onready var moving_speed: float = get_parent().moving_velocity
-@onready var jump_speed: float = get_parent().jump_velocity
+#@onready var double_jump_velocity: float = get_parent().double_jump_velocity
+#@onready var moving_speed: float = get_parent().moving_velocity
+#@onready var jump_speed: float = get_parent().jump_velocity
 
 
 var true_gravity: float = 980	#gets set to player gravity in on enter
 
+
 var fast_fall_gravity_multiplier: float = 2.0
 var fall_velocity_cap: float = 1000
+
 var has_jump_forgiveness: bool = true
 var jump_forgiveness_time: float = 0.1   #seconds
 var has_double_jumped: bool = false
@@ -57,7 +59,6 @@ func jump_logic() -> void:
 	if Input.is_action_just_released(controls.jump) && character.velocity.y < 0:
 		character.velocity.y /= 2           #smooths the player before falling after releasing jump
 	
-	#falling
 	if character.velocity.y > -600:                     #while ascending:
 		if character.velocity.y < fall_velocity_cap:	#faster fall
 			character.gravity = true_gravity * fast_fall_gravity_multiplier
@@ -67,9 +68,9 @@ func jump_logic() -> void:
 
 func movement() -> void:	
 	#slows down (gradually) after a wall jump  (to avoid getting the bonus speed overridden by basic movement)
-	var direction = Input.get_axis(controls.move_left, controls.move_right)
+	var direction: float = Input.get_axis(controls.move_left, controls.move_right)
 	if abs(character.velocity.x) < 600 && direction:	#replace 600 with top moving speed maybe
-			character.velocity.x = direction * moving_speed
+			character.velocity.x = direction * player_config.moving_velocity
 			if player.can_flip_sprite :
 				if direction > 0:
 					player.is_facing_right = true
@@ -80,11 +81,10 @@ func movement() -> void:
 
 func double_jump() -> void:
 	character.gravity = true_gravity
-	character.velocity.y = double_jump_velocity
+	character.velocity.y = player_config.double_jump_velocity
 	animation_tree.set("parameters/air_state/transition_request", "jump_state")
 	animation_tree.set("parameters/jump_state/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 	has_double_jumped = true
-	print("double jump")
 
 func on_exit() -> void:
 	time_elapsed = 0
@@ -96,3 +96,4 @@ func on_exit() -> void:
 		animation_tree.set("parameters/jump_state/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
 		animation_tree.set("parameters/landing/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 	
+	CSM.previous_state = self
