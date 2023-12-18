@@ -77,9 +77,11 @@ func camera() -> void:		#deactivated, can be used for animation debug (zoom in a
 
 func animations():
 	if is_facing_right: 
-		$Sprite2D.flip_h = false
+		
+		$Sprite2D.set_scale(Vector2(1, 1))
 	else:
-		$Sprite2D.flip_h = true
+		
+		$Sprite2D.set_scale(Vector2(-1, 1))
 
 func game_logic() -> void:
 	var hearts = ""

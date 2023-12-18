@@ -1,10 +1,11 @@
-[gd_scene load_steps=80 format=3 uid="uid://cbb5qfdj1r0sb"]
+[gd_scene load_steps=84 format=3 uid="uid://cbb5qfdj1r0sb"]
 
 [ext_resource type="Script" path="res://scenes/game/characters/player/player.gd" id="1_hkbnf"]
 [ext_resource type="PackedScene" uid="uid://61w51ai88ja0" path="res://scenes/HUD/death_screen/death_screen.tscn" id="2_ee4nu"]
 [ext_resource type="Texture2D" uid="uid://dn4qvq2mcmfif" path="res://assets/player/chara_move_sheet.png" id="2_n1ixg"]
 [ext_resource type="PackedScene" uid="uid://36kt0ngexo1t" path="res://scenes/HUD/victory_screen/victory_screen.tscn" id="3_0kecm"]
 [ext_resource type="Texture2D" uid="uid://cdjjjkjygprcn" path="res://assets/player/chara_move_sheet_n.png" id="3_w22gh"]
+[ext_resource type="Texture2D" uid="uid://cvxb8iw1q3vbf" path="res://assets/player/chara_move_sheet_attacks.png" id="4_5kev0"]
 [ext_resource type="Script" path="res://scenes/game/characters/player/States/CharacterStateMachine.gd" id="6_wfvl0"]
 [ext_resource type="Script" path="res://scenes/game/characters/player/States/AirState.gd" id="6_wvrpb"]
 [ext_resource type="Script" path="res://scripts/variables/player_config.gd" id="7_5nfh0"]
@@ -42,7 +43,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("Sprite2D/movement:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -51,13 +52,107 @@ tracks/0/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D/attacks:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_v41hu"]
+resource_name = "basic_attack_1"
+length = 0.400003
+step = 0.0333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D/attacks:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.133333, 0.233333, 0.333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 4, 5, 6, 7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D/attacks:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D/movement:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_g7pbw"]
+resource_name = "basic_attack_2"
+length = 0.300002
+step = 0.0333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D/attacks:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0166667, 0.0333333, 0.05, 0.1, 0.166667, 0.233333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [8, 10, 11, 12, 13, 14, 7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D/attacks:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D/movement:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
 
 [sub_resource type="Animation" id="Animation_5k683"]
 resource_name = "death"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("Sprite2D/movement:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -74,7 +169,7 @@ step = 0.0333333
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("Sprite2D/movement:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -92,7 +187,7 @@ step = 0.0333333
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("Sprite2D/movement:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -109,7 +204,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("Sprite2D/movement:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -126,7 +221,7 @@ step = 0.0333333
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("Sprite2D/movement:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -143,7 +238,7 @@ step = 0.0333333
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("Sprite2D/movement:frame")
 tracks/0/interp = 0
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -161,7 +256,7 @@ step = 0.0333333
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("Sprite2D/movement:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -178,7 +273,7 @@ step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("Sprite2D/movement:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -195,7 +290,7 @@ step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("Sprite2D/movement:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -208,6 +303,8 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_twtli"]
 _data = {
 "RESET": SubResource("Animation_7o5yl"),
+"basic_attack_1": SubResource("Animation_v41hu"),
+"basic_attack_2": SubResource("Animation_g7pbw"),
 "death": SubResource("Animation_5k683"),
 "fall_end": SubResource("Animation_yxkmw"),
 "fall_loop": SubResource("Animation_1qfku"),
@@ -219,6 +316,8 @@ _data = {
 "run_stop": SubResource("Animation_rq06s")
 }
 
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_hhr6l"]
+
 [sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_tjogy"]
 input_0/name = "fall_state"
 input_0/auto_advance = false
@@ -226,6 +325,12 @@ input_0/reset = true
 input_1/name = "jump_state"
 input_1/auto_advance = false
 input_1/reset = true
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_mkut2"]
+animation = &"basic_attack_1"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jvnx8"]
+animation = &"basic_attack_2"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_f4fu4"]
 animation = &"fall_loop"
@@ -323,6 +428,8 @@ filters = ["Sprite2D:frame"]
 
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_1pumf"]
 
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_ky8fa"]
+
 [sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_mtad4"]
 input_0/name = "idle"
 input_0/auto_advance = false
@@ -382,8 +489,14 @@ input_1/auto_advance = false
 input_1/reset = true
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_e5o84"]
+nodes/OneShot/node = SubResource("AnimationNodeOneShot_hhr6l")
+nodes/OneShot/position = Vector2(100, 200)
 nodes/air_state/node = SubResource("AnimationNodeTransition_tjogy")
 nodes/air_state/position = Vector2(-340, 280)
+nodes/basic_attack_1/node = SubResource("AnimationNodeAnimation_mkut2")
+nodes/basic_attack_1/position = Vector2(-120, 260)
+nodes/basic_attack_2/node = SubResource("AnimationNodeAnimation_jvnx8")
+nodes/basic_attack_2/position = Vector2(-120, 400)
 nodes/double_jump/node = SubResource("AnimationNodeStateMachine_lo6i5")
 nodes/double_jump/position = Vector2(-740, 620)
 nodes/fall/node = SubResource("AnimationNodeStateMachine_b4exb")
@@ -400,16 +513,18 @@ nodes/jump_state/node = SubResource("AnimationNodeOneShot_3inu1")
 nodes/jump_state/position = Vector2(-540, 480)
 nodes/landing/node = SubResource("AnimationNodeOneShot_1pumf")
 nodes/landing/position = Vector2(-340, -60)
+nodes/move_attack/node = SubResource("AnimationNodeOneShot_ky8fa")
+nodes/move_attack/position = Vector2(300, 0)
 nodes/movement/node = SubResource("AnimationNodeTransition_mtad4")
 nodes/movement/position = Vector2(-500, -80)
-nodes/output/position = Vector2(180, 20)
+nodes/output/position = Vector2(580, 20)
 nodes/run/node = SubResource("AnimationNodeStateMachine_vfmqx")
 nodes/run/position = Vector2(-860, 200)
 nodes/run_idle/node = SubResource("AnimationNodeStateMachine_whysm")
 nodes/run_idle/position = Vector2(-860, 60)
 nodes/run_state/node = SubResource("AnimationNodeTransition_tbjjs")
 nodes/run_state/position = Vector2(-660, 100)
-node_connections = [&"output", 0, &"ground_air", &"air_state", 0, &"fall_ground", &"air_state", 1, &"jump_state", &"ground_air", 0, &"landing", &"ground_air", 1, &"air_state", &"jump_state", 0, &"jump", &"jump_state", 1, &"double_jump", &"landing", 0, &"movement", &"landing", 1, &"fall", &"movement", 0, &"idle", &"movement", 1, &"run_state", &"run_state", 0, &"run_idle", &"run_state", 1, &"run"]
+node_connections = [&"OneShot", 0, &"basic_attack_1", &"OneShot", 1, &"basic_attack_2", &"air_state", 0, &"fall_ground", &"air_state", 1, &"jump_state", &"ground_air", 0, &"landing", &"ground_air", 1, &"air_state", &"jump_state", 0, &"jump", &"jump_state", 1, &"double_jump", &"landing", 0, &"movement", &"landing", 1, &"fall", &"move_attack", 0, &"ground_air", &"move_attack", 1, &"OneShot", &"movement", 0, &"idle", &"movement", 1, &"run_state", &"output", 0, &"move_attack", &"run_state", 0, &"run_idle", &"run_state", 1, &"run"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0lt8o"]
 size = Vector2(38, 5)
@@ -420,6 +535,7 @@ script = ExtResource("1_hkbnf")
 player_config = NodePath("player_config")
 
 [node name="playerCollisionShape" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(1, -2)
 shape = SubResource("RectangleShape2D_rrxu0")
 
@@ -430,7 +546,9 @@ collision_mask = 255
 position = Vector2(0, 0.25)
 shape = SubResource("RectangleShape2D_b1661")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Node2D" parent="."]
+
+[node name="movement" type="Sprite2D" parent="Sprite2D"]
 position = Vector2(-0.999996, -1.00001)
 scale = Vector2(0.4, 0.4)
 texture = SubResource("CanvasTexture_vlif7")
@@ -438,16 +556,31 @@ hframes = 13
 vframes = 3
 metadata/_edit_lock_ = true
 
+[node name="attacks" type="Sprite2D" parent="Sprite2D"]
+visible = false
+position = Vector2(23.3345, -6.01041)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("4_5kev0")
+hframes = 8
+vframes = 2
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 root_node = NodePath("../..")
+
 libraries = {
 "": SubResource("AnimationLibrary_twtli")
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_twtli")
+}
 tree_root = SubResource("AnimationNodeBlendTree_e5o84")
-anim_player = NodePath("../Sprite2D/AnimationPlayer")
+anim_player = NodePath("../AnimationPlayer")
 active = true
+parameters/OneShot/active = false
+parameters/OneShot/internal_active = false
+parameters/OneShot/request = 0
 parameters/air_state/current_state = "jump_state"
 parameters/air_state/transition_request = ""
 parameters/air_state/current_index = 1
@@ -460,6 +593,9 @@ parameters/jump_state/request = 0
 parameters/landing/active = false
 parameters/landing/internal_active = false
 parameters/landing/request = 0
+parameters/move_attack/active = false
+parameters/move_attack/internal_active = false
+parameters/move_attack/request = 0
 parameters/movement/current_state = "idle"
 parameters/movement/transition_request = ""
 parameters/movement/current_index = 0
@@ -507,6 +643,7 @@ state_machine = NodePath("../../CharacterStateMachine")
 form_sm = NodePath("../../FormStateMachine")
 
 [node name="floor_checker" type="ShapeCast2D" parent="."]
+visible = false
 position = Vector2(1, 68)
 scale = Vector2(0.995741, 1)
 shape = SubResource("RectangleShape2D_0lt8o")
@@ -524,14 +661,20 @@ script = ExtResource("7_5nfh0")
 [node name="controls" type="Node" parent="."]
 script = ExtResource("17_msedg")
 
-[node name="FormStateMachine" type="Node" parent="." node_paths=PackedStringArray("current_form", "no_form", "rock_form", "fire_form", "gravity_form", "ice_form")]
+[node name="FormStateMachine" type="Node" parent="."]
 script = ExtResource("18_2xi6w")
-current_form = NodePath("no_form")
-no_form = NodePath("no_form")
-rock_form = NodePath("rock_form")
-fire_form = NodePath("fire_form")
-gravity_form = NodePath("gravity_form")
-ice_form = NodePath("ice_form")
+current_form = Object(Node,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","script":ExtResource("19_q3bpg"),"passive":"nulll","special_1":"null","special_2":"null","special_3":"null")
+
+no_form = Object(Node,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","script":ExtResource("19_q3bpg"),"passive":"nulll","special_1":"null","special_2":"null","special_3":"null")
+
+rock_form = Object(Node,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","script":ExtResource("20_qotna"),"passive":"sinking","special_1":"eruption","special_2":"climb","special_3":"rock dash")
+
+fire_form = Object(Node,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","script":ExtResource("22_js6q5"),"passive":"cold res + light","special_1":"fire orb","special_2":"flamethrower","special_3":"fire dash")
+
+gravity_form = Object(Node,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","script":ExtResource("23_gx8tp"),"passive":"double jump","special_1":"push","special_2":"dark sphere","special_3":"downward spell")
+
+ice_form = Object(Node,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","script":ExtResource("21_1biub"),"passive":"ice skating","special_1":"ice sword","special_2":"aoe slow","special_3":"ice shield")
+
 
 [node name="rock_form" type="Node" parent="FormStateMachine"]
 script = ExtResource("20_qotna")
@@ -568,18 +711,31 @@ special_1 = "ice sword"
 special_2 = "aoe slow"
 special_3 = "ice shield"
 
-[node name="CharacterStateMachine" type="Node" parent="." node_paths=PackedStringArray("character", "form_sm", "idle_state", "walking_state", "air_state", "attack_state", "dashing_state", "climbing_state", "casting_state", "dead_state")]
+[node name="CharacterStateMachine" type="Node" parent="."]
 script = ExtResource("6_wfvl0")
-character = NodePath("..")
-form_sm = NodePath("../FormStateMachine")
-idle_state = NodePath("Idle")
-walking_state = NodePath("Walking")
-air_state = NodePath("Air")
-attack_state = NodePath("Attack")
-dashing_state = NodePath("Dashing")
-climbing_state = NodePath("Climbing")
-casting_state = NodePath("Casting")
-dead_state = NodePath("Dead")
+character = Object(CharacterBody2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(0, 0),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"disable_mode":0,"collision_layer":1,"collision_mask":1,"collision_priority":1.0,"input_pickable":false,"motion_mode":0,"up_direction":Vector2(0, -1),"velocity":Vector2(0, 0),"slide_on_ceiling":true,"max_slides":4,"wall_min_slide_angle":0.261799,"floor_stop_on_slope":true,"floor_constant_speed":false,"floor_block_on_wall":true,"floor_max_angle":0.785398,"floor_snap_length":1.0,"platform_on_leave":0,"platform_floor_layers":4294967295,"platform_wall_layers":0,"safe_margin":0.08,"script":ExtResource("1_hkbnf"))
+
+form_sm = Object(Node,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","script":ExtResource("18_2xi6w"),"current_form":Object(Node,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","script":ExtResource("19_q3bpg"),"passive":"nulll","special_1":"null","special_2":"null","special_3":"null")
+,"no_form":Object(Node,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","script":ExtResource("19_q3bpg"),"passive":"nulll","special_1":"null","special_2":"null","special_3":"null")
+,"rock_form":Object(Node,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","script":ExtResource("20_qotna"),"passive":"sinking","special_1":"eruption","special_2":"climb","special_3":"rock dash")
+,"fire_form":Object(Node,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","script":ExtResource("22_js6q5"),"passive":"cold res + light","special_1":"fire orb","special_2":"flamethrower","special_3":"fire dash")
+,"gravity_form":Object(Node,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","script":ExtResource("23_gx8tp"),"passive":"double jump","special_1":"push","special_2":"dark sphere","special_3":"downward spell")
+,"ice_form":Object(Node,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","script":ExtResource("21_1biub"),"passive":"ice skating","special_1":"ice sword","special_2":"aoe slow","special_3":"ice shield")
+)
+
+idle_state = Object(Node,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","script":ExtResource("7_xcc5y"),"can_wall_jump":false)
+
+walking_state = Object(Node,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","script":ExtResource("12_eyoi0"),"can_wall_jump":false)
+
+air_state = Object(Node,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","script":ExtResource("6_wvrpb"),"can_jump":false,"can_wall_jump":false)
+
+dashing_state = Object(Node,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","script":ExtResource("11_bxnc5"),"can_move":false,"can_fall":false,"can_dash":false,"can_jump":false,"can_wall_jump":false,"can_climb":false,"can_change_form":false)
+
+climbing_state = Object(Node,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","script":ExtResource("9_0x0ia"),"can_move":false,"can_fall":false,"can_dash":false,"can_jump":false,"can_climb":false,"can_change_form":false)
+
+casting_state = Object(Node,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","script":ExtResource("10_v8iwg"),"can_move":false,"can_fall":false,"can_dash":false,"can_jump":false,"can_wall_jump":false,"can_climb":false,"can_cast":false,"can_change_form":false)
+
+dead_state = Object(Node,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","script":ExtResource("13_1kak5"),"can_move":false,"can_dash":false,"can_jump":false,"can_wall_jump":false,"can_climb":false,"can_cast":false,"can_change_form":false)
 
 [node name="Dead" type="Node" parent="CharacterStateMachine"]
 script = ExtResource("13_1kak5")
@@ -663,6 +819,7 @@ can_change_form = false
 
 [node name="magic_handler" type="Node" parent="CharacterStateMachine/Casting"]
 script = ExtResource("24_gbbjy")
+previous_state = Object(Node,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","script":ExtResource("7_xcc5y"),"can_wall_jump":false)
 
 [node name="magic_orb_cooldown" type="Timer" parent="CharacterStateMachine/Casting/magic_handler"]
 process_mode = 3
