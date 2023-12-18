@@ -169,6 +169,13 @@ reset_position={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="Player"
+2d_physics/layer_2="Interactable"
+2d_physics/layer_3="Traps"
+2d_physics/layer_4="Enemies"
+
 [rendering]
 
 renderer/rendering_method="mobile"

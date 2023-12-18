@@ -16,7 +16,7 @@ func _ready() -> void:
 			print("child isn't a form: " + str(child))
 			return
 		
-		print("appended form: " + str(child))
+		#print("appended form: " + str(child))
 		#load states
 		child.no_form = no_form
 		child.rock_form = rock_form

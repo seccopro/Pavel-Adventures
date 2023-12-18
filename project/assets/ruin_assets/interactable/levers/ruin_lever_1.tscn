@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://d1eurxocqst0e"]
+
+[ext_resource type="Script" path="res://scripts/common/lever.gd" id="1_vkbn2"]
+[ext_resource type="PackedScene" uid="uid://b3gou0aih254a" path="res://assets/ruin_assets/interactable/levers/ruin_lever_1_spr.tscn" id="2_fjspd"]
+[ext_resource type="PackedScene" uid="uid://b0gmmb6vucy2n" path="res://assets/common/interactable/lever_area.tscn" id="2_uirqg"]
+
+[node name="ruin_lever_1" type="Node2D"]
+script = ExtResource("1_vkbn2")
+
+[node name="ruin_lever_1_spr" parent="." instance=ExtResource("2_fjspd")]
+
+[node name="lever_area" parent="." instance=ExtResource("2_uirqg")]
+collision_layer = 2
+
+[node name="popup_text" type="Label" parent="."]
+offset_left = -45.0
+offset_right = 62.0
+offset_bottom = 31.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "pull lever"
+metadata/_edit_use_anchors_ = true
+
+[connection signal="body_entered" from="lever_area" to="." method="_on_lever_area_body_entered"]
+[connection signal="body_exited" from="lever_area" to="." method="_on_lever_area_body_exited"]
+
+[editable path="lever_area"]

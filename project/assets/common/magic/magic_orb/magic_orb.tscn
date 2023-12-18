@@ -1,12 +1,15 @@
 [gd_scene load_steps=3 format=3 uid="uid://bcqbm8xryrpdl"]
 
-[ext_resource type="Script" path="res://scenes/game/characters/player/magic/magic_orb/magic_orb.gd" id="1_v55m1"]
+[ext_resource type="Script" path="res://assets/common/magic/magic_projectile.gd" id="1_w3som"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7kus8"]
 radius = 32.0624
 
 [node name="magic_orb" type="Area2D"]
-script = ExtResource("1_v55m1")
+scale = Vector2(0.291568, 0.291568)
+script = ExtResource("1_w3som")
+travel_distance = 500.0
+shoot_speed = 1000.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_7kus8")
