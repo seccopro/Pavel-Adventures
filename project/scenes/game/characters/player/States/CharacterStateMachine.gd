@@ -17,7 +17,7 @@ var current_state: State
 var previous_state: State
 
 
-@onready var controls : Dictionary  = $"controls".controls
+@onready var controls : Dictionary  = $"../controls".controls
 @onready var animation_tree: AnimationTree = $"../AnimationTree"
 @onready var player = $".."
 @onready var input_check = $input_check
