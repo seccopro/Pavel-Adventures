@@ -35,7 +35,7 @@ func state_input(event : InputEvent) -> void:
 func vertical_movement() -> void:
 	var direction: float = Input.get_axis(controls.move_up, controls.move_down)
 	if direction:
-		character.velocity.y = direction * variables.vertical_speed	
+		character.velocity.y = direction * player_config.vertical_speed	
 	else:
 		character.velocity.y = 0.0
 

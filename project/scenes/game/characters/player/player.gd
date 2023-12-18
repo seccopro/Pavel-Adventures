@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var variables: Node
+@export var player_config: Node
 @export var lifes : int = 3
 @export var level: Node
 
@@ -113,20 +113,20 @@ func _on_damage_area_area_entered(area):
 			print("!! - damaged on spikes")
 			#velocity = -velocity  #kek bouncy spikeys
 			if velocity.y > 0:
-				velocity.y = -variables.spikes_bounce
+				velocity.y = -player_config.spikes_bounce
 			else:
 				if velocity.x > 0:
-					velocity.x -= variables.spikes_knockback
+					velocity.x -= player_config.spikes_knockback
 				else:
-					velocity.x = variables.spikes_knockback
+					velocity.x = player_config.spikes_knockback
 		
 		"ronda_damage_area":				#layer 4 is enemies layer
 			lifes -= 1
 			print("!! Ronda hurts!")
 			if velocity.x > 0:
-				velocity.x -= variables.ronda_knockback
+				velocity.x -= player_config.ronda_knockback
 			else:
-				velocity.x = variables.ronda_knockback
+				velocity.x = player_config.ronda_knockback
 		
 		"heavy_object":	#lose 5 health
 			lifes -= 1

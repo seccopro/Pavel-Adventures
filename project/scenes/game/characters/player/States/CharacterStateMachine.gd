@@ -17,7 +17,7 @@ var current_state: State
 var previous_state: State
 
 
-@onready var controls : Dictionary  = $"../controls".controls
+@onready var controls : Dictionary  = $"controls".controls
 @onready var animation_tree: AnimationTree = $"../AnimationTree"
 @onready var player = $".."
 @onready var input_check = $input_check
@@ -52,7 +52,8 @@ func _ready() -> void:
 		child.animation_tree = animation_tree
 		child.input_check = input_check
 		child.CSM = $"."
-		child.variables = player.variables
+		child.player_config = player.player_config
+		print(child.player_config)
 		#print("appended state: " + str(child))
 		
 		#starting state

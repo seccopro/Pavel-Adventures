@@ -70,7 +70,7 @@ func movement() -> void:
 	#slows down (gradually) after a wall jump  (to avoid getting the bonus speed overridden by basic movement)
 	var direction = Input.get_axis(controls.move_left, controls.move_right)
 	if abs(character.velocity.x) < 600 && direction:	#replace 600 with top moving speed maybe
-			character.velocity.x = direction * variables.moving_velocity
+			character.velocity.x = direction * player_config.moving_velocity
 			if player.can_flip_sprite :
 				if direction > 0:
 					player.is_facing_right = true
@@ -81,7 +81,7 @@ func movement() -> void:
 
 func double_jump() -> void:
 	character.gravity = true_gravity
-	character.velocity.y = variables.double_jump_velocity
+	character.velocity.y = player_config.double_jump_velocity
 	animation_tree.set("parameters/air_state/transition_request", "jump_state")
 	animation_tree.set("parameters/jump_state/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 	has_double_jumped = true

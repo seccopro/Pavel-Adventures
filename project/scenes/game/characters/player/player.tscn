@@ -414,10 +414,10 @@ node_connections = [&"output", 0, &"ground_air", &"air_state", 0, &"fall_ground"
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0lt8o"]
 size = Vector2(38, 5)
 
-[node name="player" type="CharacterBody2D" node_paths=PackedStringArray("variables")]
+[node name="player" type="CharacterBody2D" node_paths=PackedStringArray("player_config")]
 collision_mask = 255
 script = ExtResource("1_hkbnf")
-variables = NodePath("variables")
+player_config = NodePath("player_config")
 
 [node name="playerCollisionShape" type="CollisionShape2D" parent="."]
 position = Vector2(1, -2)
@@ -518,7 +518,7 @@ target_position = Vector2(-30, 0)
 [node name="right_wall_checker" type="RayCast2D" parent="."]
 target_position = Vector2(28, 1)
 
-[node name="variables" type="Node" parent="."]
+[node name="player_config" type="Node" parent="."]
 script = ExtResource("7_5nfh0")
 
 [node name="controls" type="Node" parent="."]

@@ -2,7 +2,7 @@ extends Node
 
 #1- gets called to check if a magic is off cooldown
 #2- gets called to cast magic
-#3- passes to casting state all needed variables, including the state from which it casted
+#3- passes to casting state all needed player_config, including the state from which it casted
 
 @onready var player = $"../../.."
 @onready var father = player.get_parent()

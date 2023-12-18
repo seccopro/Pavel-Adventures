@@ -1,7 +1,5 @@
 extends Node
 
-var penis = true
-
 @export_group("Character Movement")
 #walking state ---------------------------
 @export var walking_velocity: float = 450

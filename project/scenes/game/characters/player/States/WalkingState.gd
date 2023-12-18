@@ -26,8 +26,8 @@ func on_exit() -> void:
 
 func walk() -> void:
 	var direction = Input.get_axis(controls.move_left, controls.move_right)
-	if abs(character.velocity.x) < variables.walking_velocity_cap && direction:
-		character.velocity.x = direction * variables.walking_velocity
+	if abs(character.velocity.x) < player_config.walking_velocity_cap && direction:
+		character.velocity.x = direction * player_config.walking_velocity
 		if player.can_flip_sprite :
 			if direction > 0:
 				player.is_facing_right = true

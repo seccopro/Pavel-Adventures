@@ -2,7 +2,7 @@ class_name Input_Check extends Node
 
 var controls : Dictionary
 @onready var player = $"../.."
-@onready var variables = player.variables
+@onready var player_config = player.player_config
 @onready var CSM =  $".."
 @onready var animation_tree = $"../../AnimationTree"
 @onready var area = $"../../playerCollisionShape/player_area"
@@ -57,7 +57,7 @@ func walk(state: State, _event: InputEvent) -> void:
 
 func jump(state: State, _event: InputEvent) -> void:
 	if Input.is_action_just_pressed(controls.jump):
-		player.velocity.y = variables.jump_velocity 
+		player.velocity.y = player_config.jump_velocity 
 		state.next_state = state.air_state
 
 func attack(state: State, _event: InputEvent) -> void:
@@ -110,9 +110,9 @@ func wall_jump(state: State, _event: InputEvent) -> void:
 func rock_dash(state: State, _event: InputEvent) -> void:	#rock dash
 	if Input.is_action_just_pressed(controls.dash):	
 		if player.is_facing_right:
-			get_parent().character.velocity.x = +variables.dash_velocity / 1.5		#dash right
+			get_parent().character.velocity.x = +player_config.dash_velocity / 1.5		#dash right
 		else:
-			get_parent().character.velocity.x = -variables.dash_velocity / 1.5	#dash left
+			get_parent().character.velocity.x = -player_config.dash_velocity / 1.5	#dash left
 		
 		state.next_state = state.dashing_state
 
@@ -131,9 +131,9 @@ func fire_dash(state: State, _event: InputEvent) -> void:	#fire dash
 	if Input.is_action_just_pressed(controls.dash):		
 		print("fiery dash")
 		if player.is_facing_right:
-			player.velocity.x = +variables.dash_velocity		#dash right
+			player.velocity.x = +player_config.dash_velocity		#dash right
 		else:
-			player.velocity.x = -variables.dash_velocity		#dash left
+			player.velocity.x = -player_config.dash_velocity		#dash left
 		
 		state.next_state = state.dashing_state
 

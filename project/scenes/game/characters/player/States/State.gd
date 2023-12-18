@@ -14,7 +14,7 @@ var player
 var input_check
 var animation_tree
 var CSM
-var variables
+var player_config
 
 @export_group("Behaviour Flags")
 @export var can_move: bool = true

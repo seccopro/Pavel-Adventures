@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://dqnfvaoaxxrfa"]
+[gd_scene load_steps=34 format=3 uid="uid://dqnfvaoaxxrfa"]
 
 [ext_resource type="Script" path="res://scenes/_debug/movement_test.gd" id="1_pcuud"]
 [ext_resource type="PackedScene" uid="uid://cbb5qfdj1r0sb" path="res://scenes/game/characters/player/player.tscn" id="2_36yml"]
@@ -9,7 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://cey0xyxxmqyca" path="res://assets/lights/default_light.tres" id="5_mlly0"]
 [ext_resource type="PackedScene" uid="uid://dadxrk63fjvqw" path="res://assets/ruin_assets/interactable/healing_flame_temp.tscn" id="5_y4gft"]
 [ext_resource type="PackedScene" uid="uid://d1eurxocqst0e" path="res://assets/ruin_assets/interactable/levers/ruin_lever_1.tscn" id="6_jrxx6"]
-[ext_resource type="PackedScene" uid="uid://bpfsxpmf1a2bf" path="res://scenes/_debug/level_test_1.tscn" id="7_adu1f"]
 [ext_resource type="Script" path="res://scripts/Camera2D.gd" id="9_7wjax"]
 [ext_resource type="PackedScene" uid="uid://b2p0v6qigf1ck" path="res://assets/ruin_assets/area_effects/ruin_spikes.tscn" id="10_7x4ay"]
 [ext_resource type="PackedScene" uid="uid://banaip4kb67ug" path="res://assets/ruin_assets/interactable/doors/ruin_door_2/ruin_door_2.tscn" id="12_uotk6"]
