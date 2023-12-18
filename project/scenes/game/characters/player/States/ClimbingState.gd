@@ -1,7 +1,7 @@
 class_name ClimbingState extends State
 
-var jump_on_wall_x_velocity = 400
-var jump_on_wall_y_velocity = 200
+var jump_on_wall_x_velocity: float = 400
+var jump_on_wall_y_velocity: float = 200
 
 func on_enter() -> void:
 	can_fall = false

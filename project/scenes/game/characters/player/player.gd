@@ -75,7 +75,7 @@ func camera() -> void:		#deactivated, can be used for animation debug (zoom in a
 		$"Camera2D".zoom.x -= 0.5
 		$"Camera2D".zoom.y -= 0.5	
 
-func animations():
+func animations() -> void:
 	if is_facing_right: 
 		
 		$Sprite2D.set_scale(Vector2(1, 1))
@@ -84,7 +84,7 @@ func animations():
 		$Sprite2D.set_scale(Vector2(-1, 1))
 
 func game_logic() -> void:
-	var hearts = ""
+	var hearts: String = ""
 	for i in lifes:
 		hearts += "♥"
 	$HUD/HP_bar.text = str(hearts)
@@ -107,7 +107,7 @@ func _on_node_2d_win(score: int) -> void:
 	win()
 
 
-func _on_damage_area_area_entered(area):
+func _on_damage_area_area_entered(area: Area2D) -> void:
 	#print(area.name)
 	match area.name:	 #lose 2 health
 		"spike_damage_area":	#layer 3 is trap layer

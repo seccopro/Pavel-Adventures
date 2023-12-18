@@ -1,12 +1,12 @@
 class_name AttackState extends State
 
-@onready var attack_cooldown = $attack_cooldown
+@onready var attack_cooldown: Timer = $attack_cooldown
 
 var time_elapsed:float = 0.0
 
 var attack_duration: float = 0.25
 
-@export var basic_blast: Resource  = load("res://scenes/game/characters/player/attacks/basic_blast/basic_blast.tscn")
+@onready var basic_blast: Resource  = load("res://scenes/game/characters/player/attacks/basic_blast/basic_blast.tscn")
 @export var basic_blast_cast_duration: float = 0.0	 #seconds
 var basic_blast_is_on_cooldown: bool = false
 

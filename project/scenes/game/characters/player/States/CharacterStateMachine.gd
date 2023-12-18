@@ -5,6 +5,7 @@ class_name CharacterStateMachine extends Node
 @export var form_sm : FormStateMachine
 
 @export_group("Character States")
+@export var dead_state: State
 @export var idle_state: State
 @export var walking_state: State
 @export var air_state: State
@@ -12,15 +13,14 @@ class_name CharacterStateMachine extends Node
 @export var dashing_state: State
 @export var climbing_state: State
 @export var casting_state: State
-@export var dead_state: State
 var current_state: State
 var previous_state: State
 
 
 @onready var controls : Dictionary  = $"../controls".controls
 @onready var animation_tree: AnimationTree = $"../AnimationTree"
-@onready var player = $".."
-@onready var input_check = $input_check
+@onready var player: Node2D = $".."
+@export var input_check: Node #= $input_check
 
 
 var just_detached: bool = false
@@ -79,5 +79,5 @@ func switch_states(new_state: State) -> void:
 	current_state.on_enter()
 
 #called on input events (like interrupt)
-func _input(event:InputEvent) -> void:
+func _input(event: InputEvent) -> void:
 	current_state.state_input(event)

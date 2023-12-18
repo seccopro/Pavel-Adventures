@@ -1,6 +1,6 @@
 class_name CastingState extends State
 
-@onready var magic_handler = $magic_handler
+@onready var magic_handler: Node = $magic_handler
 
 var time_elapsed : float = 0.0
 

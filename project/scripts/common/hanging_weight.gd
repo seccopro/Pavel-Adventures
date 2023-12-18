@@ -7,19 +7,19 @@ extends Node2D
 
 @export var delete_rope: bool = true
 
-var is_falling = false
+var is_falling: bool = false
 var time_elapsed: float = 0.0
 
 var first_time:bool = true
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	damaging_area.disabled = true
 	set_process(false)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta: float) -> void:
 	if first_time:
 		time_elapsed = 0.0
 		is_falling = true

@@ -76,7 +76,7 @@ script/source = "extends Area2D
 
 @export var next_scene: PackedScene 
 
-func _on_body_entered(body):
+func _on_body_entered(body: RigidBody2D) -> void:
 	if body.name == \"player\":
 		get_tree().change_scene_to_packed(next_scene)
 "

@@ -1,17 +1,17 @@
 class_name Input_Check extends Node
 
 var controls : Dictionary
-@onready var player = $"../.."
-@onready var player_config = player.player_config
-@onready var CSM =  $".."
-@onready var animation_tree = $"../../AnimationTree"
-@onready var area = $"../../playerCollisionShape/player_area"
-@onready var magic_handler = $"../Casting/magic_handler"
+@onready var player: Node2D = $"../.."
+@onready var player_config: Node = player.player_config
+@onready var CSM: Node =  $".."
+@onready var animation_tree: AnimationTree = $"../../AnimationTree"
+@onready var area: Area2D = $"../../playerCollisionShape/player_area"
+@onready var magic_handler: Node = $"../Casting/magic_handler"
 		
 var wall_jump_velocity_y: float = -800
 var wall_jump_velocity_x: float = 1100
 
-func permission_checker(state: State, _event) -> void:
+func permission_checker(state: State, _event: InputEvent) -> void:
 	if state.can_move:
 		if state != state.air_state:		#movement is handled differently in air
 			#TO WALKING STATE
@@ -67,11 +67,11 @@ func attack(state: State, _event: InputEvent) -> void:
 
 func interact(state: State, _event: InputEvent) -> void:	 #at the moment the interaction is handled by the receiving area/object
 	if Input.is_action_just_pressed(controls.interact):
-		if area.get_overlapping_areas().any( func(area): return area.name == "door_area" ):
+		if area.get_overlapping_areas().any( func ( area: Area2D ) -> bool: return area.name == "door_area" ) :
 			print("press up to go through the door")
-		elif area.get_overlapping_areas().any( func(area): return area.name == "lever_area" ):
+		elif area.get_overlapping_areas().any( func( area: Area2D ) -> bool: return area.name == "lever_area" ):
 			print("do stuff with this lever")
-		elif area.get_overlapping_areas().any( func(area): return area.name == "healing_flame_area" ):
+		elif area.get_overlapping_areas().any( func( area: Area2D ) -> bool: return area.name == "healing_flame_area" ):
 			print("the soothing flame makes you feel stronger...")
 			if player.lifes < 3:
 				player.lifes += 1

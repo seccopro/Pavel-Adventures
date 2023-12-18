@@ -1,8 +1,8 @@
 extends Node2D
 
-var lethal_depth = 600
+var lethal_depth: float = 600
 signal damaged()
-signal win(score)
+signal win(score: float)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

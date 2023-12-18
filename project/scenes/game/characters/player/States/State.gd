@@ -10,11 +10,11 @@ var climbing_state: State
 var casting_state: State
 var dead_state: State
 
-var player
-var input_check
-var animation_tree
-var CSM
-var player_config
+var player: Node2D
+var input_check: Node
+var animation_tree: AnimationTree
+var CSM: Node
+var player_config: Node
 
 @export_group("Behaviour Flags")
 @export var can_move: bool = true

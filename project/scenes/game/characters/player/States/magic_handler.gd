@@ -4,23 +4,23 @@ extends Node
 #2- gets called to cast magic
 #3- passes to casting state all needed player_config, including the state from which it casted
 
-@onready var player = $"../../.."
-@onready var father = player.get_parent()
-@onready var level = player.level	#needs fixing for magic to work without player dad
+@onready var player: Node2D = $"../../.."
+@onready var father: Node2D = player.get_parent()
+@onready var level: Node2D = player.level	#needs fixing for magic to work without player dad
 
 @export_group("magic orb")
 @export var magic_orb: PackedScene = preload("res://assets/common/magic/magic_orb/magic_orb.tscn")
 @export var magic_orb_cast_duration: float = 0.3	 #seconds
 var magic_orb_is_on_cooldown: bool = false
-@export var magic_orb_offset_x = 30
-@export var magic_orb_offset_y = 0
+@export var magic_orb_offset_x: float = 30
+@export var magic_orb_offset_y: float = 0
 
 @export_group("dark sphere")
 @export var dark_sphere: PackedScene = preload("res://assets/common/magic/dark_sphere/dark_sphere.tscn")
 @export var dark_sphere_cast_duration: float = 0.7 #seconds
 var dark_sphere_is_on_cooldown: bool = false
-@export var dark_sphere_offset_x = 30
-@export var dark_sphere_offset_y = -10
+@export var dark_sphere_offset_x: float = 30
+@export var dark_sphere_offset_y: float = -10
 
 var cast_duration: float = 0.0
 
@@ -36,7 +36,7 @@ func cast_magic_orb() -> void:
 	father.add_child(magic_orb.instantiate())
 	
 	#set magic position & facing	
-	var casted_orb = father.get_node("magic_orb")
+	var casted_orb: Node2D = father.get_node("magic_orb")
 	casted_orb.position = player.position	
 	casted_orb.is_facing_right = player.is_facing_right
 	if player.is_facing_right:
@@ -53,7 +53,7 @@ func cast_dark_sphere() -> void:
 	father.add_child(dark_sphere.instantiate())
 	
 	#set magic position & facing	
-	var casted_sphere = father.get_node("dark_sphere")
+	var casted_sphere: Node2D = father.get_node("dark_sphere")
 	casted_sphere.is_facing_right = player.is_facing_right
 	if player.is_facing_right:
 		casted_sphere.position = player.position 	+ Vector2(dark_sphere_offset_x,dark_sphere_offset_y)	#offset

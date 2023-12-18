@@ -12,7 +12,7 @@ var is_okay: bool = true
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
-func _physics_process(delta) -> void:
+func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 	if !is_on_floor():
@@ -43,11 +43,11 @@ func range_walking() -> void:
 		else:
 			target_position = 1
 
-func _on_event_detector_body_entered(body) -> void:
+func _on_event_detector_body_entered(body: RigidBody2D) -> void:
 	if body.name == "player":
 		velocity.y += JUMP_VELOCITY
 
-func _on_damage_area_area_shape_entered(area_rid, area, area_shape_index, local_shape_index) -> void:
+func _on_damage_area_area_shape_entered(area_rid: Area2D, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
 	#print("ronda is hit by a " + area.name)
 
 	match area.name:	 #lose 2 health
@@ -60,6 +60,6 @@ func _on_damage_area_area_shape_entered(area_rid, area, area_shape_index, local_
 		"heavy_object":	#die squished
 			die()
 
-func die():
+func die() -> void:
 	#print("ronda dead")
 	queue_free() #lose 1 health

@@ -68,7 +68,7 @@ func jump_logic() -> void:
 
 func movement() -> void:	
 	#slows down (gradually) after a wall jump  (to avoid getting the bonus speed overridden by basic movement)
-	var direction = Input.get_axis(controls.move_left, controls.move_right)
+	var direction: float = Input.get_axis(controls.move_left, controls.move_right)
 	if abs(character.velocity.x) < 600 && direction:	#replace 600 with top moving speed maybe
 			character.velocity.x = direction * player_config.moving_velocity
 			if player.can_flip_sprite :
