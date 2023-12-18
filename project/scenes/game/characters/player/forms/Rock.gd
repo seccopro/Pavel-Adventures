@@ -1,7 +1,11 @@
 class_name rock_form extends Form
 
+@onready var masks = $"../../Sprite2D/CanvasGroup/masks"
+
 func on_enter() -> void:
-	print("rock form equipped")
+	if !masks.visible:
+		masks.visible = !masks.visible
+	masks.frame = 0
 	#animations
 
 func form_process(delta: float) -> void:

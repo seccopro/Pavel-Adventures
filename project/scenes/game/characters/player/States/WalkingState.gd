@@ -15,13 +15,13 @@ func state_process(delta: float) -> void:
 	walk()
 	
 	if !character.is_on_ground:	#TO AIR STATE (by falling)
-		#animation_tree.set("parameters/air_state/transition_request", "fall_state")
 		next_state = air_state
 	elif character.velocity.x == 0:	#stopped walking #TO IDLE STATE
-		animation_tree.set("parameters/run_state/transition_request", "run_idle")
+		animation_tree.set("parameters/run_state/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 		next_state = idle_state
 
 func on_exit() -> void:
+	animation_tree.set("parameters/run_state/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
 	pass
 
 func walk() -> void:
