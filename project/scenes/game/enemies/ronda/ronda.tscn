@@ -32,6 +32,8 @@ position = Vector2(0, -12.5)
 shape = SubResource("RectangleShape2D_ajq04")
 
 [node name="ronda_damage_area" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 29
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ronda_damage_area"]
 position = Vector2(0, 7)
@@ -45,4 +47,5 @@ offset_right = 22.0
 offset_bottom = -95.0
 
 [connection signal="body_entered" from="event_detector" to="." method="_on_event_detector_body_entered"]
+[connection signal="area_entered" from="ronda_damage_area" to="." method="_on_ronda_damage_area_area_entered"]
 [connection signal="area_shape_entered" from="ronda_damage_area" to="." method="_on_damage_area_area_shape_entered"]

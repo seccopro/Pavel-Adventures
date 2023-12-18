@@ -47,9 +47,13 @@ func _on_event_detector_body_entered(body: RigidBody2D) -> void:
 	if body.name == "player":
 		velocity.y += JUMP_VELOCITY
 
-func _on_damage_area_area_shape_entered(area_rid: Area2D, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
-	#print("ronda is hit by a " + area.name)
+func die() -> void:
+	#print("ronda dead")
+	queue_free() #lose 1 health
 
+
+func _on_ronda_damage_area_area_entered(area : Area2D) -> void:
+	print("ronda is hit by a " + area.name)
 	match area.name:	 #lose 2 health
 		"magic_blast":
 			die()
@@ -59,7 +63,3 @@ func _on_damage_area_area_shape_entered(area_rid: Area2D, area: Area2D, area_sha
 			die()
 		"heavy_object":	#die squished
 			die()
-
-func die() -> void:
-	#print("ronda dead")
-	queue_free() #lose 1 health

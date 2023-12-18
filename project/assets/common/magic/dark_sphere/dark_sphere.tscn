@@ -7,6 +7,7 @@ radius = 74.0068
 
 [node name="dark_sphere" type="Area2D"]
 scale = Vector2(0.56, 0.56)
+collision_layer = 16
 script = ExtResource("2_yx1jw")
 travel_distance = 300.0
 

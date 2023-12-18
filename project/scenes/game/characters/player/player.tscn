@@ -722,6 +722,7 @@ script = ExtResource("13_1kak5")
 can_move = false
 can_dash = false
 can_jump = false
+can_attack = false
 can_wall_jump = false
 can_climb = false
 can_cast = false
