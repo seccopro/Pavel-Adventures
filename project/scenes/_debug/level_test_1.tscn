@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cbb5qfdj1r0sb" path="res://scenes/game/characters/player/player.tscn" id="4_51yc3"]
 [ext_resource type="Texture2D" uid="uid://cey0xyxxmqyca" path="res://assets/lights/default_light.tres" id="5_dixnv"]
 [ext_resource type="PackedScene" uid="uid://b2p0v6qigf1ck" path="res://assets/ruin_assets/area_effects/ruin_spikes.tscn" id="7_83qdb"]
-[ext_resource type="PackedScene" uid="uid://d1eurxocqst0e" path="res://assets/ruin_assets/interactable/levers/ruin_lever_1.tscn" id="10_0vs11"]
+[ext_resource type="PackedScene" uid="uid://d1eurxocqst0e" path="res://assets/ruin_assets/interactable/levers/ruin_lever_1_spr.tscn" id="10_0vs11"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_mt42k"]
 load_path = "res://.godot/imported/env_1_assets.png-b8695d348d589d83d28df7a4f31caac7.ctex"

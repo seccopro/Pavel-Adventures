@@ -1,6 +1,7 @@
 class_name nMGRo_form extends Form
 
 func on_enter() -> void:
+	$"../../Sprite2D/masks".visible = !$"../../Sprite2D/masks".visible
 	print("no form equipped")
 	#animation
 
