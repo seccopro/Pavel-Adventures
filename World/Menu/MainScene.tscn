@@ -1,0 +1,145 @@
+[gd_scene load_steps=5 format=3 uid="uid://cwban3rbetsx8"]
+
+[ext_resource type="Script" path="res://World/Menu/MainScene.gd" id="1_4cna2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gaghq"]
+bg_color = Color(0.607843, 0.792157, 0.976471, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7p3gt"]
+bg_color = Color(0.45098, 0.294118, 0.843137, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.878431, 0.639216, 0.913725, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_elahf"]
+bg_color = Color(0.858824, 0.458824, 0.533333, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.941176, 0.619608, 0.807843, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 16
+
+[node name="MainScene" type="Node2D"]
+script = ExtResource("1_4cna2")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1280.0
+offset_bottom = 720.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_gaghq")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -155.0
+offset_top = -55.0
+offset_right = 115.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Level01" type="Button" parent="Control/VBoxContainer/HBoxContainer/MarginContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+focus_neighbor_right = NodePath("../../MarginContainer2/Level02")
+focus_neighbor_bottom = NodePath("../../../HBoxContainer2/MarginContainer/Settings")
+theme_override_font_sizes/font_size = 36
+theme_override_styles/normal = SubResource("StyleBoxFlat_7p3gt")
+theme_override_styles/hover = SubResource("StyleBoxFlat_elahf")
+text = "PLAY"
+
+[node name="MarginContainer2" type="MarginContainer" parent="Control/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Level02" type="Button" parent="Control/VBoxContainer/HBoxContainer/MarginContainer2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 36
+theme_override_styles/normal = SubResource("StyleBoxFlat_7p3gt")
+theme_override_styles/hover = SubResource("StyleBoxFlat_elahf")
+text = "TEST"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Control/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Settings" type="Button" parent="Control/VBoxContainer/HBoxContainer2/MarginContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 36
+theme_override_styles/normal = SubResource("StyleBoxFlat_7p3gt")
+theme_override_styles/hover = SubResource("StyleBoxFlat_elahf")
+text = "SETTINGS"
+
+[node name="MarginContainer2" type="MarginContainer" parent="Control/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Quit" type="Button" parent="Control/VBoxContainer/HBoxContainer2/MarginContainer2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 36
+theme_override_styles/normal = SubResource("StyleBoxFlat_7p3gt")
+theme_override_styles/hover = SubResource("StyleBoxFlat_elahf")
+text = "QUIT"

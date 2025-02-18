@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://cgeepdvlmtvhy"]
+
+[ext_resource type="PackedScene" uid="uid://b8arjn4c14x7c" path="res://Entities/Player/Player.tscn" id="1_7nbvd"]
+[ext_resource type="PackedScene" uid="uid://dqs120f2t870j" path="res://World/Levels/Handoff.tscn" id="2_geivg"]
+
+[node name="Level0" type="Node2D"]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+
+[node name="Player" parent="." instance=ExtResource("1_7nbvd")]
+position = Vector2(218, 469)
+
+[node name="Handoff" parent="." instance=ExtResource("2_geivg")]
+position = Vector2(312, 21)
+
+[node name="Handoff2" parent="." instance=ExtResource("2_geivg")]
+position = Vector2(0, 91)

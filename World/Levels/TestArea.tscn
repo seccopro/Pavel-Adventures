@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://clkewx7el27qq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_np0cl"]
+
+[node name="TestArea" type="Node2D"]
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1280.0
+offset_bottom = 720.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_np0cl")
+
+[node name="TextEdit" type="TextEdit" parent="Panel"]
+offset_left = 601.0
+offset_top = 343.0
+offset_right = 709.0
+offset_bottom = 386.0
+text = "TEST AREA"
