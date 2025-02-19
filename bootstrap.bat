@@ -3,10 +3,13 @@ setlocal EnableDelayedExpansion
 
 set GODOT_ENGINE_URI=https://github.com/godotengine/godot/releases/download/4.3-stable/Godot_v4.3-stable_win64.exe.zip
 set GODOT_GIT_PLUGIN_URI=https://github.com/godotengine/godot-git-plugin/releases/download/v3.1.1/godot-git-plugin-v3.1.1.zip
+set GIT_SSH_SETTINGS_URI=https://github.com/settings/keys
 
 call :download_engine
 if errorlevel 1 exit /b %ERRORLEVEL%
 call :download_git_plugin
+if errorlevel 1 exit /b %ERRORLEVEL%
+call :setup_git_ssh_keys
 if errorlevel 1 exit /b %ERRORLEVEL%
 
 exit /b %ERRORLEVEL%
@@ -37,4 +40,14 @@ powershell Expand-Archive godot_git_plugin.zip -DestinationPath Addons/godot-git
 powershell Move-Item -Path Addons/godot-git-plugin/godot-git-plugin-v3.1.1/addons/godot-git-plugin/* -Destination Addons/godot-git-plugin/.
 powershell Remove-Item -Recurse Addons/godot-git-plugin/godot-git-plugin-v3.1.1
 powershell Remove-Item godot_git_plugin.zip
+exit /b %ERRORLEVEL%
+
+:setup_git_ssh_keys
+echo generating ssh keys...
+ssh-keygen -t rsa -m pem
+goto open_browser
+
+:open_browser
+echo opening browser
+powershell Start-Process %GIT_SSH_SETTINGS_URI%
 exit /b %ERRORLEVEL%
