@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://co602x7al8cc7"]
+
+[ext_resource type="Texture2D" uid="uid://cgkt2xwlt660t" path="res://World/Levels/Assets/Ruins/env_1_assets.png" id="1_40ka5"]
+
+[node name="RuinAssets" type="Node2D"]
+position = Vector2(-5, 2)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_40ka5")
+region_enabled = true
+region_rect = Rect2(22, 36, 570, 330)
