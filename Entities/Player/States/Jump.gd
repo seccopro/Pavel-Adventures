@@ -1,14 +1,15 @@
 class_name JumpState
-extends State
+extends PlayerState
 
 func enter(previous_state: State, msg: Dictionary = {}) -> void:
-	player.velocity.y = player.JUMP_VELOCITY
+	player.velocity.y = player.player_stats.jump_velocity
 
 func exit() -> void:
 	pass
 
 func unhandled_input(event: InputEvent) -> void:
-	player.direction = Input.get_axis("move_left", "move_right") * player.WALK_SPEED
+	if event.is_action_released("jump") and player.velocity.y < 0.0:
+		player.velocity.y *= player.player_stats.jump_deceleration
 
 func physics_update(delta: float) -> void:
 	player.apply_physics(delta)

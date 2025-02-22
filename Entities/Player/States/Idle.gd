@@ -1,12 +1,12 @@
 class_name StateIdle
-extends State
+extends PlayerState
 
 func enter(previous_state: State, msg: Dictionary = {}) -> void:
 	player.direction = 0.0
 
 func unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("move_left") or event.is_action_pressed("move_right"):
-		transition_to.emit(self, "run")
+		transition_to.emit(self, "walk")
 	
 	if event.is_action_pressed("jump") and player.is_on_floor():
 		transition_to.emit(self, "jump")
