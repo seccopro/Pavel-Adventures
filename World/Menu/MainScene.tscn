@@ -5,19 +5,6 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gaghq"]
 bg_color = Color(0.607843, 0.792157, 0.976471, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7p3gt"]
-bg_color = Color(0.45098, 0.294118, 0.843137, 1)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(0.878431, 0.639216, 0.913725, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-corner_detail = 16
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_elahf"]
 bg_color = Color(0.858824, 0.458824, 0.533333, 1)
 border_width_left = 4
@@ -25,6 +12,19 @@ border_width_top = 4
 border_width_right = 4
 border_width_bottom = 4
 border_color = Color(0.941176, 0.619608, 0.807843, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7p3gt"]
+bg_color = Color(0.45098, 0.294118, 0.843137, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.878431, 0.639216, 0.913725, 1)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
@@ -85,8 +85,8 @@ size_flags_horizontal = 4
 focus_neighbor_right = NodePath("../../MarginContainer2/Level02")
 focus_neighbor_bottom = NodePath("../../../HBoxContainer2/MarginContainer/Settings")
 theme_override_font_sizes/font_size = 36
-theme_override_styles/normal = SubResource("StyleBoxFlat_7p3gt")
 theme_override_styles/hover = SubResource("StyleBoxFlat_elahf")
+theme_override_styles/normal = SubResource("StyleBoxFlat_7p3gt")
 text = "PLAY"
 
 [node name="MarginContainer2" type="MarginContainer" parent="Control/VBoxContainer/HBoxContainer"]
@@ -102,8 +102,8 @@ custom_minimum_size = Vector2(300, 100)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 36
-theme_override_styles/normal = SubResource("StyleBoxFlat_7p3gt")
 theme_override_styles/hover = SubResource("StyleBoxFlat_elahf")
+theme_override_styles/normal = SubResource("StyleBoxFlat_7p3gt")
 text = "TEST"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Control/VBoxContainer"]
@@ -123,8 +123,8 @@ custom_minimum_size = Vector2(300, 100)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 36
-theme_override_styles/normal = SubResource("StyleBoxFlat_7p3gt")
 theme_override_styles/hover = SubResource("StyleBoxFlat_elahf")
+theme_override_styles/normal = SubResource("StyleBoxFlat_7p3gt")
 text = "SETTINGS"
 
 [node name="MarginContainer2" type="MarginContainer" parent="Control/VBoxContainer/HBoxContainer2"]
@@ -140,6 +140,6 @@ custom_minimum_size = Vector2(300, 100)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 36
-theme_override_styles/normal = SubResource("StyleBoxFlat_7p3gt")
 theme_override_styles/hover = SubResource("StyleBoxFlat_elahf")
+theme_override_styles/normal = SubResource("StyleBoxFlat_7p3gt")
 text = "QUIT"
