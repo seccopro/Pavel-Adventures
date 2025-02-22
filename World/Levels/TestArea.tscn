@@ -15,6 +15,7 @@ grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_np0cl")
 
 [node name="TextEdit" type="TextEdit" parent="Panel"]
+layout_mode = 0
 offset_left = 601.0
 offset_top = 343.0
 offset_right = 709.0

@@ -1,10 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://cgeepdvlmtvhy"]
+[gd_scene load_steps=6 format=3 uid="uid://cgeepdvlmtvhy"]
 
 [ext_resource type="PackedScene" uid="uid://b8arjn4c14x7c" path="res://Entities/Player/Player.tscn" id="1_7nbvd"]
 [ext_resource type="PackedScene" uid="uid://dqs120f2t870j" path="res://World/Levels/Handoff.tscn" id="2_geivg"]
 [ext_resource type="PackedScene" uid="uid://co602x7al8cc7" path="res://World/Levels/Assets/Ruins/ruin_assets.tscn" id="3_iia68"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ynaie"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6vpbv"]
+size = Vector2(4.90435, 12)
 
 [node name="Level0" type="Node2D"]
 
@@ -19,43 +22,62 @@ position = Vector2(312, 21)
 [node name="Handoff2" parent="." instance=ExtResource("2_geivg")]
 position = Vector2(0, 91)
 
-[node name="Architecture" type="CanvasGroup" parent="."]
+[node name="ArchitectureTexture" type="CanvasGroup" parent="."]
 
-[node name="RuinFloor1" parent="Architecture" instance=ExtResource("3_iia68")]
+[node name="RuinFloor1" parent="ArchitectureTexture" instance=ExtResource("3_iia68")]
 position = Vector2(359, 700)
 
-[node name="Sprite2D" parent="Architecture/RuinFloor1" index="0"]
+[node name="Sprite2D" parent="ArchitectureTexture/RuinFloor1" index="0"]
 region_rect = Rect2(603, 38, 1152, 42)
 
-[node name="RuinFloor2" parent="Architecture" instance=ExtResource("3_iia68")]
+[node name="RuinFloor2" parent="ArchitectureTexture" instance=ExtResource("3_iia68")]
 position = Vector2(359, 700)
 
-[node name="Sprite2D" parent="Architecture/RuinFloor2" index="0"]
+[node name="Sprite2D" parent="ArchitectureTexture/RuinFloor2" index="0"]
 position = Vector2(1149, 0)
 region_rect = Rect2(603, 38, 1152, 42)
 
-[node name="RuinFloor3" parent="Architecture" instance=ExtResource("3_iia68")]
+[node name="RuinFloor3" parent="ArchitectureTexture" instance=ExtResource("3_iia68")]
 position = Vector2(1861, 700)
 
-[node name="Sprite2D" parent="Architecture/RuinFloor3" index="0"]
+[node name="Sprite2D" parent="ArchitectureTexture/RuinFloor3" index="0"]
 position = Vector2(1149, 0)
 region_rect = Rect2(603, 38, 1152, 42)
 
-[node name="Bridge1" parent="Architecture" instance=ExtResource("3_iia68")]
-position = Vector2(2263, 700)
+[node name="Bridge1" parent="ArchitectureTexture" instance=ExtResource("3_iia68")]
+position = Vector2(2263, 697)
 
-[node name="Sprite2D" parent="Architecture/Bridge1" index="0"]
+[node name="Sprite2D" parent="ArchitectureTexture/Bridge1" index="0"]
 position = Vector2(-5, 2)
 region_rect = Rect2(440, 1760, 354, 39)
 
-[node name="FloorCollision" type="StaticBody2D" parent="Architecture"]
+[node name="ArchitectureCollision" type="Node" parent="."]
+
+[node name="Floor1Collision" type="StaticBody2D" parent="ArchitectureCollision"]
 position = Vector2(931, 700)
 scale = Vector2(115, 1)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Architecture/FloorCollision"]
+[node name="Floor1" type="CollisionShape2D" parent="ArchitectureCollision/Floor1Collision"]
 shape = SubResource("RectangleShape2D_ynaie")
 
-[editable path="Architecture/RuinFloor1"]
-[editable path="Architecture/RuinFloor2"]
-[editable path="Architecture/RuinFloor3"]
-[editable path="Architecture/Bridge1"]
+[node name="Floor2" type="CollisionShape2D" parent="ArchitectureCollision/Floor1Collision"]
+position = Vector2(18.1043, -3.05176e-05)
+scale = Vector2(2, 1)
+shape = SubResource("RectangleShape2D_6vpbv")
+
+[node name="Floor2Collision" type="StaticBody2D" parent="ArchitectureCollision"]
+position = Vector2(1480, 180)
+scale = Vector2(115, 1)
+
+[node name="Floor1" type="CollisionShape2D" parent="ArchitectureCollision/Floor2Collision"]
+shape = SubResource("RectangleShape2D_ynaie")
+
+[node name="Floor2" type="CollisionShape2D" parent="ArchitectureCollision/Floor2Collision"]
+position = Vector2(14.9739, -57.0001)
+scale = Vector2(2, 1)
+shape = SubResource("RectangleShape2D_6vpbv")
+
+[editable path="ArchitectureTexture/RuinFloor1"]
+[editable path="ArchitectureTexture/RuinFloor2"]
+[editable path="ArchitectureTexture/RuinFloor3"]
+[editable path="ArchitectureTexture/Bridge1"]

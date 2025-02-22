@@ -152,9 +152,11 @@ _data = {
 [sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_ugw5f"]
 input_0/name = "idle"
 input_0/auto_advance = false
+input_0/break_loop_at_end = false
 input_0/reset = true
 input_1/name = "run_state"
 input_1/auto_advance = false
+input_1/break_loop_at_end = false
 input_1/reset = true
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_4i7n6"]
@@ -204,6 +206,7 @@ clear_margin = 0.0
 texture = ExtResource("2_7ab5f")
 hframes = 13
 vframes = 3
+frame = 1
 
 [node name="Attack" type="Sprite2D" parent="CanvasGroup"]
 visible = false
@@ -215,7 +218,7 @@ vframes = 2
 [node name="Mask" type="Sprite2D" parent="CanvasGroup"]
 position = Vector2(22, -142)
 texture = ExtResource("3_wmfbh")
-offset = Vector2(0.155837, 0)
+offset = Vector2(0.268857, 0)
 hframes = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -227,9 +230,6 @@ libraries = {
 [node name="AnimationTree" type="AnimationTree" parent="."]
 unique_name_in_owner = true
 root_node = NodePath("%AnimationTree/..")
-libraries = {
-"": SubResource("AnimationLibrary_2kcos")
-}
 tree_root = SubResource("AnimationNodeBlendTree_o3xry")
 anim_player = NodePath("../AnimationPlayer")
 parameters/Transition/current_state = "idle"
