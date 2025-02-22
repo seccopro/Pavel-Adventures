@@ -191,6 +191,7 @@ nodes/run_state/position = Vector2(-180, 220)
 node_connections = [&"Transition", 0, &"idle", &"Transition", 1, &"run_state", &"landing", 0, &"Transition", &"landing", 1, &"fall", &"output", 0, &"landing", &"run_state", 0, &"run", &"run_state", 1, &"run_idle"]
 
 [node name="Player" type="CharacterBody2D"]
+scale = Vector2(0.4, 0.4)
 script = ExtResource("1_0t3w7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -218,7 +219,7 @@ vframes = 2
 [node name="Mask" type="Sprite2D" parent="CanvasGroup"]
 position = Vector2(22, -142)
 texture = ExtResource("3_wmfbh")
-offset = Vector2(0.268857, 0)
+offset = Vector2(0.9186, 0)
 hframes = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
