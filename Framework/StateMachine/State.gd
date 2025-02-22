@@ -17,6 +17,9 @@ func enter(previous_state: State, msg: Dictionary = {}) -> void:
 func exit() -> void:
 	pass
 
+func unhandled_input(event: InputEvent) -> void:
+	pass
+
 func update(delta: float) -> void:
 	pass
 
