@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://1ukiuvhvg6se"]
+
+[ext_resource type="PackedScene" uid="uid://b7vjkbti3ify8" path="res://assets/common/interactable/hanging_weight_area.tscn" id="1_3gge7"]
+[ext_resource type="Script" path="res://scripts/common/hanging_weight.gd" id="1_6yi4g"]
+[ext_resource type="Texture2D" uid="uid://cunr5af44uwoa" path="res://assets/ruin_assets/env_1_assets.png" id="2_alge0"]
+
+[node name="ruin_hanging_weight_1" type="Node2D"]
+script = ExtResource("1_6yi4g")
+
+[node name="rope" type="Sprite2D" parent="."]
+position = Vector2(0, -192)
+texture = ExtResource("2_alge0")
+region_enabled = true
+region_rect = Rect2(893, 1361, 11, 200)
+
+[node name="weight" type="Sprite2D" parent="."]
+position = Vector2(0, -46)
+texture = ExtResource("2_alge0")
+region_enabled = true
+region_rect = Rect2(723, 1466, 124, 94)
+
+[node name="hanging_weight_rb" parent="." instance=ExtResource("1_3gge7")]
+metadata/_edit_group_ = true
+
+[editable path="hanging_weight_rb"]

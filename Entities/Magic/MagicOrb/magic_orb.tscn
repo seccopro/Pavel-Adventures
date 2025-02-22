@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://bcqbm8xryrpdl"]
+
+[ext_resource type="Script" path="res://assets/common/magic/magic_projectile.gd" id="1_w3som"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7kus8"]
+radius = 32.0624
+
+[node name="magic_orb" type="Area2D"]
+scale = Vector2(0.291568, 0.291568)
+collision_layer = 16
+collision_mask = 65535
+script = ExtResource("1_w3som")
+travel_distance = 500.0
+shoot_speed = 1000.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_7kus8")
+
+[node name="ColorRect" type="ColorRect" parent="CollisionShape2D"]
+custom_minimum_size = Vector2(10, 10)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -25.0
+offset_top = -29.0
+offset_right = 31.0
+offset_bottom = 100.0
+grow_horizontal = 2
+scale = Vector2(0.945234, 0.448653)
+color = Color(0, 0, 1, 1)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
