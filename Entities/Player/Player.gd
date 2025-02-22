@@ -8,9 +8,8 @@ extends CharacterBody2D
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
 @onready var animation_tree: AnimationTree = %AnimationTree
 
-var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
-var direction: float = 0.0
-var speed: float = player_stats.walk_speed
+@onready var direction: float = 0.0
+@onready var speed: float = player_stats.walk_speed
 
 func _physics_process(delta: float) -> void:
 	if not is_zero_approx(velocity.x):
@@ -26,8 +25,9 @@ func apply_physics(delta: float) -> void:
 	move_and_slide()
 
 func apply_gravity(delta: float) -> void:
-	velocity.y += gravity * delta
+	velocity.y += player_stats.gravity * delta
 
 func apply_movement(delta: float) -> void:
+	speed = clamp(speed, -player_stats.horizontal_speed_cap, player_stats.horizontal_speed_cap)
 	var acceleration: float = speed * player_stats.speed_multiplier
 	velocity.x = move_toward(velocity.x, direction, acceleration * delta)
