@@ -222,7 +222,7 @@ vframes = 2
 [node name="Mask" type="Sprite2D" parent="CanvasGroup"]
 position = Vector2(22, -142)
 texture = ExtResource("3_wmfbh")
-offset = Vector2(0.715427, 0)
+offset = Vector2(0.765204, 0)
 hframes = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

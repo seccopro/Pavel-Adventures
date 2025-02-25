@@ -21,5 +21,8 @@ func physics_update(delta: float) -> void:
 	
 	if not player.is_on_floor():
 		transition_to.emit(self, "air")
+	else:
+		player.can_double_jump = true
+	
 	if is_equal_approx(player.direction, 0.0):
 		transition_to.emit(self, "idle")

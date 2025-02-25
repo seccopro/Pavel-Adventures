@@ -4,14 +4,14 @@ extends PlayerState
 var _can_double_jump: bool = false
 
 func enter(previous_state: State, msg: Dictionary = {}) -> void:
-	_can_double_jump = true
+	pass
 
 func exit() -> void:
-	_can_double_jump = true
+	pass
 
 func unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("jump") and _can_double_jump:
-		_can_double_jump = false
+	if event.is_action_pressed("jump") and player.can_double_jump:
+		player.can_double_jump = false
 		transition_to.emit(self, "jump")
 
 func physics_update(delta: float) -> void:
@@ -21,5 +21,7 @@ func physics_update(delta: float) -> void:
 	if player.is_on_floor():
 		if is_equal_approx(player.direction, 0.0):
 			transition_to.emit(self, "idle")
-		else:
+		elif player.speed > player.player_stats.walk_speed:
 			transition_to.emit(self, "run")
+		else:
+			transition_to.emit(self, "walk")

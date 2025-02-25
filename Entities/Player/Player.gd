@@ -11,6 +11,8 @@ extends CharacterBody2D
 @onready var direction: float = 0.0
 @onready var speed: float = player_stats.walk_speed
 
+@onready var can_double_jump: bool = false
+
 func _physics_process(delta: float) -> void:
 	if not is_zero_approx(velocity.x):
 			if velocity.x > 0.0:

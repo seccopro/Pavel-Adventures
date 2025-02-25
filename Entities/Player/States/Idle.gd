@@ -7,8 +7,7 @@ func enter(previous_state: State, msg: Dictionary = {}) -> void:
 func unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("move_left") or event.is_action_pressed("move_right"):
 		transition_to.emit(self, "walk")
-	
-	if event.is_action_pressed("jump") and player.is_on_floor():
+	elif event.is_action_pressed("jump") and player.is_on_floor():
 		transition_to.emit(self, "jump")
 
 func physics_update(delta: float) -> void:
@@ -16,3 +15,5 @@ func physics_update(delta: float) -> void:
 	
 	if not player.is_on_floor():
 		transition_to.emit(self, "air")
+	else:
+		player.can_double_jump = true
