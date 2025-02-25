@@ -1,15 +1,19 @@
 class_name StateIdle
-extends State
+extends PlayerState
 
 func enter(previous_state: State, msg: Dictionary = {}) -> void:
-	player.animation_tree.set("parameters/ground_air/transition_request", "movement")
-	player.animation_tree.set("parameters/movement/transition_request", "idle")
+	player.direction = 0.0
 
-func update(delta: float) -> void:
-	pass
+func unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("move_left") or event.is_action_pressed("move_right"):
+		transition_to.emit(self, "walk")
+	elif event.is_action_pressed("jump") and player.is_on_floor():
+		transition_to.emit(self, "jump")
 
 func physics_update(delta: float) -> void:
-	player.velocity.x = move_toward(player.velocity.x, 0, delta)
+	player.apply_physics(delta)
 	
-	if !player.is_on_floor:
+	if not player.is_on_floor():
 		transition_to.emit(self, "air")
+	else:
+		player.can_double_jump = true
