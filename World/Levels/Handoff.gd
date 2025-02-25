@@ -16,7 +16,7 @@ func on_body_entered(body: Node2D) -> void:
 	if not body is Player:
 		return
 	
-	player_entered_area.emit(self, transition_type, body.move_dir)
+	player_entered_area.emit(self, transition_type, body.direction)
 	queue_free()
 
 func get_player_entry_vector() -> Vector2:

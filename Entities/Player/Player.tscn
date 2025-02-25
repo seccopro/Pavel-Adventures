@@ -1,13 +1,17 @@
-[gd_scene load_steps=21 format=3 uid="uid://b8arjn4c14x7c"]
+[gd_scene load_steps=25 format=3 uid="uid://b8arjn4c14x7c"]
 
 [ext_resource type="Script" path="res://Entities/Player/Player.gd" id="1_0t3w7"]
 [ext_resource type="Texture2D" uid="uid://6nrpubu867ig" path="res://Entities/Player/Assets/character_move_sheet.png" id="2_7ab5f"]
+[ext_resource type="Resource" uid="uid://bmram5vbk646y" path="res://Entities/Player/Stats.tres" id="2_j6l6c"]
 [ext_resource type="Script" path="res://Framework/StateMachine/StateMachine.gd" id="2_ugwnw"]
 [ext_resource type="Texture2D" uid="uid://uko2ulwuorx0" path="res://Entities/Player/Assets/character_move_sheet_attacks.png" id="3_kntq6"]
 [ext_resource type="Texture2D" uid="uid://b2y56mlyix2js" path="res://Entities/Player/Assets/masks.png" id="3_wmfbh"]
 [ext_resource type="Script" path="res://Entities/Player/States/Idle.gd" id="6_04p5d"]
 [ext_resource type="Script" path="res://Entities/Player/States/Run.gd" id="7_fntwg"]
-[ext_resource type="Script" path="res://Entities/Player/RichTextLabel.gd" id="8_xdu2e"]
+[ext_resource type="Script" path="res://Entities/Player/States/Air.gd" id="8_5nnut"]
+[ext_resource type="Script" path="res://Entities/Player/DebugLabel.gd" id="8_xdu2e"]
+[ext_resource type="Script" path="res://Entities/Player/States/Jump.gd" id="9_t2pey"]
+[ext_resource type="Script" path="res://Entities/Player/States/Walk.gd" id="10_30ch3"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3h5ke"]
 radius = 67.1962
@@ -152,9 +156,11 @@ _data = {
 [sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_ugw5f"]
 input_0/name = "idle"
 input_0/auto_advance = false
+input_0/break_loop_at_end = false
 input_0/reset = true
 input_1/name = "run_state"
 input_1/auto_advance = false
+input_1/break_loop_at_end = false
 input_1/reset = true
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_4i7n6"]
@@ -189,7 +195,9 @@ nodes/run_state/position = Vector2(-180, 220)
 node_connections = [&"Transition", 0, &"idle", &"Transition", 1, &"run_state", &"landing", 0, &"Transition", &"landing", 1, &"fall", &"output", 0, &"landing", &"run_state", 0, &"run", &"run_state", 1, &"run_idle"]
 
 [node name="Player" type="CharacterBody2D"]
+scale = Vector2(0.4, 0.4)
 script = ExtResource("1_0t3w7")
+player_stats = ExtResource("2_j6l6c")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -8)
@@ -204,6 +212,7 @@ clear_margin = 0.0
 texture = ExtResource("2_7ab5f")
 hframes = 13
 vframes = 3
+frame = 1
 
 [node name="Attack" type="Sprite2D" parent="CanvasGroup"]
 visible = false
@@ -215,7 +224,7 @@ vframes = 2
 [node name="Mask" type="Sprite2D" parent="CanvasGroup"]
 position = Vector2(22, -142)
 texture = ExtResource("3_wmfbh")
-offset = Vector2(0.155837, 0)
+offset = Vector2(0.765204, 0)
 hframes = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -227,9 +236,6 @@ libraries = {
 [node name="AnimationTree" type="AnimationTree" parent="."]
 unique_name_in_owner = true
 root_node = NodePath("%AnimationTree/..")
-libraries = {
-"": SubResource("AnimationLibrary_2kcos")
-}
 tree_root = SubResource("AnimationNodeBlendTree_o3xry")
 anim_player = NodePath("../AnimationPlayer")
 parameters/Transition/current_state = "idle"
@@ -242,8 +248,6 @@ parameters/run_state/active = false
 parameters/run_state/internal_active = false
 parameters/run_state/request = 0
 
-[node name="RayCast2D" type="RayCast2D" parent="."]
-
 [node name="FSM_movement" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("2_ugwnw")
@@ -253,6 +257,15 @@ script = ExtResource("6_04p5d")
 
 [node name="Run" type="Node" parent="FSM_movement"]
 script = ExtResource("7_fntwg")
+
+[node name="Air" type="Node" parent="FSM_movement"]
+script = ExtResource("8_5nnut")
+
+[node name="Jump" type="Node" parent="FSM_movement"]
+script = ExtResource("9_t2pey")
+
+[node name="Walk" type="Node" parent="FSM_movement"]
+script = ExtResource("10_30ch3")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3

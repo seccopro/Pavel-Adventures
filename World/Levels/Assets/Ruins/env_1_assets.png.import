@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cgkt2xwlt660t"
-path="res://.godot/imported/env_1_assets.png-0a88b39cee16e13ee25c7b89d61c1bdb.ctex"
+path="res://.godot/imported/env_1_assets.png-75afb8751eaed8073a82376f20f5e062.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://World/Levels/Assets/env_1_assets.png"
-dest_files=["res://.godot/imported/env_1_assets.png-0a88b39cee16e13ee25c7b89d61c1bdb.ctex"]
+source_file="res://World/Levels/Assets/Ruins/env_1_assets.png"
+dest_files=["res://.godot/imported/env_1_assets.png-75afb8751eaed8073a82376f20f5e062.ctex"]
 
 [params]
 

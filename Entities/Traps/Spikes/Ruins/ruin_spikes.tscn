@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://b2p0v6qigf1ck"]
+
+[ext_resource type="PackedScene" uid="uid://vouj7i5fu8um" path="res://assets/common/area_effects/spike_damage_area.tscn" id="1_3f3ns"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_bohdh"]
+load_path = "res://.godot/imported/env_1_assets.png-b8695d348d589d83d28df7a4f31caac7.ctex"
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_g56jd"]
+diffuse_texture = SubResource("CompressedTexture2D_bohdh")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1e0yy"]
+size = Vector2(206.383, 69)
+
+[node name="ruin_spikes" type="Node2D"]
+
+[node name="ruin_spikes_spr" type="Sprite2D" parent="."]
+scale = Vector2(1.07328, 1)
+texture = SubResource("CanvasTexture_g56jd")
+region_enabled = true
+region_rect = Rect2(1313, 266, 544, 114)
+
+[node name="spike_damage_area" parent="." instance=ExtResource("1_3f3ns")]
+scale = Vector2(2.82, 1)
+
+[node name="CollisionShape2D" parent="spike_damage_area" index="0"]
+position = Vector2(-0.709226, -19.5)
+shape = SubResource("RectangleShape2D_1e0yy")
+
+[editable path="spike_damage_area"]

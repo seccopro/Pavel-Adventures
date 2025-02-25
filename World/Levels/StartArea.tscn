@@ -1,17 +1,306 @@
-[gd_scene load_steps=3 format=3 uid="uid://cgeepdvlmtvhy"]
+[gd_scene load_steps=7 format=3 uid="uid://cgeepdvlmtvhy"]
 
 [ext_resource type="PackedScene" uid="uid://b8arjn4c14x7c" path="res://Entities/Player/Player.tscn" id="1_7nbvd"]
 [ext_resource type="PackedScene" uid="uid://dqs120f2t870j" path="res://World/Levels/Handoff.tscn" id="2_geivg"]
+[ext_resource type="PackedScene" uid="uid://co602x7al8cc7" path="res://World/Levels/Assets/Ruins/ruin_assets.tscn" id="3_iia68"]
+[ext_resource type="PackedScene" uid="uid://c8wvmaehkj300" path="res://Entities/Enemies/Ronda/ronda.tscn" id="4_en84l"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ynaie"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6vpbv"]
+size = Vector2(4.96774, 12)
 
 [node name="Level0" type="Node2D"]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-
-[node name="Player" parent="." instance=ExtResource("1_7nbvd")]
-position = Vector2(218, 469)
 
 [node name="Handoff" parent="." instance=ExtResource("2_geivg")]
 position = Vector2(312, 21)
 
 [node name="Handoff2" parent="." instance=ExtResource("2_geivg")]
 position = Vector2(0, 91)
+
+[node name="ArchitectureCollision" type="Node" parent="."]
+
+[node name="Floor1Collision" type="StaticBody2D" parent="ArchitectureCollision"]
+visible = false
+position = Vector2(932.481, 700.17)
+scale = Vector2(115, 2)
+
+[node name="Floor1" type="CollisionShape2D" parent="ArchitectureCollision/Floor1Collision"]
+shape = SubResource("RectangleShape2D_ynaie")
+
+[node name="Floor2" type="CollisionShape2D" parent="ArchitectureCollision/Floor1Collision"]
+position = Vector2(18.0409, -3.05176e-05)
+scale = Vector2(2, 2)
+shape = SubResource("RectangleShape2D_6vpbv")
+
+[node name="Backgrounds" type="CanvasGroup" parent="."]
+
+[node name="Background1" parent="Backgrounds" instance=ExtResource("3_iia68")]
+position = Vector2(72.0825, 520.204)
+
+[node name="Background2" parent="Backgrounds" instance=ExtResource("3_iia68")]
+position = Vector2(639.053, 520)
+
+[node name="Background3" parent="Backgrounds" instance=ExtResource("3_iia68")]
+position = Vector2(1208.05, 520)
+
+[node name="Background4" parent="Backgrounds" instance=ExtResource("3_iia68")]
+position = Vector2(1776.27, 520)
+
+[node name="Sprite2D" parent="Backgrounds/Background4" index="0"]
+position = Vector2(1.12244, 0)
+
+[node name="Background5" parent="Backgrounds" instance=ExtResource("3_iia68")]
+position = Vector2(2346.33, 520)
+
+[node name="Background6" parent="Backgrounds" instance=ExtResource("3_iia68")]
+position = Vector2(2916, 520)
+
+[node name="Background7" parent="Backgrounds" instance=ExtResource("3_iia68")]
+position = Vector2(3485, 520)
+
+[node name="Background8" parent="Backgrounds" instance=ExtResource("3_iia68")]
+position = Vector2(3484.82, 190.314)
+
+[node name="Background9" parent="Backgrounds" instance=ExtResource("3_iia68")]
+position = Vector2(2916.31, 190.314)
+
+[node name="Background10" parent="Backgrounds" instance=ExtResource("3_iia68")]
+position = Vector2(2346.33, 190.314)
+
+[node name="Background11" parent="Backgrounds" instance=ExtResource("3_iia68")]
+position = Vector2(1776.27, 190.314)
+
+[node name="Sprite2D" parent="Backgrounds/Background11" index="0"]
+position = Vector2(2, 0)
+
+[node name="Background12" parent="Backgrounds" instance=ExtResource("3_iia68")]
+position = Vector2(1209.05, 190.314)
+
+[node name="Background13" parent="Backgrounds" instance=ExtResource("3_iia68")]
+position = Vector2(640.053, 189.997)
+
+[node name="Background14" parent="Backgrounds" instance=ExtResource("3_iia68")]
+position = Vector2(71.0825, 190.023)
+
+[node name="BackgroundVariety1" parent="Backgrounds" instance=ExtResource("3_iia68")]
+position = Vector2(-119.58, 190.023)
+
+[node name="Sprite2D" parent="Backgrounds/BackgroundVariety1" index="0"]
+region_rect = Rect2(23, 868, 190, 110)
+
+[node name="BackgroundVariety2" parent="Backgrounds" instance=ExtResource("3_iia68")]
+position = Vector2(-118.58, 629.998)
+
+[node name="Sprite2D" parent="Backgrounds/BackgroundVariety2" index="0"]
+region_rect = Rect2(23, 868, 190, 110)
+
+[node name="Filter" type="ColorRect" parent="Backgrounds"]
+modulate = Color(1, 1, 1, 0.109804)
+offset_left = -1114.0
+offset_top = -1061.0
+offset_right = 4459.0
+offset_bottom = 1592.0
+color = Color(0.632994, 0.780935, 0.888313, 1)
+metadata/_edit_lock_ = true
+
+[node name="ArchitectureTexture" type="CanvasGroup" parent="."]
+
+[node name="RuinFloor1" parent="ArchitectureTexture" instance=ExtResource("3_iia68")]
+position = Vector2(359, 700)
+
+[node name="Sprite2D" parent="ArchitectureTexture/RuinFloor1" index="0"]
+region_rect = Rect2(603, 38, 1152, 42)
+
+[node name="RuinFloor2" parent="ArchitectureTexture" instance=ExtResource("3_iia68")]
+position = Vector2(359, 700)
+
+[node name="Sprite2D" parent="ArchitectureTexture/RuinFloor2" index="0"]
+position = Vector2(1149, 0)
+region_rect = Rect2(603, 38, 1152, 42)
+
+[node name="RuinFloor3" parent="ArchitectureTexture" instance=ExtResource("3_iia68")]
+position = Vector2(1861, 700)
+
+[node name="Sprite2D" parent="ArchitectureTexture/RuinFloor3" index="0"]
+position = Vector2(1149, 0)
+region_rect = Rect2(603, 38, 1152, 42)
+
+[node name="RuinFloor4" parent="ArchitectureTexture" instance=ExtResource("3_iia68")]
+position = Vector2(1884.02, 700)
+
+[node name="Sprite2D" parent="ArchitectureTexture/RuinFloor4" index="0"]
+position = Vector2(1729.06, -0.386047)
+region_rect = Rect2(1779, 37, 56, 43)
+
+[node name="Bridge1" parent="ArchitectureTexture" instance=ExtResource("3_iia68")]
+position = Vector2(2263, 697)
+
+[node name="Sprite2D" parent="ArchitectureTexture/Bridge1" index="0"]
+position = Vector2(-5, 2)
+region_rect = Rect2(440, 1760, 354, 39)
+
+[node name="WallR1" parent="ArchitectureTexture" instance=ExtResource("3_iia68")]
+position = Vector2(3606.03, 516.061)
+
+[node name="Sprite2D" parent="ArchitectureTexture/WallR1" index="0"]
+region_rect = Rect2(1872, 999, 99, 328)
+
+[node name="WallR2" parent="ArchitectureTexture" instance=ExtResource("3_iia68")]
+position = Vector2(3606.03, 187.023)
+
+[node name="Sprite2D" parent="ArchitectureTexture/WallR2" index="0"]
+region_rect = Rect2(1872, 999, 99, 328)
+
+[node name="WallL1" parent="ArchitectureTexture" instance=ExtResource("3_iia68")]
+position = Vector2(-129.973, 516.352)
+rotation = 3.14159
+
+[node name="Sprite2D" parent="ArchitectureTexture/WallL1" index="0"]
+region_rect = Rect2(1872, 999, 99, 328)
+
+[node name="WallR3" parent="ArchitectureTexture" instance=ExtResource("3_iia68")]
+position = Vector2(-129.973, 187.314)
+rotation = 3.14159
+
+[node name="Sprite2D" parent="ArchitectureTexture/WallR3" index="0"]
+region_rect = Rect2(1872, 999, 99, 328)
+
+[node name="Ceiling1" parent="ArchitectureTexture" instance=ExtResource("3_iia68")]
+position = Vector2(40.7844, 15)
+
+[node name="Sprite2D" parent="ArchitectureTexture/Ceiling1" index="0"]
+region_rect = Rect2(865, 209, 516, 26)
+
+[node name="Ceiling2" parent="ArchitectureTexture" instance=ExtResource("3_iia68")]
+position = Vector2(555.413, 15)
+
+[node name="Sprite2D" parent="ArchitectureTexture/Ceiling2" index="0"]
+region_rect = Rect2(865, 209, 516, 26)
+
+[node name="Ceiling3" parent="ArchitectureTexture" instance=ExtResource("3_iia68")]
+position = Vector2(1070.66, 15)
+
+[node name="Sprite2D" parent="ArchitectureTexture/Ceiling3" index="0"]
+region_rect = Rect2(865, 209, 516, 26)
+
+[node name="Ceiling4" parent="ArchitectureTexture" instance=ExtResource("3_iia68")]
+position = Vector2(1586.57, 15)
+
+[node name="Sprite2D" parent="ArchitectureTexture/Ceiling4" index="0"]
+region_rect = Rect2(865, 209, 516, 26)
+
+[node name="Ceiling5" parent="ArchitectureTexture" instance=ExtResource("3_iia68")]
+position = Vector2(2100.98, 15)
+
+[node name="Sprite2D" parent="ArchitectureTexture/Ceiling5" index="0"]
+region_rect = Rect2(865, 209, 516, 26)
+
+[node name="Ceiling6" parent="ArchitectureTexture" instance=ExtResource("3_iia68")]
+position = Vector2(2616.98, 15)
+
+[node name="Sprite2D" parent="ArchitectureTexture/Ceiling6" index="0"]
+region_rect = Rect2(865, 209, 516, 26)
+
+[node name="Ceiling7" parent="ArchitectureTexture" instance=ExtResource("3_iia68")]
+position = Vector2(3130.98, 15)
+
+[node name="Sprite2D" parent="ArchitectureTexture/Ceiling7" index="0"]
+region_rect = Rect2(865, 209, 516, 26)
+
+[node name="Ceiling8" parent="ArchitectureTexture" instance=ExtResource("3_iia68")]
+position = Vector2(3641.07, 15)
+
+[node name="Sprite2D" parent="ArchitectureTexture/Ceiling8" index="0"]
+region_rect = Rect2(865, 209, 516, 26)
+
+[node name="CeilingAngle1" parent="ArchitectureTexture" instance=ExtResource("3_iia68")]
+position = Vector2(-137.307, 17.0595)
+
+[node name="Sprite2D" parent="ArchitectureTexture/CeilingAngle1" index="0"]
+region_rect = Rect2(791, 209, 67, 30)
+
+[node name="CeilingAngle2" parent="ArchitectureTexture" instance=ExtResource("3_iia68")]
+position = Vector2(3602.1, 17)
+scale = Vector2(-1, 1)
+
+[node name="Sprite2D" parent="ArchitectureTexture/CeilingAngle2" index="0"]
+region_rect = Rect2(791, 209, 67, 30)
+
+[node name="Player" parent="." instance=ExtResource("1_7nbvd")]
+position = Vector2(266.739, 607.404)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+
+[node name="ronda" parent="." instance=ExtResource("4_en84l")]
+position = Vector2(913.444, 609.42)
+
+[node name="BlackOffsets" type="CanvasGroup" parent="."]
+
+[node name="DeepDarkness1" type="ColorRect" parent="BlackOffsets"]
+offset_left = -450.0
+offset_right = -163.0
+offset_bottom = 721.0
+color = Color(0, 0, 0, 1)
+
+[node name="DeepDarkness2" type="ColorRect" parent="BlackOffsets"]
+offset_left = 3634.0
+offset_top = 2.0
+offset_right = 4024.0
+offset_bottom = 719.0
+color = Color(0, 0, 0, 1)
+metadata/_edit_lock_ = true
+
+[node name="DeepDarkness3" type="ColorRect" parent="BlackOffsets"]
+offset_left = -450.0
+offset_top = -699.499
+offset_right = 4024.0
+offset_bottom = 2.50146
+color = Color(0, 0, 0, 1)
+metadata/_edit_lock_ = true
+
+[node name="DeepDarkness4" type="ColorRect" parent="BlackOffsets"]
+offset_left = -450.0
+offset_top = 697.0
+offset_right = 4024.0
+offset_bottom = 1399.0
+color = Color(0, 0, 0, 1)
+metadata/_edit_lock_ = true
+
+[editable path="Backgrounds/Background1"]
+[editable path="Backgrounds/Background2"]
+[editable path="Backgrounds/Background3"]
+[editable path="Backgrounds/Background4"]
+[editable path="Backgrounds/Background5"]
+[editable path="Backgrounds/Background6"]
+[editable path="Backgrounds/Background7"]
+[editable path="Backgrounds/Background8"]
+[editable path="Backgrounds/Background9"]
+[editable path="Backgrounds/Background10"]
+[editable path="Backgrounds/Background11"]
+[editable path="Backgrounds/Background12"]
+[editable path="Backgrounds/Background13"]
+[editable path="Backgrounds/Background14"]
+[editable path="Backgrounds/BackgroundVariety1"]
+[editable path="Backgrounds/BackgroundVariety2"]
+[editable path="ArchitectureTexture/RuinFloor1"]
+[editable path="ArchitectureTexture/RuinFloor2"]
+[editable path="ArchitectureTexture/RuinFloor3"]
+[editable path="ArchitectureTexture/RuinFloor4"]
+[editable path="ArchitectureTexture/Bridge1"]
+[editable path="ArchitectureTexture/WallR1"]
+[editable path="ArchitectureTexture/WallR2"]
+[editable path="ArchitectureTexture/WallL1"]
+[editable path="ArchitectureTexture/WallR3"]
+[editable path="ArchitectureTexture/Ceiling1"]
+[editable path="ArchitectureTexture/Ceiling2"]
+[editable path="ArchitectureTexture/Ceiling3"]
+[editable path="ArchitectureTexture/Ceiling4"]
+[editable path="ArchitectureTexture/Ceiling5"]
+[editable path="ArchitectureTexture/Ceiling6"]
+[editable path="ArchitectureTexture/Ceiling7"]
+[editable path="ArchitectureTexture/Ceiling8"]
+[editable path="ArchitectureTexture/CeilingAngle1"]
+[editable path="ArchitectureTexture/CeilingAngle2"]

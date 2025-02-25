@@ -26,6 +26,10 @@ func _physics_process(delta: float) -> void:
 	assert(active_state != null)
 	active_state.physics_update(delta)
 
+func _unhandled_input(event: InputEvent) -> void:
+	assert(active_state != null)
+	active_state.unhandled_input(event)
+
 func on_state_transition_to(state: State, new_state_name: String, msg: Dictionary = {}) -> void:
 	if state != active_state:
 		push_warning("The state is already the active state: [%s]" % state.name.to_lower())

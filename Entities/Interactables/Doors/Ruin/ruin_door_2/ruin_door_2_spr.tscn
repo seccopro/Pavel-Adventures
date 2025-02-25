@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://b734ecw7bdx46"]
+
+[ext_resource type="Texture2D" uid="uid://cunr5af44uwoa" path="res://assets/ruin_assets/env_1_assets.png" id="1_8as28"]
+
+[node name="ruin_door_2_spr" type="Sprite2D"]
+
+[node name="ruin_door_2_a" type="Sprite2D" parent="."]
+position = Vector2(-9, 18)
+texture = ExtResource("1_8as28")
+region_enabled = true
+region_rect = Rect2(17, 1409, 46, 158)
+
+[node name="ruin_door_2_b" type="Sprite2D" parent="."]
+texture = ExtResource("1_8as28")
+region_enabled = true
+region_rect = Rect2(95, 1373, 65, 194)
