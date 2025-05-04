@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://cbaobodo7qamk"]
+
+[ext_resource type="Script" path="res://Entities/Enemies/blank/blank.gd" id="1_4ch1k"]
+[ext_resource type="Texture2D" uid="uid://b2y56mlyix2js" path="res://Entities/Player/Assets/masks.png" id="2_nkj0u"]
+[ext_resource type="AudioStream" uid="uid://db7cc8o7xd401" path="res://Entities/Enemies/blank/blank_woosh.mp3" id="3_4d1m6"]
+[ext_resource type="AudioStream" uid="uid://obacca27x0i3" path="res://Entities/Enemies/blank/idle_wooshing.wav" id="3_y15u5"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4tqnv"]
+radius = 28.0
+height = 92.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7ojo3"]
+radius = 333.021
+
+[node name="Blank" type="CharacterBody2D"]
+script = ExtResource("1_4ch1k")
+range_radius = 100.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_4tqnv")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_nkj0u")
+region_enabled = true
+region_rect = Rect2(388, 74, 62, 95)
+region_filter_clip_enabled = true
+
+[node name="sound" type="Node" parent="."]
+
+[node name="idle" type="AudioStreamPlayer2D" parent="sound"]
+stream = ExtResource("3_y15u5")
+
+[node name="attack" type="AudioStreamPlayer2D" parent="sound"]
+
+[node name="swoop" type="AudioStreamPlayer2D" parent="sound"]
+stream = ExtResource("3_4d1m6")
+
+[node name="player_seeker" type="Area2D" parent="."]
+position = Vector2(-1, 0)
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player_seeker"]
+position = Vector2(0, -11.75)
+shape = SubResource("CircleShape2D_7ojo3")
+
+[connection signal="body_entered" from="player_seeker" to="." method="_on_player_seeker_body_entered"]
